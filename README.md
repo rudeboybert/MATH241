@@ -1,4 +1,3 @@
-# MATH 241 Case Studies in Statistical Analysis
-Albert Y. Kim  
+# Case Studies in Statistical Analysis
 
-This is the GitHub repository for Reed College's MATH 241 Case Studies in Statistical Analysis.
+This is the GitHub repository for Reed College's Spring 2015 MATH 241 Case Studies in Statistical Analysis.
