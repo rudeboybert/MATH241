@@ -1,0 +1,156 @@
+ggplot2 Continued
+========================================================
+author: Albert Y. Kim
+date: Wednesday 2015/01/28
+
+```{r, echo=FALSE}
+# The following code ensures all necessary packages are installed
+pkg <- c("dplyr", "ggplot2", "scales", "nlme")
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos="http://cran.rstudio.com/")
+}
+library(dplyr)
+library(ggplot2)
+library(scales) # for %'age labeling of axes
+library(nlme) # for Oxboys dataset
+```
+
+
+
+Review Exercise from Last Time
+========================================================
+Open `ggplot_2.R` in RStudio.
+
+
+
+
+Last Time: Basic Components
+========================================================
+
+* **`aes`** mappings of data variables to aesthetics we can perceive on a graphic
+* **`geom`** geometric objects
+* **`stat`** statistical transformations to summarise data
+* **`facet`** how to break up plots into subsets
+* **`coord`** coordinate system for x/y values: typically cartesian (can be polar)
+* **`scale`** both convert **data units** to **physical units** the computer can display AND draw a legend/axes.
+* **Extras** titles, axes labels, themes
+
+
+
+Further Reading Ressources
+========================================================
+* Help files.  Ex `?geom_line()`
+* Online help files: [http://docs.ggplot2.org/current/](http://docs.ggplot2.org/current/)
+* [Ultimate Tech Support](http://xkcd.com/627/)
+
+* ggplot2 book is on Moodle.  To learn more, I suggest reading
+    + Chapter 1,
+    + Chapter 3, but it will be hard to grasp the first time
+    + Chapter 4
+    + Revisit Chapter 3. Chapters  5-10 go into specific details.
+* The code for all examples in the book: [http://ggplot2.org/book/](http://ggplot2.org/book/)
+
+
+
+Today:  More Components/Concepts
+========================================================
+* **layers**: mechanism by which additional data elements are added to a plot
+* **`position`** adjustments: minor tweeks to the position of elements
+* **groups**: splitting data into groups within the same plot (not via facets)
+
+
+
+Building a Graphic Layer-by-Layer
+========================================================
+We build plots by adding **layers**. Each layer consists of:
+
+1. data and aesthetic mappings (the base)
+2. geometric object
+3. statistical transformation (with default values)
+4. position adjustment (with default values)
+
+Without all four elements specified, nothing will plot!
+
+Building a Graphic Layer-by-Layer
+========================================================
+
+Notes:
+
+* Make the base as general as possible
+* Every `geom` has a default `stat` & `position` value if they aren't specified
+* Layer settings override plot defaults
+* You can save plots as variables and add to variables, to reduce duplication
+
+
+
+
+Examples for Today
+========================================================
+In `ggplot_2.R` we have examples of
+
+* setting groups: `Examples of groups`.
+* many different types of geoms: `Examples of geoms`.
+* `geom_histogram()` and **position adjustments**: [Titanic Survival Data](https://www.youtube.com/watch?v=zisjRgcuL9k)
+
+
+
+
+Today's Question: UC Berkeley Admissions
+========================================================
+
+In 1973, the UC Berkeley was sued for bias against women who had applied for admission to graduate schools.  n=4526 applicants:
+```{r, echo=FALSE}
+data(UCBAdmissions)
+UCBAdmissions <- as.data.frame(UCBAdmissions) %>% group_by(Admit, Gender) %>% summarise(Freq = sum(Freq))
+UCBAdmissions
+```
+
+
+
+
+
+Today's Question: UC Berkeley Admissions
+========================================================
+
+```{r, echo=FALSE}
+UCBPlot <- ggplot(data=UCBAdmissions, aes(x=Gender, y=Freq, fill=Admit)) +
+  ggtitle("Acceptance Rate Split by Gender") +
+  xlab("Gender")
+UCBPlot + geom_bar(stat = "identity") +
+  ylab("# of Applicants")
+```
+
+
+
+Today's Question: UC Berkeley Admissions
+========================================================
+
+```{r, echo=FALSE}
+UCBPlot + geom_bar(stat = "identity", position="fill") +
+  ylab("% of Applicants") + scale_y_continuous(labels = percent)
+```
+
+
+
+Today's Question: UC Berkeley Admissions
+========================================================
+
+However, there was another variable researchers could consider: department applied to.
+
+```{r, echo=FALSE}
+data(UCBAdmissions)
+UCBAdmissions <- as.data.frame(UCBAdmissions) %>% tbl_df()
+UCBAdmissions
+```
+
+
+
+Today's Question: UC Berkeley Admissions
+========================================================
+
+Investigate:
+
+1. Construct a statistical graphic showing how male vs female acceptance varied by department.  Bonus:  Using google, make one of the axes reflect percentage of applicants.
+2. Construct a statistical graphic showing the "competitiveness" of the department as measured by acceptance rate.
+
