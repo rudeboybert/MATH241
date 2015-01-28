@@ -9,8 +9,10 @@ date: Wednesday 2015/01/28
 
 Review Exercise from Last Time
 ========================================================
-Open `ggplot_2.R` in RStudio.
 
+* Go to top menu bar of RStudio -> File -> New File -> R Script
+* Click on "Lec02 Exercise" in Moodle
+* Copy contents and paste into R Script
 
 
 
