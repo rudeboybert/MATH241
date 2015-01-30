@@ -1,0 +1,127 @@
+Wrapping Up ggplot + Grammar of Data Manipulation
+========================================================
+author: Albert Y. Kim
+date: Friday 2015/01/30
+
+```{r, echo=FALSE}
+# The following code ensures all necessary packages are installed
+pkg <- c("dplyr", "ggplot2")
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos="http://cran.rstudio.com/")
+}
+library(dplyr)
+library(ggplot2)
+```
+
+
+
+UC Berkeley Admissions
+========================================================
+
+* stat identity business
+* difference between
+* aes()
+* View()
+* Explain qplot
+
+
+
+Simpsons' Paradox
+========================================================
+
+
+
+
+
+Next in our Data Toolbox...
+========================================================
+![alt text](tools.jpg)
+
+
+
+
+Data "Wrangling"
+========================================================
+
+
+
+
+Grammar of Data Manipulation
+========================================================
+Most data manipulations can be achieved by the following **verbs** on a "tidy" data frame:
+
+1. **`filter`**: keep rows matching criteria
+2. **`summarise`**: reduce variables to values
+3. **`mutate`**: add new variables
+4. **`arrange`**: reorder rows
+5. **`select`**: pick columns by name
+
+Each of these is a command from the `dplyr` package.
+
+
+
+
+Grammar of Data Manipulation
+========================================================
+The beauty of this "grammar" is that it is programming language/software **agnostic**.  Even if later on your don't end up using R, the previous five verbs is still how you would think about manipulating your data.
+
+
+
+Cheat Sheet
+========================================================
+
+
+
+
+
+Cheat Sheet
+========================================================
+Get comfortable with this: [dplyr cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet.pdf) from the folks at RStudio.
+
+
+
+
+
+
+
+
+dplyr Commands
+========================================================
+For example, let's `filter` to only those diamonds are have "Ideal" cut
+```{r}
+filter(diamonds, cut == "Ideal")
+```
+
+
+
+dplyr Commands
+========================================================
+You can _pipe_ commands into others using the `%>%` command, described as _then_.
+```{r}
+filter(diamonds, cut == "Ideal") %>% select(carat)
+filter(diamonds, cut == "Ideal") %>% select(carat) %>% sum()
+```
+
+
+
+dplyr Commands
+========================================================
+You can _pipe_ commands into others using the `%>%` command, described as _then_.
+```{r}
+filter(diamonds, cut == "Ideal") %>% select(carat) %>% sum()
+```
+Note the piping saves you from nesting your commands in a morass of parentheses:
+```{r}
+sum(select(filter(diamonds, cut == "Ideal"), carat))
+```
+
+
+
+dplyr Commands
+========================================================
+Finally, you can use the `group_by()` command to define groupings on a categorical variable.  Compare:
+```{r}
+summarize(diamonds, mean(price))
+group_by(diamonds, cut) %>% summarize(mean(price))
+```
