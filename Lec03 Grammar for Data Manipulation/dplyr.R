@@ -1,13 +1,45 @@
 #------------------------------------------------------------------------------
 # The following code ensures all necessary packages are installed
 #------------------------------------------------------------------------------
-pkg <- c("ggplot2", "dplyr", "scales")
+pkg <- c("ggplot2", "dplyr", "scales", "RColorBrewer")
 new.pkg <- pkg[!(pkg %in% installed.packages())]
 if (length(new.pkg)) {
   install.packages(new.pkg, repos="http://cran.rstudio.com/")
 }
 library(ggplot2)
 library(dplyr)
+library(RColorBrewer)
+
+
+#------------------------------------------------------------------------------
+# Question about stat("identity")
+#------------------------------------------------------------------------------
+ex <- data.frame(count=c(rep("A", 5), rep("B", 3)))
+ex
+ggplot(ex, aes(x=count)) + geom_bar()
+ggplot(ex, aes(x=count)) + geom_bar(stat="bin")
+ex2 <- data.frame(name=c("A", "B"), count=c(5, 3))
+ex2
+ggplot(ex2, aes(x=name, y=count)) + geom_bar()
+ggplot(ex2, aes(x=name, y=count)) + geom_bar(stat="identity")
+
+
+
+#------------------------------------------------------------------------------
+# Quick Plots
+#------------------------------------------------------------------------------
+data(mtcars)
+# Only specifying x aesthetic defaults to a histogram
+qplot(x=wt, data=mtcars)
+
+# Specifying both x and y aesthetics defaults to a scatterplot
+qplot(x=disp, y=mpg, data=mtcars)
+
+# Change to boxplot
+qplot(x=1, y=wt, geom="boxplot", data=mtcars)
+qplot(x=as.factor(cyl), y=wt, geom="boxplot", data=mtcars)
+qplot(x=as.factor(cyl), y=wt, geom="boxplot", data=mtcars) + coord_flip()
+
 
 
 #------------------------------------------------------------------------------
@@ -33,6 +65,13 @@ ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
   xlab("Dept") +
   ylab("% of Applicants")
 
+# Eye candy:  change up the color scheme by changing scale
+# See http://colorbrewer2.org/ for different palette names
+ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
+  geom_bar(stat = "identity", position="fill") +
+  ggtitle("Acceptance Rate Split by Department") +
+  xlab("Dept") +
+  ylab("% of Applicants") + scale_fill_brewer(palette="Pastel1")
 
 
 
@@ -44,14 +83,16 @@ data(diamonds)
 data(mtcars)
 diamonds
 
-# The previous command lists too many rows to view conveniently, so we convert it to tbl_df format.  This is useful when our data is large.
+# The previous command lists too many rows to view conveniently, so we convert
+# it to tbl_df format.  This is useful when our data is large.
 diamonds <- tbl_df(diamonds)
 diamonds
 
-# Some other useful viewing tools.  The View command is the same as going to the Environment panel in RStudio and clicking on the name of a variable: it shows it in spreadsheet format.
+# Some other useful viewing tools.  The View command is the same as going to the
+# Environment panel in RStudio and clicking on the name of a variable: it shows
+# it in spreadsheet format.
 glimpse(diamonds)
 View(diamonds)
-
 
 
 

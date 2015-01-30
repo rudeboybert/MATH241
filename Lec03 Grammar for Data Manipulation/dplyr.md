@@ -9,22 +9,22 @@ date: Friday 2015/01/30
 
 Questions from Last Time
 ========================================================
-* stat identity business
-* difference between
+What up with the `geom_bar(stat = "identity")` code from last time?
 
+The default `stat` for bar plots is "bin".  Meaning if the data are already binned,
+we don't want to re-bin them again, so we set `stat="identity"` meaning take the numbers as
+they are.
+
+See R code.
 
 
 qplot
 ========================================================
-The `qplot()` command (Chapter 2 in ggplot text) describes a way to make "quick" plots, such as
-simple histograms and scatterplots.  Ex:
+The `qplot()` command (Chapter 2 in ggplot text) describes a way to make "quick" plots, such as simple histograms and scatterplots.
 
-```r
-# Defaults to a histogram
-qplot(x=carat, data=diamonds)
-# Defaults to a scatterplot
-qplot(x=carat, y=price, data=diamonds)
-```
+It's built using all the grammar of graphics and you add layers.
+
+See R code.
 
 
 
@@ -32,13 +32,21 @@ UC Berkeley Admissions
 ========================================================
 Male vs female admissions
 
-![plot of chunk unnamed-chunk-3](dplyr-figure/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-2](dplyr-figure/unnamed-chunk-2-1.png) 
+
+
+
+UC Berkeley Admissions
+========================================================
+Go to R code.
 
 
 
 Simpsons' Paradox
 ========================================================
-Slides from MATH 141.
+
+* [Slides from MATH 141](https://github.com/rudeboybert/MATH241/blob/master/Lec03%20Grammar%20for%20Data%20Manipulation/Lec03.pdf)
+* Click on "Raw" to download PDF
 
 
 
@@ -48,13 +56,13 @@ Next in our Data Toolbox...
 
 
 
-
 Data Manipulation
 ========================================================
-We now discuss a **grammar for data manipulation**.
+We now discuss a **grammar for data manipulation**.  Other terms for "data manipulation" include:
 
-Another term increasing in usage is **data wrangling**.  The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view of the work.
-
+* **data wrangling**
+* **data munging**
+* The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view.
 
 
 
@@ -84,11 +92,9 @@ Even if later on your don't end up using R, the previous five verbs is still how
 Other Important Concepts
 ========================================================
 
-* **piping**: the `%>%` command, described as "_then_". This saves you from a morass of nesting.  Ex:  say `f()` and `g()` and `h()` are functions.  On data `x` you can do
-    + `f(g(h(x)))` OR
-    + `h(x) %>% g() %>% f()`
-* **grouping**: define groupings on a categorical variable via the `group_by()` command that is useful for `summarise()`'ations.
+* **piping**: the `%>%` command, described as "_then_".
 * **boolean algebra**:  statements that evaluate to `TRUE` or `FALSE`.
+* **grouping**: define groupings on a categorical variable via the `group_by()` command that is useful for `summarise()`'ations.
 
 
 
@@ -122,6 +128,38 @@ Other Concepts:  Boolean Algebra
 
 
 
+Task for Next Time
+========================================================
+We need to install the `dev_tools` package.  Unfortunately, you can't just download it from CRAN (i.e. directly from RStudio as we've been doing).  Follow the instructions [here](https://github.com/hadley/devtools). Beforehand
+
+* Mac users: Install Apple's software development kit [Xcode](https://developer.apple.com/xcode/). Huge file!
+* Windows users: Ensure you have R v. 3.1.2 (run `sessionInfo()` in R), and install [Rtools32.exe](http://cran.r-project.org/bin/windows/Rtools/)
+
+Then run
+
+```r
+devtools::install_github("hadley/rvest")
+library(rvest)
+```
+and ensure the package `rvest` loads.
+
+
+
+Why?
+========================================================
+
+```r
+if (!require("rvest")) devtools::install_github("hadley/rvest")
+library(rvest)
+webpage <- html("http://en.wikipedia.org/wiki/List_of_Stanley_Cup_champions")
+stanley.cup <- webpage %>% html_nodes("table") %>% .[[3]] %>% html_table()
+```
+
+
+
+Cheat Sheet
+========================================================
+Get comfortable with this: [dplyr cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet.pdf) from the folks at RStudio.
 
 
 
