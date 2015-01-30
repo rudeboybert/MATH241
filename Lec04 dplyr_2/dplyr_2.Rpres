@@ -1,0 +1,21 @@
+More dplyr
+========================================================
+author: Albert Y. Kim
+date: Monday 2015/02/02
+
+```{r, echo=FALSE}
+# The following code ensures all necessary packages are installed
+pkg <- c("dplyr", "ggplot2")
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos="http://cran.rstudio.com/")
+}
+library(dplyr)
+library(ggplot2)
+```
+
+
+
+Cheat Sheet
+========================================================
+Get comfortable with this: [dplyr cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet.pdf) from the folks at RStudio.

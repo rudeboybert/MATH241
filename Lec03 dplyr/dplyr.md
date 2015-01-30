@@ -7,21 +7,38 @@ date: Friday 2015/01/30
 
 
 
-UC Berkeley Admissions
+Questions from Last Time
 ========================================================
-
 * stat identity business
 * difference between
-* aes()
-* View()
-* Explain qplot
+
+
+
+qplot
+========================================================
+The `qplot()` command (Chapter 2 in ggplot text) describes a way to make "quick" plots, such as
+simple histograms and scatterplots.  Ex:
+
+```r
+# Defaults to a histogram
+qplot(x=carat, data=diamonds)
+# Defaults to a scatterplot
+qplot(x=carat, y=price, data=diamonds)
+```
+
+
+
+UC Berkeley Admissions
+========================================================
+Male vs female admissions
+
+![plot of chunk unnamed-chunk-3](dplyr-figure/unnamed-chunk-3-1.png) 
 
 
 
 Simpsons' Paradox
 ========================================================
-
-
+Slides from MATH 141.
 
 
 
@@ -32,9 +49,11 @@ Next in our Data Toolbox...
 
 
 
-Data "Wrangling"
+Data Manipulation
 ========================================================
-Another term increasing in usage is **"data wrangling"**.  The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view of the work.
+We now discuss a **grammar for data manipulation**.
+
+Another term increasing in usage is **data wrangling**.  The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view of the work.
 
 
 
@@ -56,7 +75,9 @@ Each of these is a command from the `dplyr` package.
 
 Grammar of Data Manipulation
 ========================================================
-The beauty of this "grammar" (and the grammar of graphics) is that it is programming language/software **agnostic**.  Even if later on your don't end up using R, the previous five verbs is still how you would think about manipulating your data.
+The beauty of this "grammar" (and the grammar of graphics) is that it is programming language/software **agnostic**.
+
+Even if later on your don't end up using R, the previous five verbs is still how you would think about manipulating your data.
 
 
 
@@ -101,9 +122,6 @@ Other Concepts:  Boolean Algebra
 
 
 
-Cheat Sheet
-========================================================
-Get comfortable with this: [dplyr cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet.pdf) from the folks at RStudio.
 
 
 

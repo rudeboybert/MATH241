@@ -4,33 +4,56 @@ author: Albert Y. Kim
 date: Friday 2015/01/30
 
 ```{r, echo=FALSE}
-# The following code ensures all necessary packages are installed
-pkg <- c("dplyr", "ggplot2")
+pkg <- c("ggplot2", "dplyr", "scales")
 new.pkg <- pkg[!(pkg %in% installed.packages())]
 if (length(new.pkg)) {
   install.packages(new.pkg, repos="http://cran.rstudio.com/")
 }
 library(dplyr)
 library(ggplot2)
+library(scales)
+```
+
+
+
+Questions from Last Time
+========================================================
+* stat identity business
+* difference between
+
+
+
+qplot
+========================================================
+The `qplot()` command (Chapter 2 in ggplot text) describes a way to make "quick" plots, such as
+simple histograms and scatterplots.  Ex:
+```{r, eval=FALSE}
+# Defaults to a histogram
+qplot(x=carat, data=diamonds)
+# Defaults to a scatterplot
+qplot(x=carat, y=price, data=diamonds)
 ```
 
 
 
 UC Berkeley Admissions
 ========================================================
+Male vs female admissions
 
-* stat identity business
-* difference between
-* aes()
-* View()
-* Explain qplot
+```{r, echo=FALSE}
+data(UCBAdmissions)
+UCB <- as.data.frame(UCBAdmissions) %>% group_by(Admit, Gender) %>% summarise(Freq = sum(Freq))
+ggplot(data=UCB, aes(x=Gender, y=Freq, fill=Admit)) +
+  ggtitle("Acceptance Rate Split by Gender") +
+  xlab("Gender") + geom_bar(stat = "identity", position="fill") +
+  ylab("% of Applicants") + scale_y_continuous(labels = percent)
+```
 
 
 
 Simpsons' Paradox
 ========================================================
-
-
+Slides from MATH 141.
 
 
 
@@ -41,9 +64,11 @@ Next in our Data Toolbox...
 
 
 
-Data "Wrangling"
+Data Manipulation
 ========================================================
-Another term increasing in usage is **"data wrangling"**.  The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view of the work.
+We now discuss a **grammar for data manipulation**.
+
+Another term increasing in usage is **data wrangling**.  The [New York Times](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) takes a rather pessimistic view of the work.
 
 
 
@@ -65,7 +90,9 @@ Each of these is a command from the `dplyr` package.
 
 Grammar of Data Manipulation
 ========================================================
-The beauty of this "grammar" (and the grammar of graphics) is that it is programming language/software **agnostic**.  Even if later on your don't end up using R, the previous five verbs is still how you would think about manipulating your data.
+The beauty of this "grammar" (and the grammar of graphics) is that it is programming language/software **agnostic**.
+
+Even if later on your don't end up using R, the previous five verbs is still how you would think about manipulating your data.
 
 
 
@@ -110,9 +137,6 @@ Other Concepts:  Boolean Algebra
 
 
 
-Cheat Sheet
-========================================================
-Get comfortable with this: [dplyr cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet.pdf) from the folks at RStudio.
 
 
 
