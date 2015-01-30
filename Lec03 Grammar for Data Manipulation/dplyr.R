@@ -161,3 +161,5 @@ group_by(UCB, Admit, Gender) %>% summarise(Freq = sum(Freq)) %>%
 # Using dplyr, fix the 2nd plot above showing the acceptance rates of the
 # different departments at UC Berkeley so that the bars aren't split up.  i.e.
 # collapse the data appropriately.
+
+
