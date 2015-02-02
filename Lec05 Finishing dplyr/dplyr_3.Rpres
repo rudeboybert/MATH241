@@ -73,7 +73,7 @@ ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
 
 
 
-Introducing Hadley Wickham:
+Hadley Wickham
 ========================================================
 ![alt text](https://camo.githubusercontent.com/e29219823036f4a91aa48726cf8b53148bf1d25c/687474703a2f2f692e696d6775722e636f6d2f4472496c522e706e67)
 
@@ -129,9 +129,7 @@ nhl <- webpage %>%
 
 Question for Today
 ========================================================
-Article from the Washington Post: [Colleges often give discounts to the rich. But here’s one that gave up on ‘merit aid.’](http://www.washingtonpost.com/local/education/colleges-often-give-discounts-to-the-rich-but-heres-one-that-gave-up-on-merit-aid/2014/12/29/a15a0f22-6f3c-11e4-893f-86bd390a3340_story.html)
-
-Using the data provided, we investigate which states have the highest average no need grants (averaged over schools).
+I want to know which states have the highest average no need grants (averaged over schools).
 
 1. Create the smallest data frame (i.e. least number of rows, least number of columns) that answers this question.
 2. Challenge: create a visualization of this data

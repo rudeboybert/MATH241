@@ -87,5 +87,71 @@ From Last Time: "Collapse" over Gender
 
 
 
+Introducing Hadley Wickham:
+========================================================
+![alt text](https://camo.githubusercontent.com/e29219823036f4a91aa48726cf8b53148bf1d25c/687474703a2f2f692e696d6775722e636f6d2f4472496c522e706e67)
+
+
+
+Introducing Hadley Wickham
+========================================================
+He is the author of the following R packages
+
+* **`ggplot`**
+* **`dplyr`**
+* **`lubridate`**: handling dates and times (later)
+* **`stingr`**: handling character strings i.e. computer text (later)
+* **`rvest`**: tools for webscraping (today)
+
+
+
+`rvest` Package
+========================================================
+The `rvest` package works by scraping HTML code used to make webpages.  To view a webpage's raw HTML code:
+
+* In Google Chrome: Go to menu bar -> View -> Developer -> View Source
+* In Firefox: Go to menu bar -> Tools -> Web Developer -> Page Source
+
+The `html_nodes` function looks for HTML tags.
+
+
+
+`rvest` Package
+========================================================
+`wp_data` is a [list](http://www.r-tutor.com/r-introduction/list) that contains all HTML tables on the page.
+
+
+```r
+webpage <- html("http://www.nhl.com")
+nhl <- webpage %>%
+  html_nodes("table")
+```
+
+
+
+`rvest` Package
+========================================================
+Now we pull the first table and then apply the `html_table()` function to convert it to a format useable by R.
+
+
+```r
+webpage <- html("http://www.nhl.com")
+nhl <- webpage %>%
+  html_nodes("table") %>%
+  .[[1]] %>% html_table()
+```
+
+
+
+Question for Today
+========================================================
+Article from the Washington Post: [Colleges often give discounts to the rich. But here’s one that gave up on ‘merit aid.’](http://www.washingtonpost.com/local/education/colleges-often-give-discounts-to-the-rich-but-heres-one-that-gave-up-on-merit-aid/2014/12/29/a15a0f22-6f3c-11e4-893f-86bd390a3340_story.html)
+
+Using the data provided, we investigate which states have the highest average no need grants (averaged over schools).
+
+1. Create the smallest data frame (i.e. least number of rows, least number of columns) that answers this question.
+2. Challenge: create a visualization of this data
+
+
 
 
