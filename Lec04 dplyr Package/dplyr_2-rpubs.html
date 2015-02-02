@@ -762,6 +762,8 @@ hljs.initHighlightingOnLoad();
 <ul>
 <li>My office hours will be Monday and Wednesday 2:30-4:00</li>
 <li>Rich Majerus has R office hours on Thursdays 10-12 (or by appointment) in ETC 223.  Google search &ldquo;Data at Reed&rdquo;</li>
+<li>First HW will be assigned on Friday</li>
+<li>We&#39;ll start discussing project next week</li>
 </ul>
 
 </div>
@@ -861,16 +863,16 @@ Groups: Admit
 <li><strong><code>dplyr</code></strong></li>
 <li><strong><code>lubridate</code></strong>: handling dates and times (later)</li>
 <li><strong><code>stingr</code></strong>: handling character strings i.e. computer text (later)</li>
-<li><strong><code>rvest</code></strong>: tools for webscraping (today)</li>
+<li><strong>rvest</strong>: tools for webscraping (today)</li>
 </ul>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>`rvest` Package</h3>
+<h3>rvest Package</h3>
 <div class="slideContent" >
-<p>The <code>rvest</code> package works by scraping HTML code used to make webpages.  To view a webpage&#39;s raw HTML code:</p>
+<p>The rvest package works by scraping HTML code used to make webpages.  To view a webpage&#39;s raw HTML code:</p>
 
 <ul>
 <li>In Google Chrome: Go to menu bar -&gt; View -&gt; Developer -&gt; View Source</li>
@@ -883,7 +885,7 @@ Groups: Admit
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>`rvest` Package</h3>
+<h3>rvest Package</h3>
 <div class="slideContent" >
 <p><code>wp_data</code> is a <a href="http://www.r-tutor.com/r-introduction/list">list</a> that contains all HTML tables on the page.</p>
 
@@ -896,7 +898,7 @@ nhl &lt;- webpage %&gt;%
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>`rvest` Package</h3>
+<h3>rvest Package</h3>
 <div class="slideContent" >
 <p>Now we pull the first table and then apply the <code>html_table()</code> function to convert it to a format useable by R.</p>
 
@@ -905,6 +907,14 @@ nhl &lt;- webpage %&gt;%
   html_nodes(&quot;table&quot;) %&gt;%
   .[[1]] %&gt;% html_table()
 </code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>leaflet Package</h3>
+<div class="slideContent" >
+<p>We also use the leaflet package to draw maps:  <a href="http://www.r-bloggers.com/the-leaflet-package-for-online-mapping-in-r/">http://www.r-bloggers.com/the-leaflet-package-for-online-mapping-in-r/</a></p>
 
 </div>
 
@@ -920,6 +930,23 @@ nhl &lt;- webpage %&gt;%
 <li>Create the smallest data frame (i.e. least number of rows, least number of columns) that answers this question.</li>
 <li>Challenge: create a visualization of this data</li>
 </ol>
+
+<p>Please read this article for Wednesday.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Exercise for Today</h3>
+<div class="slideContent" >
+<p>A lot of sophisticated tools are used here, so don&#39;t try to figure out all the data preprocessing.  Focus on the <code>dplyr</code> and <code>ggplot</code>.  Some new concepts:</p>
+
+<ul>
+<li>Defining <strong>functions</strong>:  For tasks you&#39;ll be doing many times, it&#39;s a good idea to define a new function.  They take in arguments (i.e. inputs) and return outputs. Ex. on lines 64 and 71.</li>
+<li><strong><code>rename()</code></strong> command in dplyr allows you to rename columns</li>
+<li><code>ifelse(TEST, A, B)</code>:  run <code>TEST</code>, return <code>A</code> if <code>TRUE</code>, return <code>B</code> if <code>FALSE</code>.  Example <code>ifelse(3 &lt;= 5, 1, 0)</code> returns <code>1</code></li>
+<li>Missing data is stored as <code>NA</code> in R. <code>is.na(x)</code> tests if x is a missing value.  If you set <code>na.rm=TRUE</code> to many functions, it will ignore the missing values.  Make sure you want to do this!</li>
+</ul>
 
 </div>
 

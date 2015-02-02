@@ -1,4 +1,19 @@
 #------------------------------------------------------------------------------
+# From last time:  Fix plot of acceptance rates per department
+#------------------------------------------------------------------------------
+data(UCBAdmissions)
+UCB <- as.data.frame(UCBAdmissions) %>% tbl_df() %>%
+  group_by(Admit, Dept) %>% summarize(Freq=sum(Freq))
+
+ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
+  geom_bar(stat = "identity", position="fill") +
+  ggtitle("Acceptance Rate Split by Department") +
+  xlab("Dept") +
+  ylab("% of Applicants")
+
+
+
+#------------------------------------------------------------------------------
 # More dplyr: adapted from Paideia 2015 Data Science and Visualization by
 # Rich Majerus and Albert Y. Kim 2015/1/23
 #------------------------------------------------------------------------------
@@ -18,14 +33,13 @@ new.pkg <- pkg[!(pkg %in% installed.packages())]
 if (length(new.pkg)) {
   install.packages(new.pkg)
 }
-
+# Install rvest and leaflet packages
 if (!require("rvest")) {
   devtools::install_github("hadley/rvest")
 }
 if (!require("leaflet")) {
   devtools::install_github("rstudio/leaflet")
 }
-
 
 # Update all packages
 update.packages(checkBuilt=TRUE, ask=FALSE)
@@ -80,10 +94,9 @@ currency.to.numeric <- function(x){
 # long
 View(wp_data)
 
-# Think:
-# * What does the clean.names() function do? THEN
-# * What does the %<>% does?  Ask me if you're not sure THEN
-# * What does the rename() function do?
+# Guess:
+# * What does the clean.names() function do?
+# * What does the %<>% does?  Ask me if you're not sure.
 # * The mutate command from last time
 wp_data %<>%
   clean.names() %>%
@@ -97,10 +110,10 @@ wp_data %<>%
     # Convert character strings to factors i.e. categorical variables
     state = as.factor(state),
     sector = as.factor(sector),
-    # Convert currencies to numeric i.e. numerical variables
+    # Convert currencies to numeric i.e. strip dollar signs and commas
     comp_fee = currency.to.numeric(comp_fee),
     ave_no_need_grant = currency.to.numeric(ave_no_need_grant),
-    # Using the ifelse() command, replace missing values with .5 non-missing
+    # Using the ifelse() command, replace missing values with .5
     p_no_need_grant = ifelse(is.na(p_no_need_grant), .5, p_no_need_grant))
 
 # Now look at it.  A bit cleaner
@@ -114,6 +127,7 @@ View(wp_data)
 # Using the geocode() function from the ggmap package, get geocodes of school
 # locations based on school name by searching Google maps.  The code takes about
 # two minutes; uncomment and run if you're curious:
+#
 # gc <- do.call(rbind, lapply(as.character(wp_data$school), geocode))
 # wp_data %<>% mutate(lon=gc$lon, lat=gc$lat)
 
@@ -134,7 +148,7 @@ leaflet(wp_data) %>%
 # It might be helpful to color code the schools based on the average no need
 # grant variable in the data by defining a new color palette where darker
 # indicates higher values
-pal <- colorQuantile("YlOrRd", NULL, n = 6) # define color pal
+pal <- colorQuantile("YlOrRd", NULL, n = 6)
 
 leaflet(wp_data) %>%
   addTiles() %>%
@@ -270,3 +284,5 @@ ggplot(south.data, aes(x=ave_no_need_grant, fill=as.factor(south))) +
 # 1. Create the smallest data frame (i.e. least number of rows, least number of
 # columns) that answers this question.
 # 2. Challenge: create a visualization of this data
+
+
