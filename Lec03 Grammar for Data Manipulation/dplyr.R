@@ -203,4 +203,12 @@ group_by(UCB, Admit, Gender) %>% summarise(Freq = sum(Freq)) %>%
 # different departments at UC Berkeley so that the bars aren't split up.  i.e.
 # collapse the data appropriately.
 
+data(UCBAdmissions)
+UCB <- as.data.frame(UCBAdmissions) %>% group_by(Admit, Dept) %>%
+  summarize(Freq=sum(Freq))
 
+ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
+  geom_bar(stat = "identity", position="fill") +
+  ggtitle("Acceptance Rate Split by Department") +
+  xlab("Dept") +
+  ylab("% of Applicants")
