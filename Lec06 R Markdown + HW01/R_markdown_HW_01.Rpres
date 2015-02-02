@@ -1,7 +1,7 @@
 Wrapping Up dplyr
 ========================================================
 author: Albert Y. Kim
-date: Wednesday 2015/02/04
+date: Friday 2015/02/06
 
 ```{r, echo=FALSE}
 # The following code ensures all necessary packages are installed
