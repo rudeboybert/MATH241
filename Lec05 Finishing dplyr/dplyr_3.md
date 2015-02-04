@@ -9,7 +9,7 @@ date: Wednesday 2015/02/04
 
 Notes from Last Time
 ========================================================
-`%<>%` is a combination of `->` and `%>%` from the `magrittr` package.  Example: the following are the same:
+`%<>%` is a combination of `->` and `%>%` from the `magrittr` package.  Example: the following are the same
 
 
 ```r
@@ -24,9 +24,11 @@ Questions about Article
 
 
 
-Combining Data Sets
+
+
+Combining Data Sets via Join Operations
 ========================================================
-Imagine we have two data frames `x` and `y`:
+Imagine we have two data frames **`x**   and  **y`**:
 
 
 ```
@@ -43,9 +45,11 @@ Imagine we have two data frames `x` and `y`:
 3  D  TRUE
 ```
 
+We want to **join** them along the `x1` variable and end up with a new data frame that has all three variables.
 
 
-Join Operations
+
+Combining Data Sets via Join Operations
 ========================================================
 
 `dplyr`'s operations to join data sets are inspired by SQL (Structured Query Language), which is a database language.

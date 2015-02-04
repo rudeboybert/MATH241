@@ -19,7 +19,7 @@ library(magrittr)
 
 Notes from Last Time
 ========================================================
-`%<>%` is a combination of `->` and `%>%` from the `magrittr` package.  Example: the following are the same:
+`%<>%` is a combination of `->` and `%>%` from the `magrittr` package.  Example: the following are the same
 
 ```{r}
 mtcars <- filter(mtcars, gear >3)
@@ -28,14 +28,16 @@ mtcars %<>% filter(gear > 3)
 
 
 
-Questions about Article
+Discussion about Article
 ========================================================
 
 
 
-Combining Data Sets
+
+
+Combining Data Sets via Join Operations
 ========================================================
-Imagine we have two data frames `x` and `y`:
+Imagine we have two data frames **`x**   and  **y`**:
 
 ```{r, echo=FALSE}
 x <- data.frame(x1=c("A","B","C"), x2=c(1,2,3))
@@ -44,9 +46,11 @@ x
 y
 ```
 
+We want to **join** them along the `x1` variable and end up with a new data frame that has all three variables.
 
 
-Join Operations
+
+Combining Data Sets via Join Operations
 ========================================================
 
 `dplyr`'s operations to join data sets are inspired by SQL (Structured Query Language), which is a database language.

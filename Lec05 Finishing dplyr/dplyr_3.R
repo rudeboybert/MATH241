@@ -1,4 +1,5 @@
 #------------------------------------------------------------------------------
+# Lines 1:68 are from last time:
 # Load all necessary packages and recompute Washington Post data
 #------------------------------------------------------------------------------
 # Install necessary packages
@@ -99,13 +100,16 @@ ggplot(data=state.means, aes(x=state, y=ave_no_need_grant)) +
 
 
 #------------------------------------------------------------------------------
-# Using the join command
+# Learning the join command
 #------------------------------------------------------------------------------
+# Let's test out join commands on these data sets.  Setting stringsAsFactors =
+# FALSE treats the letters A, B, C, D as character strings, and not factors
+# (i.e. categorical variables)
 x <- data.frame(x1=c("A","B","C"), x2=c(1,2,3), stringsAsFactors=FALSE)
 y <- data.frame(x1=c("A","B","D"), x3=c(TRUE,FALSE,TRUE), stringsAsFactors=FALSE)
 z <- data.frame(x1=c("B","C","D"), x2=c(2,3,4), stringsAsFactors = FALSE)
 
-# Compare these to the Venn Diagrams from:
+# Compare the outputs of the following 6 commands to the Venn Diagrams from:
 # https://twitter.com/yutannihilation/status/551572539697143808
 left_join(x, y, by="x1")
 right_join(x, y, by="x1")
@@ -114,7 +118,7 @@ semi_join(x, y, by="x1")
 full_join(x, y, by="x1")
 anti_join(x, y, by="x1")
 
-# Other set operations
+# Other useful set operations, also included on your cheat sheet.
 intersect(x, z)
 union(x, z)
 setdiff(x, z)
@@ -128,23 +132,41 @@ setdiff(x, z)
 # match where the file is:  Files panel -> Navigate to Directory -> More ->
 # "Set As Working Directory"
 state.info <- read.csv("states.csv", header=TRUE) %>% tbl_df()
+state.info
 
-# EXERCISE: Merge the state.means data with the new state.info data and color
-# code the barchart by region: NE, south, west, midwest
+# EXERCISE:
+# 1. Merge the state.means data with the new state.info data so that we know
+# what region each observation is in
+# 2. Recreate the bar chart from above, but color code the bars by which region
+# of the US the state is a member of NE, south, west, midwest.  What trend do
+# you notice?
 
 
 
 #------------------------------------------------------------------------------
 # Maps
 #------------------------------------------------------------------------------
-# Get geographic coordinates of each state using the map_data() function in
-# ggplot.  Examples:
-map_data("county") %>% ggplot(aes(long, lat, group = group)) +
-  geom_path(color="black")
-map_data("world") %>% ggplot(aes(long, lat, group = group)) +
+# ggplot has a lot of preloaded maps in it, for which you can get the geographic
+# coordinates using the map_data() function.  Examples:
+
+# Takes a few seconds:
+map_data("county") %>%
+  ggplot(aes(long, lat, group = group)) +
   geom_path(color="black")
 
-# We join the state.means data and the map_data corresponding to states
+map_data("world") %>%
+  ggplot(aes(long, lat, group = group)) +
+  geom_path(color="black")
+
+# We'll use states
+map_data("state") %>%
+  ggplot(aes(long, lat, group = group)) +
+  geom_path(color="black")
+
+
+# We join the state.means data and the map_data() corresponding to states.
+# Notice the "by" argument in the left_join.  Read the help file to understand
+# what's going on.  If you can't figure it out, ask me.
 state.data <- map_data("state") %>%
   left_join(state.means, by=c("region" = "fullname")) %>%
   tbl_df()
@@ -152,11 +174,23 @@ state.data
 
 # What do you think the grey values mean? Note:  the "\n" is the "return"
 # character
-ggplot(state.data, aes(long, lat, group = group)) +
+ggplot(state.data, aes(long, lat, group = group)) + # Recall "grouping"
   geom_polygon(aes(fill = ave_no_need_grant)) +
-  geom_path(color="white") +
+  geom_path(color="white") + # outline of states
   scale_fill_gradient(name="Avg. No\nNeed Grant", low='white', high='red')
 
 
-# EXERCISE:  Changing one word from above, change the plot so that states
-# that do not have any data do not get plotted at at all
+# EXERCISE:  By changing the left_join() function to another join function,
+# change the plot so that states that do not have any data do not get plotted at
+# at all
+
+
+
+#------------------------------------------------------------------------------
+# Exercise
+#------------------------------------------------------------------------------
+# Recreate the above barchart and map but now split by the sector of the
+# university: public or private.
+
+
+

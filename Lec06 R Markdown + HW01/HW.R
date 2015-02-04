@@ -1,11 +1,24 @@
 state.means <- left_join(state.means, state.info, by="state")
 state.means
-
 # Now we replot the plot from above, but with the fill aesthetic set to "region"
 ggplot(data=state.means, aes(x=state, y=ave_no_need_grant, fill=region)) +
   geom_bar(stat="identity") +
   ylab("avg no need grant")
 
+
+
+
+state.means <- wp_data %>%
+  select(state, sector, ave_no_need_grant) %>%
+  group_by(state, sector) %>%
+  summarise_each(funs(mean)) %>%
+  arrange(desc(ave_no_need_grant)) %>%
+  left_join(state.info, by="state")
+state.means
+
+ggplot(data=state.means, aes(x=state, y=ave_no_need_grant, fill=region)) +
+  geom_bar(stat="identity") +
+  ylab("avg no need grant") + facet_wrap(~sector, ncol=1)
 
 
 
