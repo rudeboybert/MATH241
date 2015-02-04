@@ -1,19 +1,4 @@
 #------------------------------------------------------------------------------
-# From last time:  Fix plot of acceptance rates per department
-#------------------------------------------------------------------------------
-data(UCBAdmissions)
-UCB <- as.data.frame(UCBAdmissions) %>% tbl_df() %>%
-  group_by(Admit, Dept) %>% summarize(Freq=sum(Freq))
-
-ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
-  geom_bar(stat = "identity", position="fill") +
-  ggtitle("Acceptance Rate Split by Department") +
-  xlab("Dept") +
-  ylab("% of Applicants")
-
-
-
-#------------------------------------------------------------------------------
 # More dplyr: adapted from Paideia 2015 Data Science and Visualization by
 # Rich Majerus and Albert Y. Kim 2015/1/23
 #------------------------------------------------------------------------------
@@ -57,6 +42,21 @@ library(RColorBrewer)
 library(magrittr)
 library(RCurl)
 library(scales)
+
+
+
+#------------------------------------------------------------------------------
+# From last time:  Fix plot of acceptance rates per department
+#------------------------------------------------------------------------------
+data(UCBAdmissions)
+UCB <- as.data.frame(UCBAdmissions) %>% tbl_df() %>%
+  group_by(Admit, Dept) %>% summarize(Freq=sum(Freq))
+
+ggplot(UCB, aes(x=Dept, y=Freq, fill = Admit)) +
+  geom_bar(stat = "identity", position="fill") +
+  ggtitle("Acceptance Rate Split by Department") +
+  xlab("Dept") +
+  ylab("% of Applicants")
 
 
 
