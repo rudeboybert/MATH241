@@ -7,6 +7,13 @@ date: Wednesday 2015/02/04
 
 
 
+Office Hours Today
+========================================================
+
+From 2:30-3:30 only. Also by appointment.
+
+
+
 Notes from Last Time
 ========================================================
 `%<>%` is a combination of `->` and `%>%` from the `magrittr` package.  Ex. the following are the same:
