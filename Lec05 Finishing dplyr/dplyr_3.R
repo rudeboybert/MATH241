@@ -122,6 +122,8 @@ anti_join(x, y, by="x1")
 intersect(x, z)
 union(x, z)
 setdiff(x, z)
+bind_rows(x, y)
+bind_rows(x, x) %>% distinct()
 
 
 
@@ -136,7 +138,7 @@ state.info
 
 # EXERCISE:
 # 1. Merge the state.means data with the new state.info data so that we know
-# what region each observation is in
+# what region each observation (i.e. university) is in
 # 2. Recreate the bar chart from above, but color code the bars by which region
 # of the US the state is a member of NE, south, west, midwest.  What trend do
 # you notice?
@@ -167,9 +169,10 @@ map_data("state") %>%
 # We join the state.means data and the map_data() corresponding to states.
 # Notice the "by" argument in the left_join.  Read the help file to understand
 # what's going on.  If you can't figure it out, ask me.
-state.data <- map_data("state") %>%
-  left_join(state.means, by=c("region" = "fullname")) %>%
-  tbl_df()
+state.data <- map_data("state") %>% tbl_df()
+state.data
+
+state.data <- left_join(state.data, state.means, by=c("region" = "fullname"))
 state.data
 
 # What do you think the grey values mean? Note:  the "\n" is the "return"

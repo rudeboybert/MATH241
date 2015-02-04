@@ -759,7 +759,7 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Notes from Last Time</h3>
 <div class="slideContent" >
-<p><code>%&lt;&gt;%</code> is a combination of <code>-&gt;</code> and <code>%&gt;%</code> from the <code>magrittr</code> package.  Example: the following are the same:</p>
+<p><code>%&lt;&gt;%</code> is a combination of <code>-&gt;</code> and <code>%&gt;%</code> from the <code>magrittr</code> package.  Ex. the following are the same:</p>
 
 <pre><code class="r">mtcars &lt;- filter(mtcars, gear &gt;3)
 mtcars %&lt;&gt;% filter(gear &gt; 3)
@@ -769,9 +769,16 @@ mtcars %&lt;&gt;% filter(gear &gt; 3)
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Combining Data Sets</h3>
+<h3>Discussion about Article</h3>
 <div class="slideContent" >
-<p>Imagine we have two data frames <code>x</code> and <code>y</code>:</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Combining Data Sets via Join Operations</h3>
+<div class="slideContent" >
+<p>Imagine we have two data frames <strong>x</strong>   and  <strong>y</strong>:</p>
 
 <pre><code>  x1 x2
 1  A  1
@@ -785,17 +792,19 @@ mtcars %&lt;&gt;% filter(gear &gt; 3)
 3  D  TRUE
 </code></pre>
 
+<p>We want to <strong>join</strong> them along the <code>x1</code> variable and end up with a new data frame that has all three variables.</p>
+
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Join Operations</h3>
+<h3>Combining Data Sets via Join Operations</h3>
 <div class="slideContent" >
-<p><code>dplyr</code>&#39;s operations to join data sets are inspired by SQL (Structured Query Language), which is a database language.</p>
-
-<p>This <a href="https://twitter.com/yutannihilation/status/551572539697143808">illustration</a> succinctly summarizes all of them.</p>
-
-<p>If values are missing during the join, <code>NA</code>&#39;s are inserted.</p>
+<ul>
+<li><code>dplyr</code>&#39;s operations to join data sets are inspired by SQL (Structured Query Language), which used to query large databases.</li>
+<li>If values are missing during the join, <code>NA</code>&#39;s are inserted.</li>
+<li>This <a href="https://twitter.com/yutannihilation/status/551572539697143808">illustration</a> succinctly summarizes all of them.</li>
+</ul>
 
 </div>
 
@@ -804,6 +813,8 @@ mtcars %&lt;&gt;% filter(gear &gt; 3)
 <h3>R Markdown</h3>
 <div class="slideContent" >
 <p>Everybody please ensure that Step 9 in the <a href="http://reed.edu/data-at-reed/software/R/r_studio.html">instructions about LaTeX</a> work.  If this doesn&#39;t work, please see Rich in his office hours tomorrow or me at some point before class.</p>
+
+<p>Homework 01 will be assigned on Friday.</p>
 
 </div>
 
