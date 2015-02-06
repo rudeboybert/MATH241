@@ -757,16 +757,82 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
+<h3>Questions</h3>
+<div class="slideContent" >
+<p>Last time someone asked how to reorder the bars on the barplot.  We do that by setting the <code>state</code> variable as a factor, i.e. a categorical variable, and then setting its order via its <code>levels</code>.</p>
+
+<p>See lines 106-120.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>A few other commands</h3>
+<div class="slideContent" >
+<ul>
+<li><code>count()</code>.  Ex:
+
+<ul>
+<li><code>count(diamonds, color)</code></li>
+<li><code>count(diamonds, color, clarity)</code></li>
+</ul></li>
+<li><code>summarise(n())</code>.  Ex:
+
+<ul>
+<li><code>group_by(diamonds, color) %&gt;% summarise(n())</code></li>
+</ul></li>
+<li>How to deal with missing data
+
+<ul>
+<li><code>mean(c(1, 2, NA))</code> gives <code>NA</code></li>
+<li>but <code>mean(c(1, 2, NA), na.rm=TRUE)</code> gives 1.5.</li>
+</ul></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
 <h3>Flights data</h3>
 <div class="slideContent" >
 <ul>
-<li><code>flights</code> [227,496 x 14]. Every flight departing Houston in 2011.</li>
+<li><code>flights</code> [227,496 x 14]. Every domestic flight departing Houston in 2011.</li>
 <li><code>weather</code> [8,723 x 14]. Hourly weather data.</li>
 <li><code>planes</code> [2,853 x 9]. Plane metadata.</li>
 <li><code>airports</code> [3,376 x 7]. Airport metadata.</li>
 </ul>
 
-<p>Source: RStudio</p>
+<p>Source: RStudio.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Questions for Homework</h3>
+<div class="slideContent" >
+<ul>
+<li>Plot a &ldquo;time series&rdquo; of the number of flights that were delayed by more than 30 minutes on each day.  i.e.
+
+<ul>
+<li>the x-axis should be some notion of time</li>
+<li>the y-axis should be the proportion.</li>
+</ul></li>
+<li>Which seasons did we tend to see the most and least delays of &gt; 30 minutes.</li>
+<li>I actually prefer flying on older planes.  Even though they aren&#39;t as nice, they tend to have more room.  Which airlines should I favor?</li>
+<li>What states did Southwest Airlines flights tend to fly to from Houston?</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Questions for Homework</h3>
+<div class="slideContent" >
+<ul>
+<li>What weather patterns are associated with the biggest departure delays?</li>
+<li>I want to know what regions (NE, south, west, midwest) each carrier flies to from Houston.</li>
+<li>Get creative:  Answer one question of your own using this data based on your feelings on flying.  The more interesting the question the better.</li>
+</ul>
 
 </div>
 
@@ -784,7 +850,18 @@ hljs.initHighlightingOnLoad();
 <li>&hellip;</li>
 </ul></li>
 <li>Once you have the appropriate <strong>tidy</strong> data frame sketch out what you want your graphic to look like and build it using the <strong>grammar of graphics</strong></li>
-<li>For those of you with no programming experience: if you&#39;re spinning your wheels, TAKE A BREAK.</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Strategy</h3>
+<div class="slideContent" >
+<ul>
+<li>For those of you with no programming experience: if you&#39;re spinning your wheels, TAKE A BREAK.  If really stuck, get help from your peers, me, or Rich.</li>
+<li>There are no &ldquo;right&rdquo; answers.  Just think of the goal:  you want to convey the most information so that consumers need to use the least cerebral power to understand it.</li>
+<li><a href="http://stat545-ubc.github.io/peer-review01_marking-rubric.html">Grading Rubric</a></li>
 </ul>
 
 </div>
@@ -793,18 +870,6 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>R Markdown</h3>
 <div class="slideContent" >
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Homeworks</h3>
-<div class="slideContent" >
-<p>*</p>
-
-<ul>
-<li><a href="http://stat545-ubc.github.io/peer-review01_marking-rubric.html">Grading Rubric</a></li>
-</ul>
 
 </div>
 
