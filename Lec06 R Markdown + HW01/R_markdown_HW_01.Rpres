@@ -22,18 +22,19 @@ Questions
 
 Last time someone asked how to reorder the bars on the barplot.  We do that by setting the `state` variable as a factor, i.e. a categorical variable, and then setting its order via its `levels`.
 
-See lines 106-120.
+Unfortunately the solution is a bit of a hack.  See lines 106-120 of `HW01.R` for an example.
 
 
 
 A few other commands
 ========================================================
+Load `dplyr`:
 
 * `count()`.  Ex:
-    + `count(diamonds, color)`
-    + `count(diamonds, color, clarity)`
+    + `count(mtcars, cyl)`
+    + `count(mtcars, cyl, vs)`
 * `summarise(n())`.  Ex:
-    + `group_by(diamonds, color) %>% summarise(n())`
+    + `group_by(mtcars, cyl) %>% summarise(count = n())`
 * How to deal with missing data
     + `mean(c(1, 2, NA))` gives `NA`
     + but `mean(c(1, 2, NA), na.rm=TRUE)` gives 1.5.
@@ -52,24 +53,51 @@ Source: RStudio.
 
 
 
-Questions for Homework
+Question 1
 ========================================================
 
-* Plot a "time series" of the number of flights that were delayed by more than 30 minutes on each day.  i.e.
+* Plot a "time series" of the number of flights that were delayed by > 30 minutes on each day.  i.e.
     + the x-axis should be some notion of time
     + the y-axis should be the proportion.
 * Which seasons did we tend to see the most and least delays of > 30 minutes.
-* I actually prefer flying on older planes.  Even though they aren't as nice, they tend to have more room.  Which airlines should I favor?
-* What states did Southwest Airlines flights tend to fly to from Houston?
 
 
 
-Questions for Homework
+Question 2
 ========================================================
 
-* What weather patterns are associated with the biggest departure delays?
-* I want to know what regions (NE, south, west, midwest) each carrier flies to from Houston.
-* Get creative:  Answer one question of your own using this data based on your feelings on flying.  The more interesting the question the better.
+I actually prefer flying on older planes.  Even though they aren't as nice, they tend to have more room.  Which airlines should I favor?
+
+
+
+Question 3
+========================================================
+
+* What states did listed Southwest Airlines flights tend to fly to?
+* What states did all Southwest Airlines flights tend to fly to?
+
+
+
+Question 4
+========================================================
+
+What weather patterns are associated with the biggest departure delays?
+
+
+
+
+Question 5
+========================================================
+
+I want to know proportionately what regions (NE, south, west, midwest) each carrier flies to from Houston in the month of July.  Consider the `lubridate` package.
+
+
+
+Question 6
+========================================================
+
+Get creative:  Answer one question of your own using this data.  The more interesting the question the better.
+
 
 
 
@@ -89,15 +117,20 @@ Strategy
 Strategy
 ========================================================
 
-* For those of you with no programming experience: if you're spinning your wheels, TAKE A BREAK.  If really stuck, get help from your peers, me, or Rich.
+* For those of you with no programming experience: if you're spinning your wheels for a long while, TAKE A BREAK.  If really stuck, get help from your peers, me, or Rich.
 * There are no "right" answers.  Just think of the goal:  you want to convey the most information so that consumers need to use the least cerebral power to understand it.
 * [Grading Rubric](http://stat545-ubc.github.io/peer-review01_marking-rubric.html)
+
+
 
 
 
 R Markdown
 ========================================================
 
+* Use `HW01.Rmd` template for submitting your homework.
+* Submit a working `.Rmd` file by Wednesday Feb. 18th at 1pm.  We will discuss the HW in lecture that day.
+* Please check out the R Markdown debugging sheet at the top of the Moodle page.
 
 
 

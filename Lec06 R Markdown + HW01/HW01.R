@@ -106,15 +106,20 @@ ggplot(data=state.means, aes(x=state, y=ave_no_need_grant, fill=region)) +
 # Somebody asked how do we rearrange the ordering of the states on the x-axis.
 # Unfortunately there doesn't seem to be a clean dplyr way to do this.  Here is
 # the hacky solution.  We first arrange the state.means data.frame in the order
-# we want the states to show:
+# we want the states to show:  first by region, then descending order of
+# average no need grant.
 state.means <- arrange(state.means, region, desc(ave_no_need_grant))
 state.means
 
 # Then we "factor" the state variable to be a categorial variable whose
 # "levels" determine the order.  If no levels are specified, then alphabetical
-# is the default
+# is the default.  Note the $ sign is used to quickly access a variable from the
+# data frame
+factor(state.means$state)
+factor(state.means$state, levels = state.means$state)
+
+# Assign the latter
 state.means$state <- factor(state.means$state, levels = state.means$state)
-state.means$state
 
 # Now we plot
 ggplot(data=state.means, aes(x=state, y=ave_no_need_grant, fill=region)) +
@@ -142,7 +147,7 @@ ggplot(state.data, aes(long, lat, group = group)) + # Recall "grouping"
 # EXERCISE:  Recreate the above barchart and map but now split by the sector of the
 # university: public or private.
 
-# ANSWER:  We also group_by() sector on top of state:
+# ANSWER:  We also group_by() sector as well as state:
 state.means <- wp_data %>%
   select(state, sector, ave_no_need_grant) %>%
   group_by(state, sector) %>%
