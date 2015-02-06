@@ -58,7 +58,7 @@ Question 1
 
 * Plot a "time series" of the number of flights that were delayed by > 30 minutes on each day.  i.e.
     + the x-axis should be some notion of time
-    + the y-axis should be the proportion.
+    + the y-axis should be the count.
 * Which seasons did we tend to see the most and least delays of > 30 minutes.
 
 

@@ -761,7 +761,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>Last time someone asked how to reorder the bars on the barplot.  We do that by setting the <code>state</code> variable as a factor, i.e. a categorical variable, and then setting its order via its <code>levels</code>.</p>
 
-<p>See lines 106-120.</p>
+<p>Unfortunately the solution is a bit of a hack.  See lines 106-120 of <code>HW01.R</code> for an example.</p>
 
 </div>
 
@@ -769,17 +769,19 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>A few other commands</h3>
 <div class="slideContent" >
+<p>Load <code>dplyr</code>:</p>
+
 <ul>
 <li><code>count()</code>.  Ex:
 
 <ul>
-<li><code>count(diamonds, color)</code></li>
-<li><code>count(diamonds, color, clarity)</code></li>
+<li><code>count(mtcars, cyl)</code></li>
+<li><code>count(mtcars, cyl, vs)</code></li>
 </ul></li>
 <li><code>summarise(n())</code>.  Ex:
 
 <ul>
-<li><code>group_by(diamonds, color) %&gt;% summarise(n())</code></li>
+<li><code>group_by(mtcars, cyl) %&gt;% summarise(count = n())</code></li>
 </ul></li>
 <li>How to deal with missing data
 
@@ -808,31 +810,60 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Questions for Homework</h3>
+<h3>Question 1</h3>
 <div class="slideContent" >
 <ul>
-<li>Plot a &ldquo;time series&rdquo; of the number of flights that were delayed by more than 30 minutes on each day.  i.e.
+<li>Plot a &ldquo;time series&rdquo; of the number of flights that were delayed by &gt; 30 minutes on each day.  i.e.
 
 <ul>
 <li>the x-axis should be some notion of time</li>
-<li>the y-axis should be the proportion.</li>
+<li>the y-axis should be the count.</li>
 </ul></li>
 <li>Which seasons did we tend to see the most and least delays of &gt; 30 minutes.</li>
-<li>I actually prefer flying on older planes.  Even though they aren&#39;t as nice, they tend to have more room.  Which airlines should I favor?</li>
-<li>What states did Southwest Airlines flights tend to fly to from Houston?</li>
 </ul>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Questions for Homework</h3>
+<h3>Question 2</h3>
+<div class="slideContent" >
+<p>I actually prefer flying on older planes.  Even though they aren&#39;t as nice, they tend to have more room.  Which airlines should I favor?</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Question 3</h3>
 <div class="slideContent" >
 <ul>
-<li>What weather patterns are associated with the biggest departure delays?</li>
-<li>I want to know what regions (NE, south, west, midwest) each carrier flies to from Houston.</li>
-<li>Get creative:  Answer one question of your own using this data based on your feelings on flying.  The more interesting the question the better.</li>
+<li>What states did listed Southwest Airlines flights tend to fly to?</li>
+<li>What states did all Southwest Airlines flights tend to fly to?</li>
 </ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Question 4</h3>
+<div class="slideContent" >
+<p>What weather patterns are associated with the biggest departure delays?</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Question 5</h3>
+<div class="slideContent" >
+<p>I want to know proportionately what regions (NE, south, west, midwest) each carrier flies to from Houston in the month of July.  Consider the <code>lubridate</code> package.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Question 6</h3>
+<div class="slideContent" >
+<p>Get creative:  Answer one question of your own using this data.  The more interesting the question the better.</p>
 
 </div>
 
@@ -859,7 +890,7 @@ hljs.initHighlightingOnLoad();
 <h3>Strategy</h3>
 <div class="slideContent" >
 <ul>
-<li>For those of you with no programming experience: if you&#39;re spinning your wheels, TAKE A BREAK.  If really stuck, get help from your peers, me, or Rich.</li>
+<li>For those of you with no programming experience: if you&#39;re spinning your wheels for a long while, TAKE A BREAK.  If really stuck, get help from your peers, me, or Rich.</li>
 <li>There are no &ldquo;right&rdquo; answers.  Just think of the goal:  you want to convey the most information so that consumers need to use the least cerebral power to understand it.</li>
 <li><a href="http://stat545-ubc.github.io/peer-review01_marking-rubric.html">Grading Rubric</a></li>
 </ul>
@@ -870,6 +901,11 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>R Markdown</h3>
 <div class="slideContent" >
+<ul>
+<li>Use <code>HW01.Rmd</code> template for submitting your homework.</li>
+<li>Submit a working <code>.Rmd</code> file by Wednesday Feb. 18th at 1pm.  We will discuss the HW in lecture that day.</li>
+<li>Please check out the R Markdown debugging sheet at the top of the Moodle page.</li>
+</ul>
 
 </div>
 
