@@ -1,3 +1,9 @@
+# Linear Regression
+# Reference:  Chapter 3 of Data analysis using regression and
+# multilevel/hierarchical models by Gelman and Hill
+# Note all code/data from this book can be found at
+# http://www.stat.columbia.edu/~gelman/arm
+
 library(dplyr)
 library(ggplot2)
 
