@@ -1,17 +1,19 @@
 # Linear Regression
-# Reference:  Chapter 3 of Data analysis using regression and
-# multilevel/hierarchical models by Gelman and Hill
+# Reference:  Chapter 3 of "Data analysis using regression and
+# multilevel/hierarchical models" by Gelman and Hill
 # Note all code/data from this book can be found at
 # http://www.stat.columbia.edu/~gelman/arm
-
 library(dplyr)
 library(ggplot2)
 
-# This package allows us to read .dta STATA files into R
+# This package allows us to read .dta STATA files into R via read.dta()
 library(foreign)
 
-# Load child IQ data from Gelman.  Recall tbl_df() changes the data frame so
-# that not all rows show when we print its contents
+# Load child data from Gelman:  predicting cognitive test scores of 3-4 year old
+# children given characteristics of their mothers, using data from the National
+# Longitudinal Survey of Youth.
+# Recall tbl_df() changes the data frame so that not all rows show when we print
+# its contents
 url <- "http://www.stat.columbia.edu/~gelman/arm/examples/child.iq/kidiq.dta"
 kid.iq <- read.dta(url) %>% tbl_df()
 kid.iq
@@ -103,8 +105,7 @@ p
 # of a mom having completed high school
 model3 <- lm(kid_score ~ mom_iq + mom_hs, data=kid.iq)
 summary(model3)
-x.new <- data.frame(mom_hs=1, mom_iq=100)
-predict(model3, x.new, interval="prediction", level=0.95)
+
 
 # Plot these lines
 b <- coefficients(model3)
