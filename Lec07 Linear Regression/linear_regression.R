@@ -24,7 +24,7 @@ kid.iq
 ybar <- mean(kid.iq$kid_score)
 ybar
 
-qplot(x=kid.iq$kid_score) +
+qplot(data=kid.iq, x=kid_score) +
   geom_vline(xintercept=ybar, col="red", size=1)
 
 
@@ -73,14 +73,15 @@ p
 
 model2 <- lm(kid_score ~ mom_iq, data=kid.iq)
 summary(model2)
+
+# We plot the regression line by extracting the intercept and slope using square
+# brackets:
 b <- coefficients(model2)
 b
-
-# We plot the regression line by extracting the intercept and slope:
-p + geom_abline(intercept=b[1], slope=b[2], col="blue")
+p + geom_abline(intercept=b[1], slope=b[2], col="blue", size=1)
 
 # We can do this quick via geom_smooth()
-p + geom_smooth(method="lm")
+p + geom_smooth(method="lm", size=1)
 
 
 
@@ -97,26 +98,28 @@ p <- ggplot(kid.iq, aes(x=mom_iq, y=kid_score, color=factor(mom_hs))) +
   geom_point()
 p
 
-# Now let's add some regression lines.  Notice anything?
-p + geom_smooth(method="lm")
 
 # We fit the first model assuming an intercept shift, or just the additive effect
 # of a mom having completed high school
 model3 <- lm(kid_score ~ mom_iq + mom_hs, data=kid.iq)
 summary(model3)
-b <- coefficients(model3)
-b
+x.new <- data.frame(mom_hs=1, mom_iq=100)
+predict(model3, x.new, interval="prediction", level=0.95)
 
 # Plot these lines
+b <- coefficients(model3)
+b
 p + geom_abline(intercept=b[1], slope=b[2], col="#F8766D", size=1) +
   geom_abline(intercept=b[1]+b[3], slope=b[2], col="#00BFC4", size=1)
+
 
 # We now assume an interaction model using the * command:
 model4 <- lm(kid_score ~ mom_iq*mom_hs, data=kid.iq)
 summary(model4)
+
+# Plot these lines
 b <- coefficients(model4)
 b
-
 p + geom_abline(intercept=b[1], slope=b[2], col="#F8766D", size=1) +
   geom_abline(intercept=b[1]+b[3], slope=b[2]+b[4], col="#00BFC4", size=1)
 
