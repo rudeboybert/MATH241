@@ -19,7 +19,7 @@ gg_color_hue <- function(n) {
 }
 
 # For example for the plots above we had two cases, so we set n=2
-gg_color_hue(n=2)
+gg_color_hue(n=16)
 
 # Create color wheel
 r  <- seq(0,1,length=201)
@@ -96,8 +96,8 @@ p + geom_smooth(method="lm", se=FALSE, fullrange=TRUE) + xlim(c(0, 140))
 
 # What we can do is "standardize" the predictor so its centered at 0 and has
 # SD = 1.
-kid.iq <- mutate(kid.iq, z_mom_iq = (mom_iq - mean(mom_iq))/sd(mom_iq)) %>%
-  ggplot(data=., aes(x=z_mom_iq, y=kid_score)) + geom_point()
+kid.iq <- mutate(kid.iq, z_mom_iq = (mom_iq - mean(mom_iq))/sd(mom_iq))
+ggplot(kid.iq, aes(x=z_mom_iq, y=kid_score)) + geom_point()
 
 model5 <- lm(kid_score ~ z_mom_iq, data=kid.iq)
 summary(model5)
