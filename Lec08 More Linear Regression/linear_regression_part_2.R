@@ -38,12 +38,12 @@ ggplot(gg) +
 # Model 3: Continued
 #------------------------------------------------
 # Model 3.b) we now assume an interaction model using the * command:
-model3b <- lm(kid_score ~ mom_iq*mom_hs, data=kid.iq)
+model3b <- lm(kid_score ~ mom_iq * mom_hs, data=kid.iq)
 summary(model3b)
-
-# Plot these lines
 b <- coefficients(model3b)
 b
+
+# Plot these lines
 p + geom_abline(intercept=b[1], slope=b[2], col="#F8766D", size=1) +
   geom_abline(intercept=b[1]+b[3], slope=b[2]+b[4], col="#00BFC4", size=1)
 
@@ -72,10 +72,10 @@ summary(model4)
 # The above treats mom_work as a numerical variable and not a categorical one
 model4 <- lm(kid_score ~ as.factor(mom_work) + mom_iq, data=kid.iq)
 summary(model4)
-
-# Plot these lines
 b <- coefficients(model4)
 b
+
+# Plot these lines
 p + geom_abline(intercept=b[1], slope=b[5], col="#F8766D", size=1) +
   geom_abline(intercept=b[1]+b[2], slope=b[5], col="#7CAE00", size=1) +
   geom_abline(intercept=b[1]+b[3], slope=b[5], col="#00BFC4", size=1) +
@@ -133,8 +133,10 @@ summary(model6)
 b <- coefficients(model6)
 b
 
-# This is what the data/regression looks like on the log-scale
-ggplot(data=heights, aes(x=height, y=log_earn)) +
+# This is what the data/regression looks like on the log-scale.  Note we use
+# the jitter() function to put a little noise in the x-component so we can
+# better see the number of points
+ggplot(data=heights, aes(x=jitter(height), y=log_earn)) +
   geom_point() +
   xlab("height") +
   ylab("log of earnings") +
