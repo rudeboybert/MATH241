@@ -5,7 +5,7 @@ library(stringr)
 
 
 #------------------------------------------------
-# Load Data & Preprocess It
+# Load Data & Preprocess It (Same as Previous)
 #------------------------------------------------
 profiles <- read.csv("profiles.csv", header=TRUE) %>% tbl_df()
 
@@ -56,25 +56,27 @@ profiles$username.len <- profiles$username %>% as.character %>% nchar()
 #------------------
 # -a) Means: Since the sample proportion = 40% of the observations are female
 # (remember this is San Francisco), this should be the "probability that a
-# randomly chosen person is female"
+# randomly chosen person is female".  Logistic regression (and all regression
+# for that matter) is all about guessing better than this mean value by
+# incorporating other information.
 mean(profiles$is.female)
 
 
 # -b) Regression, coefficients, and fitted values:  This situation is akin to
-# fitting a regression with only an intercept.  This is done in R by setting the
+# fitting a regression with only an intercept. This is done in R by setting the
 # predictor variables to just "1" (the number one).  The command to run logistic
 # regression is "glm" for "generalized linear model", where the family is set to
-# "binomial" i.e. with have n independent trials of a Bernoulli random variable
-# with probability p of success:
+# "binomial"
+# i.e. with have n independent trials of a Bernoulli random variable with
+# probability p of success:
 model0 <- glm(is.female ~ 1, data=profiles, family=binomial)
 summary(model0)
 
-# We apply the inverse logit formula to the intercept:
-b.0 <- coefficients(model0)
-1/(1+exp(-b.0))
+# We apply the inverse logit formula to the intercept.  What does this equal?
+b0 <- coefficients(model0)
+1/(1+exp(-b0))
 
-# The inverse-logit of the intercept match the fitted values.  Compare to the
-# mean from part a)
+# The inverse-logit of the intercept match the fitted values
 fitted(model0)
 table(fitted(model0))
 
@@ -118,7 +120,9 @@ mosaicplot(y, xlab="sex", ylab="Has 'wine'?")
 # Exercise:  Visualize the relationship between the presence of the word "wine"
 # and the presence of the word "food" in users' profiles
 
-# Solution
+# Solution.  We see that there is a dependency between having the word "food"
+# and the word "wine" in one's profile.  i.e. having one is positively
+# associated with the other
 profiles$has.food <- profile.has.query(data.frame = essays, query = "food")
 z <- table(profiles$has.food, profiles$has.wine)
 z
@@ -131,8 +135,9 @@ mosaicplot(z, xlab="Has 'food'?", ylab="Has 'wine'?")
 # Let's do an analysis using the "has.wine" variable as a predictor
 
 # -a) Means: in this case, the means are the sample proportions of the two groups:
-# those with the word wine in their profile, and those without.
-group_by(profiles, has.wine) %>% summarise(mean=mean(is.female))
+# those with the word wine in their profile, and those without.  Compare these
+# to the model0 mean.  Are we doing better?
+group_by(profiles, has.wine) %>% summarise(prop.female=mean(is.female))
 
 
 # -b) Regression, coefficients, and fitted values: we now include the has.wine
@@ -152,17 +157,25 @@ b1
 table(fitted(model1))
 
 
-# -c) Plot:  Not useful when we don't have any predictors
+# -c) Plot.
 p1 <- ggplot(data=profiles, aes(x=has.wine, y=is.female)) + geom_point()
 p1
 
 # The above plot is useless, b/c we don't know how many points are superimposed
 # on top of each other; so we first convert the TRUE/FALSE has.wine variable to
-# a 0/1 numeric variable, then add a little jitter to both variables:
-p1 <- ggplot(data=profiles,
-             aes(x=jitter(as.numeric(has.wine)), y=jitter(is.female))) +
+# a 0/1 numeric variable, then add a little jitter (random noise) to both
+# variables:
+p1 <-
+  ggplot(data=profiles, aes(x=jitter(as.numeric(has.wine)), y=jitter(is.female))) +
   geom_point() + xlab("has wine") + ylab("is female?")
 p1
+
+# We add the fitted probabilities:  blue line for those with "wine", red for
+# those without
+p1 +
+  geom_hline(yintercept=1/(1+exp(-(b1[1] + 0*b1[2]))), col="red", size=2)+
+  geom_hline(yintercept=1/(1+exp(-(b1[1] + 1*b1[2]))), col="blue", size=2)
+
 
 
 
@@ -183,32 +196,37 @@ ggplot(data=profiles, aes(x=height, y=..density..)) +
 #------------------
 # Analysis:
 #------------------
-# -a) Means: Looking at the above histograms, the heights of the men are higher
-group_by(profiles, is.female) %>% summarise(mean=mean(height), sd=sd(height))
+# -a) Means: Looking at the above histograms, the heights of the men are higher,
+# but is the difference significant?  What is SE?  How does this help us tell if
+# there is a significant difference?
+group_by(profiles, is.female) %>% summarise(mean=mean(height), SE=sd(height)/n())
 
 
 # -b) Regression, coefficients, and fitted values
 model2 <- glm(is.female ~ height, data=profiles, family=binomial)
 summary(model2)
 
-# We apply the inverse logit FUNCTION to the regression equation: now we have a
-# numerical input x
+# We apply the inverse logit FUNCTION to the regression equation: i.e. instead
+# of a categorical predictor, we now we have a numerical input x.
 b2 <- coefficients(model2)
 regression.line <- function(x, b){
   linear.equation <- b[1] + b[2]*x
   1/(1+exp(-linear.equation))
 }
 
-# Histogram of fitted p.hat's
+# Histogram of fitted p.hat's.  What is the range of the p.hats?  How does this
+# compare to our original model0 p.hat?
 qplot(fitted(model2)) + xlab("Fitted Probability of Being Female")
 
 
-# -c) Plot:
+# -c) Plot.  Again, we add some jitter so we can better visualize the number of
+# points involved for each height.
 p2 <- ggplot(data=profiles, aes(x=jitter(height), y=jitter(is.female))) +
   geom_point() + xlab("height") + ylab("is female")
 p2
 
-# We now add the regression line
+# We now add the regression line.  For what height does our model say we have a
+# 50/50 chance the user is female?
 p2 + stat_function(fun = regression.line, args=list(b=b2), color="blue", size=2)
 
 
@@ -221,27 +239,31 @@ p2 + stat_function(fun = regression.line, args=list(b=b2), color="blue", size=2)
 # Exercise:  Compare the number of characters used in the usernames of females
 # and males using geom_bar()
 
-# Solution:
+# Solution: Compute the distribution of heights for each sex
 library(scales)
 values <- group_by(profiles, sex, username.len) %>%
   summarise(count=n()) %>%
   mutate(perc=count/sum(count))
+values
 
+# Ask yourself.  Is there a difference in how males and females choose
+# usernames?
 ggplot(data=values, aes(x=as.factor(username.len), y=perc)) +
   geom_bar(stat="identity") +
   facet_wrap(~sex, nrow=1) +
   scale_y_continuous(labels = percent) +
-  xlab("# of characters") + ylab("proportion")
+  xlab("# of characters") + ylab("Proportion")
 
-# Alternatively, use density estimates
+# Alternatively, use density estimates.  Who has the longer usernames?
 ggplot(data=profiles, aes(x=username.len, fill=sex)) + geom_density(alpha=.3)
 
 
 #------------------
 # Analysis:
 #------------------
-# -a) Means: Looking at the above histograms, the heights of the men are higher
-group_by(profiles, is.female) %>% summarise(mean=mean(height), sd=sd(height))
+# -a) Means: Looking at the above histograms, the lengths for the men are higher
+group_by(profiles, is.female) %>%
+  summarise(mean=mean(username.len), SE=sd(username.len)/n())
 
 
 # -b) Regression, coefficients, and fitted values
@@ -252,7 +274,9 @@ summary(model3)
 # numerical input x
 b3 <- coefficients(model3)
 
-# Histogram of fitted p.hat's
+# Histogram of fitted p.hat's.  CRUCIAL:  compare the range of these fitted
+# p.hats to the ones from the model that uses height.  What does this tell you
+# about using username length as a predictor?
 qplot(fitted(model3)) + xlab("Fitted Probability of Being Female")
 
 
@@ -262,11 +286,22 @@ p3 <- ggplot(data=profiles, aes(x=jitter(username.len), y=jitter(is.female))) +
   ylab("is female")
 p3
 
-# We now add the regression line
+# We now add the regression line.  What does the range of this line tell you
+# about username length as a predictor?  Also, compare this to the model0 mean.
 p3 + stat_function(fun = regression.line, args=list(b=b3), color="blue", size=2)
 
-# Although this looks like a straight line, its really a curved line.  Note we
-# cannot actually extrapolate the model to values of x = 100, since there are no
-# observations there
-p3 + stat_function(fun = regression.line, args=list(b=b3), color="blue", size=2) +
-  xlim(c(0, 100))
+
+
+
+
+#------------------------------------------------
+# Exercise:
+#------------------------------------------------
+# Repeat the EDA (exploratory data analysis), a) Means, b) Regression,
+# coefficients, and fitted values, c) Plot analysis using age as a predictor.
+# Again, keep in mind:  how much better are we doing than just using the mean of
+# the outcome variable and no other information?
+
+
+
+
