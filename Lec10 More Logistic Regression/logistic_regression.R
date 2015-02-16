@@ -142,10 +142,10 @@ summary(model1)
 
 # We apply the inverse logit formula to the two cases of the regression
 # equation:  when the profile has wine, i.e. x=1, or when it doesn't, i.e. x=0
-b.1 <- coefficients(model1)
-b.1
-1/(1+exp(-(b.1[1] + 0*b.1[2])))
-1/(1+exp(-(b.1[1] + 1*b.1[2])))
+b1 <- coefficients(model1)
+b1
+1/(1+exp(-(b1[1] + 0*b1[2])))
+1/(1+exp(-(b1[1] + 1*b1[2])))
 
 # The inverse-logit of the two cases of the regression equation match the fitted
 # values.  Compare to the means from part a)
@@ -193,7 +193,7 @@ summary(model2)
 
 # We apply the inverse logit FUNCTION to the regression equation: now we have a
 # numerical input x
-b.2 <- coefficients(model2)
+b2 <- coefficients(model2)
 regression.line <- function(x, b){
   linear.equation <- b[1] + b[2]*x
   1/(1+exp(-linear.equation))
@@ -209,7 +209,7 @@ p2 <- ggplot(data=profiles, aes(x=jitter(height), y=jitter(is.female))) +
 p2
 
 # We now add the regression line
-p2 + stat_function(fun = regression.line, args=list(b=b.2), color="blue", size=2)
+p2 + stat_function(fun = regression.line, args=list(b=b2), color="blue", size=2)
 
 
 
@@ -250,7 +250,7 @@ summary(model3)
 
 # We apply the inverse logit FUNCTION to the regression equation: now we have a
 # numerical input x
-b.3 <- coefficients(model3)
+b3 <- coefficients(model3)
 
 # Histogram of fitted p.hat's
 qplot(fitted(model3)) + xlab("Fitted Probability of Being Female")
@@ -263,10 +263,10 @@ p3 <- ggplot(data=profiles, aes(x=jitter(username.len), y=jitter(is.female))) +
 p3
 
 # We now add the regression line
-p3 + stat_function(fun = regression.line, args=list(b=b.3), color="blue", size=2)
+p3 + stat_function(fun = regression.line, args=list(b=b3), color="blue", size=2)
 
 # Although this looks like a straight line, its really a curved line.  Note we
 # cannot actually extrapolate the model to values of x = 100, since there are no
 # observations there
-p3 + stat_function(fun = regression.line, args=list(b=b.3), color="blue", size=2) +
+p3 + stat_function(fun = regression.line, args=list(b=b3), color="blue", size=2) +
   xlim(c(0, 100))
