@@ -27,10 +27,8 @@ pollution <- read.dta(url) %>% tbl_df()
 
 ## Question 2:
 
-I actually prefer flying on older planes.  Even though they aren't as nice, they tend to have more room.  Which airlines should I favor?
-
 ```{r}
-
+SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt")
 ```
 
 
