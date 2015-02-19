@@ -1,0 +1,68 @@
+Term Project + Homework 02
+========================================================
+author: Albert Y. Kim
+date: Friday 2015/02/20
+
+```{r, echo=FALSE}
+# The following code ensures all necessary packages are installed
+pkg <- c("dplyr", "ggplot2")
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos="http://cran.rstudio.com/")
+}
+library(dplyr)
+library(ggplot2)
+```
+
+
+
+
+
+Project Logistics
+========================================================
+
+* Proposal due on Friday March 20th.
+* During exam week: 20 minute presentation of your work.  There will be 4 sessions where in groups of 5 you will present to each other and me.
+* Write-up will be due at the same time.
+
+
+
+
+Principles
+========================================================
+
+* Guiding principle:  **Use the materials learned in this class.**  Ex:  a one-sample t-test is not enough.
+    + Data visualization
+    + Data manipulation (not for its own sake)
+    + Topics to be covered for sure:  time series, spatial statistics, text mining, and machine learning
+* Grading rubric for homeworks applies
+* Reproducible research:  start with rawest possible data file, set code up so that any one can reproduce the entire analysis with one click of the mouse
+
+
+
+
+Data
+========================================================
+
+* Has to involve REAL data
+* Pick a topic you're interested in (politics, sports, science, etc) and find an interesting question to answer.  The more interested you are in an answer, the less it will seem like work!
+* Seniors:  you **can** use thesis data.  However I require that
+    + Your advisors email me and consent to you using your data for both your thesis and this class.
+    + Your data processing and analysis be done in R.
+* If you're looking for ideas, come talk to me.
+
+
+
+
+Homework 02
+========================================================
+
+* Has to involve REAL data
+* Pick a topic you're interested in (politics, sports, science, etc) and find an interesting question to answer.  The more interested you are in an answer, the less it will seem like work!
+* Seniors:  you **can** use thesis data.  However I require that
+    + Your advisors email me and consent to you using your data for both your thesis and this class.
+    + Your data processing and analysis be done in R.
+* If you're looking for ideas, come talk to me.
+
+
+
