@@ -28,7 +28,7 @@ pollution <- read.dta(url) %>% tbl_df()
 ## Question 2:
 
 ```{r}
-SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt")
+SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt") %>% tbl_df()
 ```
 
 
