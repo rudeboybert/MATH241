@@ -15,9 +15,6 @@ suppressPackageStartupMessages(library(ggplot2))
 
 ## Question 1:
 
-Question 4 on page 76 from Chapter 4 of Data Analysis Using Regression and Multilevel/Hierarchical Models.  The codebook can be found [here](http://www.stat.columbia.edu/~gelman/arm/examples/pollution/pollution.txt).  
-
-
 ```{r, echo=FALSE}
 url <- "http://www.stat.columbia.edu/~gelman/arm/examples/pollution/pollution.dta"
 pollution <- read.dta(url) %>% tbl_df()
@@ -28,46 +25,19 @@ pollution <- read.dta(url) %>% tbl_df()
 ## Question 2:
 
 ```{r}
-SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt") %>% tbl_df()
 ```
 
 
 
 ## Question 3:
 
-* What states did listed Southwest Airlines flights tend to fly to?
-* What states did all Southwest Airlines flights tend to fly to?
-
 ```{r}
-
+SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt", header=TRUE) %>% tbl_df()
+glimpse(SEER)
 ```
 
 
 
-## Question 4:
-
-What weather patterns are associated with the biggest departure delays?
-
-```{r}
-
-```
 
 
 
-## Question 5:
-
-I want to know what proportionately regions (NE, south, west, midwest) each carrier flies to from Houston in the month of July.  Consider the `lubridate` package.
-
-```{r}
-
-```
-
-
-
-## Question 6:
-
-Get creative:  Answer one question of your own using this data.  The more interesting the question the better.
-
-```{r}
-
-```

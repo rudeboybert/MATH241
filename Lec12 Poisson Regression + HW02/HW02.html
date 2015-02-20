@@ -69,32 +69,23 @@ img {
 
 <div id="question-1" class="section level2">
 <h2>Question 1:</h2>
-<p>Question 4 on page 76 from Chapter 4 of Data Analysis Using Regression and Multilevel/Hierarchical Models. The codebook can be found <a href="http://www.stat.columbia.edu/~gelman/arm/examples/pollution/pollution.txt">here</a>.</p>
-<pre class="r"><code>url &lt;- &quot;http://www.stat.columbia.edu/~gelman/arm/examples/pollution/pollution.dta&quot;
-pollution &lt;- read.dta(url) %&gt;% tbl_df()</code></pre>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2:</h2>
-<p>I actually prefer flying on older planes. Even though they aren’t as nice, they tend to have more room. Which airlines should I favor?</p>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3:</h2>
-<ul>
-<li>What states did listed Southwest Airlines flights tend to fly to?</li>
-<li>What states did all Southwest Airlines flights tend to fly to?</li>
-</ul>
-</div>
-<div id="question-4" class="section level2">
-<h2>Question 4:</h2>
-<p>What weather patterns are associated with the biggest departure delays?</p>
-</div>
-<div id="question-5" class="section level2">
-<h2>Question 5:</h2>
-<p>I want to know what proportionately regions (NE, south, west, midwest) each carrier flies to from Houston in the month of July. Consider the <code>lubridate</code> package.</p>
-</div>
-<div id="question-6" class="section level2">
-<h2>Question 6:</h2>
-<p>Get creative: Answer one question of your own using this data. The more interesting the question the better.</p>
+<pre class="r"><code>SEER &lt;- read.csv(&quot;Space Time Surveillance Counts 11_05_09.txt&quot;, header=TRUE) %&gt;% tbl_df()
+glimpse(SEER)</code></pre>
+<pre><code>## Observations: 175000
+## Variables:
+## $ StateCoTractComb          (dbl) 53009980100, 53009980100, 5300998010...
+## $ SiteRecodeTxt             (fctr) Breast , Breast , Breast , Breast ,...
+## $ AgeGrp                    (fctr) 45-49, 45-49, 50-54, 50-54, 50-54, ...
+## $ SexGrp                    (fctr) Female, Female, Female, Female, Fem...
+## $ RaceGrp                   (fctr) American Indian, White, American In...
+## $ intDiagnosisYear          (int) 1998, 1997, 1997, 2002, 2003, 2005, ...
+## $ CountOfintPatientIDNumber (int) 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...</code></pre>
 </div>
 
 

@@ -736,6 +736,16 @@ hljs.initHighlightingOnLoad();
 </script>
 
    
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    showProcessingMessages: false,
+    messageStyle: "none"
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
   
 
 
@@ -762,7 +772,7 @@ hljs.initHighlightingOnLoad();
 <ul>
 <li>Proposal due on Friday March 20th.</li>
 <li>During exam week: 20 minute presentation of your work.  There will be 4 sessions where in groups of 5 you will present to each other and me.</li>
-<li>Write-up will be due at the same time.</li>
+<li>Write-up will be due on Monday of that week.</li>
 </ul>
 
 </div>
@@ -780,7 +790,7 @@ hljs.initHighlightingOnLoad();
 <li>Topics to be covered for sure:  time series, spatial statistics, text mining, and machine learning</li>
 </ul></li>
 <li>Grading rubric for homeworks applies</li>
-<li>Reproducible research:  start with rawest possible data file, set code up so that any one can reproduce the entire analysis with one click of the mouse</li>
+<li>Reproducible research:  start with rawest possible data file, set code up so that any one can reproduce the entire analysis with one click of the mouse.</li>
 </ul>
 
 </div>
@@ -805,19 +815,110 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Homework 02</h3>
+<h3>Homework 02: Question 1</h3>
 <div class="slideContent" >
-<ul>
-<li>Has to involve REAL data</li>
-<li>Pick a topic you&#39;re interested in (politics, sports, science, etc) and find an interesting question to answer.  The more interested you are in an answer, the less it will seem like work!</li>
-<li>Seniors:  you <strong>can</strong> use thesis data.  However I require that
+<p>Question 4 on page 76 from Chapter 4 of Data Analysis Using Regression and Multilevel/Hierarchical Models.  The codebook can be found <a href="http://www.stat.columbia.edu/%7Egelman/arm/examples/pollution/pollution.txt">here</a>.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 2</h3>
+<div class="slideContent" >
+<p>Using the OkCupid data, fit what you think is a good predictive model for gender and interpret all results.</p>
+
+<p>What do I mean by &ldquo;good predictions&rdquo;?  Recall that the dataset from class is a  <strong>sample</strong> of profiles.  In fact, I gave you 10% of all profiles.  I define &ldquo;bad&rdquo; as the following:  the proportion of people misclassified (both possible ways)  using the <strong>other</strong> 90% of profiles.</p>
+
+<p>Think about what happens when your prediction mechanism is overly optimized for your particular dataset.  What will happen when it tries to predict other datasets?</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 3</h3>
+<div class="slideContent" >
+<p>Data consists cancer counts of the National Cancer Institute&#39;s &ldquo;Surveillance, Epidemiology, and End Results Program&rdquo; (SEER) database of cancers</p>
 
 <ul>
-<li>Your advisors email me and consent to you using your data for both your thesis and this class.</li>
-<li>Your data processing and analysis be done in R.</li>
-</ul></li>
-<li>If you&#39;re looking for ideas, come talk to me.</li>
+<li>For the \( n=887 \) census tracts in the 13 counties in Western Washington:  Clallam, Grays Harbor, Island, Jefferson, King, Kitsap, Mason, Pierce, San Juan, Skagit, Snohomish, Thurston, and Whatcom.</li>
+<li>Stratified by different demographic categories:  age, sex, and race</li>
+<li>For the years 1996 through 2005</li>
 </ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 3</h3>
+<div class="slideContent" >
+<p>Unprocess data file as provided by SEER (please do not share).  Marked as <code>txt</code> file, but actually is CSV file:</p>
+
+<pre><code class="r">library(dplyr)
+SEER &lt;- read.csv(&quot;Space Time Surveillance Counts 11_05_09.txt&quot;, header=TRUE) %&gt;% tbl_df()
+SEER
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 3</h3>
+<div class="slideContent" >
+<p>Let</p>
+
+<ul>
+<li>\( y_i \) for \( i=1, \ldots, n \) be counts of a particular cancer summed across all years (1996-2005) and all demographic categories.</li>
+<li>Predictor variables \( X_i \) be relevant demographic factors like age, race, gender, plus socio-economic status and any other relevant variables from the <strong>2000</strong> census.</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 3</h3>
+<div class="slideContent" >
+<p>Keeping in mind that you will be sharing your findings with state public health officials:</p>
+
+<ul>
+<li>Perform exploratory data analyses:  basic summaries, relevant maps (more on mapping making on Monday)</li>
+<li>Conduct appropriate regressions along with <strong>interpretations</strong></li>
+</ul>
+
+<p>Do this for breast and lung cancer separately.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Obtaining Predictor Variables</h3>
+<div class="slideContent" >
+<p>Go to <a href="http://www.socialexplorer.com/">Social Explorer</a> while at Reed or using a proxy.</p>
+
+<ul>
+<li>Click on &ldquo;Start Now&rdquo; -&gt; 3-Bar button on top right</li>
+<li>Zoom into WA by entering &ldquo;Washington&rdquo; in top left bar</li>
+<li>Select
+
+<ul>
+<li>&ldquo;Census Tract&rdquo; level of refinement</li>
+<li>1. Census 2000 survey</li>
+<li>2. Any particular topic</li>
+<li>3. Census tracts using &ldquo;Circle&rdquo; tool</li>
+</ul></li>
+<li>Click &ldquo;Create Report&rdquo; -&gt; &ldquo;Data Download&rdquo; and download &ldquo;Census Tract data (CSV)&rdquo; &amp; &ldquo;Data dictionary (text file)&rdquo;</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Identifying Census Tracts</h3>
+<div class="mediaInline slideContent" >
+<p>States, counties, census tracts, and census blocks can be identified using &ldquo;Federal Information Processing Standard&rdquo; (FIPS) codes.</p>
+
+<p><img src="data:image/png;base64,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" alt="alt text"/></p>
+
+<p>These codes are <strong>crucial</strong> for matching up different data sets.  For example, &ldquo;Nez Perce County Idaho&rdquo; might be coded as: &ldquo;Nez Perce&rdquo;, &ldquo;Nez_Perce&rdquo;, &ldquo;NezPerce&rdquo;, etc.  Whereas the FIPS code is just 16069.</p>
 
 </div>
 
