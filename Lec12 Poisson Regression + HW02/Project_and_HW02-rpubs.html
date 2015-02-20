@@ -782,13 +782,22 @@ hljs.initHighlightingOnLoad();
 <h3>Principles</h3>
 <div class="slideContent" >
 <ul>
-<li>Guiding principle:  <strong>Use the materials learned in this class.</strong>  Ex:  a one-sample t-test is not enough.
+<li>Guiding principle:  <strong>Use the materials learned in this class.</strong>  Ex:  a two-sample t-test is not enough:
 
 <ul>
 <li>Data visualization</li>
 <li>Data manipulation (not for its own sake)</li>
-<li>Topics to be covered for sure:  time series, spatial statistics, text mining, and machine learning</li>
+<li>Topics to be covered for sure later:  time series, spatial statistics, text mining, and machine learning</li>
 </ul></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Principles</h3>
+<div class="slideContent" >
+<ul>
 <li>Grading rubric for homeworks applies</li>
 <li>Reproducible research:  start with rawest possible data file, set code up so that any one can reproduce the entire analysis with one click of the mouse.</li>
 </ul>
@@ -801,7 +810,16 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <ul>
 <li>Has to involve REAL data</li>
-<li>Pick a topic you&#39;re interested in (politics, sports, science, etc) and find an interesting question to answer.  The more interested you are in an answer, the less it will seem like work!</li>
+<li>Pick a topic you&#39;re interested in (politics, sports, science, etc) and find an interesting question.  The more interested you are in an answer, the less it will seem like work!</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Data</h3>
+<div class="slideContent" >
+<ul>
 <li>Seniors:  you <strong>can</strong> use thesis data.  However I require that
 
 <ul>
@@ -827,6 +845,12 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>Using the OkCupid data, fit what you think is a good predictive model for gender and interpret all results.</p>
 
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Homework 02: Question 2</h3>
+<div class="slideContent" >
 <p>What do I mean by &ldquo;good predictions&rdquo;?  Recall that the dataset from class is a  <strong>sample</strong> of profiles.  In fact, I gave you 10% of all profiles.  I define &ldquo;bad&rdquo; as the following:  the proportion of people misclassified (both possible ways)  using the <strong>other</strong> 90% of profiles.</p>
 
 <p>Think about what happens when your prediction mechanism is overly optimized for your particular dataset.  What will happen when it tries to predict other datasets?</p>
@@ -851,7 +875,7 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Homework 02: Question 3</h3>
 <div class="slideContent" >
-<p>Unprocess data file as provided by SEER (please do not share).  Marked as <code>txt</code> file, but actually is CSV file:</p>
+<p>Unprocessed data file as provided by SEER (please do not share).  Marked as <code>txt</code> file, but actually is CSV file:</p>
 
 <pre><code class="r">library(dplyr)
 SEER &lt;- read.csv(&quot;Space Time Surveillance Counts 11_05_09.txt&quot;, header=TRUE) %&gt;% tbl_df()
@@ -867,7 +891,7 @@ SEER
 <p>Let</p>
 
 <ul>
-<li>\( y_i \) for \( i=1, \ldots, n \) be counts of a particular cancer summed across all years (1996-2005) and all demographic categories.</li>
+<li>\( y_i \) for \( i=1, \ldots, n \) be counts of a particular cancer summed over all years (1996-2005) and over all demographic categories.</li>
 <li>Predictor variables \( X_i \) be relevant demographic factors like age, race, gender, plus socio-economic status and any other relevant variables from the <strong>2000</strong> census.</li>
 </ul>
 
@@ -877,7 +901,7 @@ SEER
 <section data-transition="linear" data-transition-speed="default">
 <h3>Homework 02: Question 3</h3>
 <div class="slideContent" >
-<p>Keeping in mind that you will be sharing your findings with state public health officials:</p>
+<p>Keep a tone of where you would be sharing your findings with state public health officials:</p>
 
 <ul>
 <li>Perform exploratory data analyses:  basic summaries, relevant maps (more on mapping making on Monday)</li>
