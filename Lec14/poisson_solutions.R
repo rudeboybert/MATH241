@@ -41,6 +41,11 @@ p + scale_x_log10()
 
 # EXERCISE:  Investigate arrests.  Which groups are subject to the highest
 # numbers of stops?
+group_by(arrests, eth) %>% summarise(stops=sum(stops))
+p <- ggplot(data=arrests, aes(x=stops)) + geom_histogram() + facet_wrap(~eth, ncol=1)
+p
+# Changing the x-axis scale to a logged one helps deal with the skew
+p + scale_x_log10()
 
 
 # Investigate relationship between population size and number of stops
@@ -53,11 +58,15 @@ p + scale_x_log10() + scale_y_log10()
 
 # EXERCISE:  Add a smoother to the previous plot to focus on the signal
 # distinguishing the three groups and less on the noise.
+p + scale_x_log10() + scale_y_log10() + geom_smooth()
 
 
 # EXERCISE: Using dplyr, compare the "stops per 10K individuals" between the
 # three ethnic groups
-
+group_by(arrests, eth) %>%
+  summarise(rate.per.10K = 10000*sum(stops)/sum(pop)) %>%
+  ggplot(data=., aes(x=eth, y=rate.per.10K)) +
+  geom_bar(stat="identity")
 
 
 
@@ -70,7 +79,6 @@ p + scale_x_log10() + scale_y_log10()
 rate0 <- sum(arrests$stops)/sum(arrests$pop)
 rate0
 
-
 # Model Fit:
 # Poisson regression is done in R using glm() again, but now setting family to
 # poisson.  Note also that we specifiy the offset to be log(pop).  Recall that
@@ -79,10 +87,8 @@ model0 <- glm(stops ~ 1, offset=log(pop), family=poisson, data=arrests)
 summary(model0)
 b0 <- coefficients(model0)
 
-
 # What does this value correspond to?
 exp(b0)
-
 
 # A 95% confidence interval on the rate of arrest in NYC
 confint(model0)
@@ -95,7 +101,7 @@ exp(confint(model0))
 # Model 1: Incorporating ethnicity
 #------------------------------------------------
 # EXERCISE:  Find the arrest rate for all three ethnic groups
-
+group_by(arrests, eth) %>% summarise(rate=sum(stops)/sum(pop))
 
 # Model Fit:
 model1 <- glm(stops ~ eth, family=poisson, data=arrests, offset=log(pop))
@@ -103,17 +109,20 @@ summary(model1)
 b1 <- coefficients(model1)
 exp(b1)
 
-
 # CRUCIAL EXERCISE:  What is the relationship between the above rates and
 # exp(b1)?
-
+# The effects are multiplicative.  So for example blacks (the baseline) have a
+# baseline rate of 0.009355162, but being hispanic has a multiplicative effect
+# of 0.688386155 on that rate (i.e. it lower it).  Note 0.009355162 * 0.688386155
+# is equal to the rate we first computed earlier
 
 # RELATED EXERCISE:  Compute 95% confidence intervals on the coefficients.  What
 # is the "null" value for such CI's?  Do the hispanic and white coefficient CI's
 # include it?
 exp(confint(model1))
-
-
+# The null value is 1.  i.e. a multiplicative of 1 means no change.  For both
+# whites and hispanics, they both don't include it, and the confidenct interval
+# is entirely less than 1, suggesting a significant effect.
 
 
 
@@ -125,7 +134,13 @@ exp(confint(model1))
 # EXERCISE:  Create a single plot that shows stop rates for each of the three
 # ethnic groups for all 75 precincts in NYC.  Hint:  consider the "group" aesthetic
 # What trend do you notice?
-
+p <- group_by(arrests, eth, precinct) %>%
+  summarise(rate=sum(stops)/sum(pop), stops=sum(stops), pop=sum(pop)) %>%
+  ggplot(aes(x=precinct, y=rate, group=eth, col=eth)) + geom_line() +
+  ylab("Stop rate (log-scale)")
+p
+p + geom_point(aes(size=log10(pop)))
+p + geom_point(aes(size=log10(pop))) + scale_y_log10()
 
 # Model Fit:
 model2 <- glm(stops ~ eth + precinct, family=poisson, data=arrests, offset=log(pop))
@@ -135,6 +150,9 @@ exp(b2)
 CI2 <- confint(model2)
 exp(CI2)
 
-
 # EXERCISE:  What is the interpretation of the first three coefficients based on
 # ethnicity now?
+# Recall Precinct 1 was the baseline, so the first coefficient is the rate
+# African-Americans get stoped at precinct 1, and the other two are the
+# multiplicative effect on top of that (both less than 1, i.e. they get
+# arrested at a lower rate)
