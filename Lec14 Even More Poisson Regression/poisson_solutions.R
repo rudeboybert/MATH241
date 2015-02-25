@@ -214,7 +214,7 @@ n-k
 # squared residuals to follow a chi-squared distribution with df=n-k
 p <- ggplot(data.frame(x = c(0, 300)), aes(x)) +
   stat_function(fun = dchisq, args=list(df=n-k)) +
-  xlab("sum squared residuals")
+  xlab("sum squared residuals") +
   ylab("density") +
   ggtitle("Expected Distribution of Sum.Sq.Resid if No Overdispersion")
 p
@@ -227,7 +227,7 @@ observed.sum.sq.resid
 p + geom_vline(xintercept=observed.sum.sq.resid, col="red")
 
 # This is the estimated overdispersion value.  It is much greater than 1.
-est.overdispersion <- sum.sq.resid/(n-k)
+est.overdispersion <- observed.sum.sq.resid/(n-k)
 est.overdispersion
 
 # To correct for overdispersion, we need to multiply all the standard errors
