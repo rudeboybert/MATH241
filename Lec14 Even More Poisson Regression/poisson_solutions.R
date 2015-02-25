@@ -142,6 +142,8 @@ p
 p + geom_point(aes(size=log10(pop)))
 p + geom_point(aes(size=log10(pop))) + scale_y_log10()
 
+
+
 # Model Fit:
 model2 <- glm(stops ~ eth + precinct, family=poisson, data=arrests, offset=log(pop))
 summary(model2)
