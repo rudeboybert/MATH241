@@ -137,10 +137,13 @@ exp(confint(model1))
 p <- group_by(arrests, eth, precinct) %>%
   summarise(rate=sum(stops)/sum(pop), stops=sum(stops), pop=sum(pop)) %>%
   ggplot(aes(x=precinct, y=rate, group=eth, col=eth)) + geom_line() +
-  ylab("Stop rate (log-scale)")
+  xlab("Precinct") + ylab("Stop rate (log-scale)") +
+  scale_colour_discrete(name="Ethnicity") +
+  ggtitle("Stop rates by NYPD in 1998-1999")
+
 p
-p + geom_point(aes(size=log10(pop)))
-p + geom_point(aes(size=log10(pop))) + scale_y_log10()
+p + scale_y_log10()
+p + scale_y_log10() + geom_point(aes(size=log10(pop)))
 
 
 
@@ -158,3 +161,85 @@ exp(CI2)
 # African-Americans get stoped at precinct 1, and the other two are the
 # multiplicative effect on top of that (both less than 1, i.e. they get
 # arrested at a lower rate)
+
+
+
+
+
+#------------------------------------------------
+# Overdispersion
+#------------------------------------------------
+# Get fitted values for stops i.e. y.hat
+arrests$stops.hat <- fitted(model2)
+
+# We compare the observed numbers of stops to the number of stops fitted by our
+# model
+qplot(stops, stops.hat, data=arrests, xlab="observed stops", ylab="fitted stops")
+# logging both the x and y axes
+qplot(stops, stops.hat, data=arrests, xlab="observed stops", ylab="fitted stops", log='xy')
+# We add a line y=x to compare the observed to fitted values
+qplot(stops, stops.hat, data=arrests, xlab="observed stops", ylab="fitted stops", log='xy') +
+  geom_abline(intercept=0, slope=1, col="red")
+
+# Create standardized residuals.  We see they are centered at 0 (dashed line),
+# but have standard deviation much greater than 1.
+arrests <- mutate(arrests,
+                  residuals = stops-stops.hat,
+                  z = residuals/sqrt(stops.hat))
+qplot(arrests$z, xlab="Standardized Residuals")
+
+# We expect 95% of the points to lie within +/- 2 standard deviations of the
+# mean, (i.e. within the solid lines) but we see that there are many that
+# aren't, suggesting overdispersion.
+qplot(stops.hat, z, data=arrests) +
+  xlab("fitted stops") + ylab("standardized residuals") +
+  ggtitle("Standardized Residuals vs Fitted Values") +
+  geom_hline(yintercept=0, linetype="dashed") +
+  geom_hline(yintercept=c(-2, 2))
+
+
+# Recall we have
+# -n=225 observations
+#
+# -3 ethnic groups, one of which acts as a baseline, thus two parameters
+# -75 precincts, one of which acts as a baseline, thus 74 parameters
+# -1 intercept parameters
+# Thus the number of parameters is k = 2 + 74 + 1
+# Thus n-k = 148 degrees of freedom
+n <- nrow(arrests)
+k <- (nlevels(arrests$eth)-1) + (nlevels(arrests$precinct)-1) + 1
+n-k
+
+# Under the null hypothesis of no overdispersion, we'd expect the sum of the
+# squared residuals to follow a chi-squared distribution with df=n-k
+p <- ggplot(data.frame(x = c(0, 300)), aes(x)) +
+  stat_function(fun = dchisq, args=list(df=n-k)) +
+  xlab("sum squared residuals")
+  ylab("density") +
+  ggtitle("Expected Distribution of Sum.Sq.Resid if No Overdispersion")
+p
+
+# The observed sum of squared residuals is crazy extreme; it is nowhere
+# near the bulk of the distribution, suggesting massive overdispersion.
+# i.e. we reject the null hypothesis of no overdispersion
+observed.sum.sq.resid <- sum(arrests$z^2)
+observed.sum.sq.resid
+p + geom_vline(xintercept=observed.sum.sq.resid, col="red")
+
+# This is the estimated overdispersion value.  It is much greater than 1.
+est.overdispersion <- sum.sq.resid/(n-k)
+est.overdispersion
+
+# To correct for overdispersion, we need to multiply all the standard errors
+# in the regression output by
+sqrt(est.overdispersion)
+
+# We can do this automatically by fitting an "overdispersed Poisson" regression
+# model.  We do this by setting the family in the glm call to quasipoisson,
+# instead of poisson.
+model3 <- glm(stops ~ eth + precinct, family=quasipoisson, data=arrests, offset=log(pop))
+summary(model3)
+
+# Compare the standard errors of the two ethnicity parameters to those from the
+# overdispersed model.  By what factor are they changed?
+summary(model2)
