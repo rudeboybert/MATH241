@@ -62,7 +62,7 @@ admissions <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
 model <- glm(admit ~ gre + gpa + factor(rank), family = binomial, data = admissions)
 
 #------------------------------------------------
-# Poisson Regression
+# 3. Poisson Regression
 #------------------------------------------------
 # Data: Stop and Frisk Data
 url <- "https://raw.githubusercontent.com/rudeboybert/MATH241/master/Lec13%20More%20Poisson%20Regression/frisk_with_noise.txt"
@@ -74,7 +74,7 @@ arrests <- read.table(text=getURL(url), header=TRUE)
 model <- glm(stops ~ eth + precinct, family=poisson, offset=log(pop), data=arrests)
 
 #------------------------------------------------
-# Quasipoisson Regression with Correction for Overdispersion
+# 4. Quasipoisson Regression with Correction for Overdispersion
 #------------------------------------------------
 # For quasipoisson regression, we set family=quasipoisson.  If you look at the
 # summary() for this model, you can get the overdispersion factor.  We
