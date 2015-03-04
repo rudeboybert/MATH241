@@ -57,6 +57,16 @@ parse_date_time(x, "%y %b %d %H%M%S")
 # date/time objects and plot a time series of the avg price of bitcoins relative
 # to USD vs date.  What is the overall trend?
 
+# We convert them to date/time objects using the ymd()
+bitcoin$Date <- ymd(bitcoin$Date)
+bitcoin$Date
+
+# Time series
+p <- ggplot(data=bitcoin, aes(x=Date, y=Avg)) + geom_line() +
+  xlab("Date") + ylab("Bitcoin price vs US Dollar")
+p
+p + geom_smooth()
+
 
 
 #-------------------------------------------------------------------------------
@@ -85,6 +95,10 @@ arrive
 # EXERCISE: Create a new variable day.of.week which specifies the day of week
 # and compute the mean trading value split by day of week.  Which day of the
 # week is there on average the most trading of bitcoins?
+bitcoin$day.of.week <- wday(bitcoin$Date, label=TRUE)
+group_by(bitcoin, day.of.week) %>%
+  summarise_each(funs(mean, sd), Total.Volume) %>%
+  arrange(mean)
 
 
 
@@ -134,7 +148,10 @@ x %within% jsm
 
 # EXERCISE:  Using the interval and %within% commands, plot the times series
 # for the price of bitcoin to dates in 2013 and on.
-
+date.range <- interval(ymd(20130101), ymd(20150601))
+filter(bitcoin, Date %within% date.range) %>%
+  ggplot(data=., aes(x=Date, y=Avg)) + geom_line() +
+  xlab("Date") + ylab("Bitcoin price vs US Dollar") + geom_smooth()
 
 # EXERCISE.  Replot the above curve so that the 4 seasons are in different
 # colors.  For simplicity assume Winter = (Jan, Feb, Mar), etc.  Don't forget
@@ -143,3 +160,16 @@ x %within% jsm
 # Hint: nested ifelse statements and the following %in%  function which is
 # similar to %within% but for individual elements, not intervals.
 c(3,5) %in% c(1,2,3)
+
+filter(bitcoin, Date %within% date.range) %>%
+mutate(month=month(Date),
+       Season = ifelse(month %in% c(1,2,3), "spring",
+                       ifelse(month %in% c(4,5,6), "summer",
+                              ifelse(month %in% c(7,8,9), "fall", "winter")
+                       )),
+       Season = factor(Season, levels=c("spring", "summer", "fall", "winter"))
+       ) %>%
+  ggplot(data=., aes(x=Date, y=Avg)) +
+  geom_point(aes(col=Season)) +
+  xlab("Date") + ylab("Bitcoin price vs US Dollar") +
+  geom_smooth()
