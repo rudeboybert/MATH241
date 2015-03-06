@@ -80,7 +80,7 @@ bitcoin <-
                          ifelse(month %in% c(4,5,6), "summer",
                                 ifelse(month %in% c(7,8,9), "fall", "winter")
                          ))
-  ) %>%
+  )
 
 # We could alternatively using piping, but needs to be outside the dplyr piping
 # or else things will get confused
@@ -88,6 +88,7 @@ bitcoin$Season <-
   ifelse(bitcoin$month %in% c(7,8,9), "fall", "winter") %>%
   ifelse(bitcoin$month %in% c(4,5,6), "summer", .) %>%
   ifelse(bitcoin$month %in% c(1,2,3), "spring", .)
+
 
 
 # Reorder the factors
