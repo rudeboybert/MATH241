@@ -85,7 +85,7 @@ Answer another question of interest to you about the jukebox data.
 
 ## Question 8:
 
-Answer another question of interest to you using the data on Quandl.  Preferably on a topic you are interested in.  
+CHANGED:  Answer another question of interest to you using data on Quandl **or** using the `library(babynames)` dataset.  Preferably on a topic you are interested in.  
 
 ```{r, echo=FALSE}
 ```
