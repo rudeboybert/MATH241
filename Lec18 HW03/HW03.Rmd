@@ -20,7 +20,7 @@ jukebox <- read.csv("jukebox.csv", header=TRUE)
 For each academic year between 2003-2004 thru 2008-2009, who were the top 10 artists played?  Define
 
 * the start of academic year as the first Tuesday in September
-* the end of the academic year as the first Monday in January plus 15 weeks plus 4 days (i.e. the Friday of that week)
+* the end of the academic year as the last Monday in January plus 15 weeks plus 4 days (i.e. the Friday of that week)
 
 You can find these dates manually, or with the help of lubridate functions, or entirely using lubrdiate functions.  Display the results in easily digestible format.  
 
