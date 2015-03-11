@@ -53,35 +53,3 @@ We're going to import shapefiles into R and convert them into **SpatialPolygons*
 * Any relevant data to each geographic object
 
 The last three are the most relevant to you.
-
-
-Combining Data Sets via Join Operations
-========================================================
-Imagine we have two data frames **`x**   and  **y`**:
-
-```{r, echo=FALSE}
-x <- data.frame(x1=c("A","B","C"), x2=c(1,2,3))
-y <- data.frame(x1=c("A","B","D"), x3=c(TRUE,FALSE,TRUE))
-x
-y
-```
-
-We want to **join** them along the `x1` variable and end up with a new data frame that has all three variables.
-
-
-
-Combining Data Sets via Join Operations
-========================================================
-
-* `dplyr`'s operations to join data sets are inspired by SQL (Structured Query Language), which used to query large databases.
-* If values are missing during the join, `NA`'s are inserted.
-* This [illustration](https://twitter.com/yutannihilation/status/551572539697143808) succinctly summarizes all of them.
-
-
-
-R Markdown
-========================================================
-
-Everybody please ensure that Step 9 in the [instructions about LaTeX](http://reed.edu/data-at-reed/software/R/r_studio.html) work.  If this doesn't work, please see Rich in his office hours tomorrow or me at some point before class.
-
-Homework 01 will be assigned on Friday.
