@@ -3,17 +3,7 @@ Working With Maps
 author: Albert Y. Kim
 date: Wednesday 2015/03/11
 
-```{r, echo=FALSE}
-# The following code ensures all necessary packages are installed
-pkg <- c("dplyr", "ggplot2", "magrittr")
-new.pkg <- pkg[!(pkg %in% installed.packages())]
-if (length(new.pkg)) {
-  install.packages(new.pkg, repos="http://cran.rstudio.com/")
-}
-library(dplyr)
-library(ggplot2)
-library(magrittr)
-```
+
 
 
 
@@ -59,11 +49,19 @@ Combining Data Sets via Join Operations
 ========================================================
 Imagine we have two data frames **`x**   and  **y`**:
 
-```{r, echo=FALSE}
-x <- data.frame(x1=c("A","B","C"), x2=c(1,2,3))
-y <- data.frame(x1=c("A","B","D"), x3=c(TRUE,FALSE,TRUE))
-x
-y
+
+```
+  x1 x2
+1  A  1
+2  B  2
+3  C  3
+```
+
+```
+  x1    x3
+1  A  TRUE
+2  B FALSE
+3  D  TRUE
 ```
 
 We want to **join** them along the `x1` variable and end up with a new data frame that has all three variables.

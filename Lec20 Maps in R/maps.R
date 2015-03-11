@@ -5,21 +5,17 @@ library(ggmap)
 
 
 
+
 #-------------------------------------------------------------------------------
-# 2010 Census Tract Data
+# 2010 Portland Census Tract Data
 #-------------------------------------------------------------------------------
 # Download 2010 Census Tract from http://rlisdiscovery.oregonmetro.gov/
 
-# Basic plot of "Spatial Polygons" object
+# Convert shapefile into "Spatial Polygons" AKA "sp" object
 PDX <- readShapeSpatial("tract2010")
 
-# Don't fret about this part.  The geographical coordinate system of this particular data
-# originally is not in longitude and latitude, so we change it.  Many datasets will already be
-# in lat-long
-proj4string(PDX) <- "+proj=lcc +lat_1=44.33333333333334 +lat_2=46 +lat_0=43.66666666666666 +lon_0=-120.5 +x_0=2500000 +y_0=0 +ellps=GRS80 +units=ft +no_defs"
-PDX <- spTransform(PDX, CRS("+proj=longlat +ellps=WGS84"))
-
-# Plot the map use native R plot command (i.e. not the ggplot package)
+# Plot the map use native R plot command (i.e. not the ggplot package).  Note
+# that the geographical coordinate system is NOT latitude and longitude
 plot(PDX, axes=TRUE)
 
 # Restrict to Multnomah County.  Unfortunately, the filter() command from dplyr
@@ -29,11 +25,10 @@ plot(PDX, axes=TRUE)
 
 # Many shapefiles come with data attached to each geographic object.  In this
 # case we have census data for each census tract.  Looking at PDX.data, each
-# region's unique identifier is, unsurprisingly, the FIPS code.
+# region's unique identifier is, unsurprisingly, the FIPS code.  For some weird
+# reason you access the data in sp objects using "@" and not "$".
 PDX.data <- PDX@data %>% tbl_df()
 View(PDX.data)
-
-# PDX@data$id <- rownames(PDX@data)
 
 
 
@@ -44,7 +39,6 @@ View(PDX.data)
 # We have to use the fortify() command to convert the sp object to a ggplot'able
 # data frame where regions are ID'ed using the unique identifier discussed
 # above.
-
 PDX.map <- fortify(PDX, region="FIPS") %>% tbl_df()
 PDX.map
 
@@ -54,12 +48,10 @@ PDX.map
 #  plotted together
 # -the polygons will be filled with darkorange
 # -geom_path traces out the outline of each census tract in black
-# -coord_map() is a map-specific coordinate command that ensures the aspect ratio
 #  of longitude and latitude make sense
 ggplot(data=PDX.map, aes(x=long, y=lat, group=group)) +
   geom_polygon(fill="darkorange") +
   geom_path(color="black", size=0.5) +
-  coord_map() +
   xlab("longitude") + ylab("latitude")
 
 
@@ -71,84 +63,63 @@ ggplot(data=PDX.map, aes(x=long, y=lat, group=group)) +
 # Using the get_map() function from the ggmap package, we can download Google
 # map images
 google.map <-
-  get_map(location = "Portland, OR", maptype = "roadmap", zoom = 10,
-          color = "color")
+  get_map(location = "Portland, OR", maptype = "roadmap", zoom = 10, color = "color")
 
 # Plot it
 p <- ggmap(google.map) + xlab("longitude") + ylab("latitude")
 p
 
-# We plot the previous census tracts of Portland onto the map.  Note since the
-# ggmap has its own data and aesthetics, for both the geom_polygon and geom_path
-# we need to define their own separate data and aesthetics.  The alpha value sets
-# the opacity of the plot.
-p +
-  geom_polygon(data=PDX.map, aes(x=long, y=lat, group=group), fill="darkorange", alpha=0.6) +
-  geom_path(data=PDX.map, aes(x=long, y=lat, group=group), color="black", size=0.5)
+# Unfortunately we can't superimpose our ggplot object over this Google map b/c
+# the coordinate system is off.  The function to switch coordinate systems will
+# (hopefully) come from a package in an R package to be installed later.
 
 
 
 
 #-------------------------------------------------------------------------------
-# Proportion Caucasian
+# Map of Proportion Hispanic for Each Census Tract
 #-------------------------------------------------------------------------------
+# Define numerical variable of the proportion hispanic in each census tract.
 PDX.data <- mutate(PDX.data, prop.hisp = HISPANIC/POP10)
+
+# Define the same variable, but now in a categorial fashion.  We "cut" the
+# values according to the quantiles.  Try this on for size:
+quantile(PDX.data$prop.hisp)
+cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp))
+cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp), dig.lab=2)
+cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp), dig.lab=2, include.lowest=TRUE)
+
 PDX.data <- mutate(PDX.data,
-                   prop.hisp.bracket = cut(prop.hisp, quantile(prop.hisp), dig.lab=3)
+                   prop.hisp.bracket = cut(prop.hisp, quantile(prop.hisp), dig.lab=2, include.lowest=TRUE)
                      )
 
+# Fortify PDX data and join with new PDX.data data frame which contains our
+# proportion hispanic variables
 PDX.map <- fortify(PDX, region="FIPS") %>%
   left_join(PDX.data, by=c("id"="FIPS"))
 
-
-ggplot(data=PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp.bracket)) +
-  geom_polygon() +
-  geom_path(color="black", size=0.5) +
-  coord_map() +
-  scale_fill_brewer(palette = 'Greys', name="Prop. Hispanic") +
-  xlab("longitude") + ylab("latitude")
-
-
+# Plot the numerical proportion:  note the scale_fill_continuous
 ggplot(data=PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp)) +
   geom_polygon() +
   geom_path(color="black", size=0.5) +
-  coord_map() +
   xlab("longitude") + ylab("latitude") +
   scale_fill_continuous(low="white", high="black", name="Prop. Hispanic")
 
-p +
-  geom_polygon(data=PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp), alpha=0.6) +
-  geom_path(data=PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp), color="black", size=0.5) +
-  scale_fill_continuous(low="white", high="black", name="Prop. Hispanic")
-
-
-
+# Plot the categorical proportion:  note the scale_fill_brewer
+ggplot(data=PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp.bracket)) +
+  geom_polygon() +
+  geom_path(color="black", size=0.5) +
+  xlab("longitude") + ylab("latitude") +
+  scale_fill_brewer(palette = 'Greys', name="Prop. Hispanic")
 
 
 
 
 #-------------------------------------------------------------------------------
 # Exercise:  Recycling the code above, plot a map of the population of Western
-# Washington
+# Washington by census tract.
 #-------------------------------------------------------------------------------
-ww <- readShapeSpatial("ww.shp")
-ww.data <- ww@data %>% tbl_df()
 
-ww.map <- fortify(ww, region="FIPS") %>%
-  inner_join(ww.data, by=c('id'='FIPS')) %>% tbl_df()
-
-ww.map <- mutate(
-  ww.map,
-  POP2000.bracket = cut(POP2000, quantile(POP2000), dig.lab=10)
-)
-
-ggplot(data=ww.map, aes(long, lat, group=group, fill=POP2000.bracket)) +
-  geom_polygon() +
-  geom_path(color="black", size=0.05) +
-  xlab("longitude") +
-  ylab("latitude") +
-  coord_map() +
-  scale_fill_brewer(palette="Greys", name="Population")
 
 
 
