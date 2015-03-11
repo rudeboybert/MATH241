@@ -14,56 +14,12 @@ source("http://people.reed.edu/~albkim/MATH241/Lec19_examples.R")
 
 
 
-
-#-------------------------------------------------------------------------------
-# Tutorial
-#-------------------------------------------------------------------------------
-#---------------------------------------------------------------
-# Going from tidy (AKA narrow AKA tall) format to wide format and vice versa
-# using gather() and separate()
-#---------------------------------------------------------------
-# Convert to tidy format. All three of the following do the same:  "year" is the
-# new "key" variable and n is the "value" variable
-cases
-gather(data=cases, key="year", value=n, 2:4)
-gather(cases, "year", n, `2011`, `2012`, `2013`)
-gather(cases, "year", n, -country)
-
-
-# Convert to wide format. The "key" variable is size and the "value" variable is
-# amount
-pollution
-spread(pollution, size, amount)
-
-
-# Note: gather() and spread() are opposites of each other
-cases
-gather(cases, "year", n, -country) %>% spread(year, n)
-
-
-
-#---------------------------------------------------------------
-# separate() and unite() columns
-#---------------------------------------------------------------
-# Separate the year, month, day from the date variable":
-storms
-storms2 <- separate(storms, date, c("year", "month", "day"), sep = "-")
-storms2
-
-# Undo the last change using unite()
-unite(storms2, "date", year, month, day, sep = "-")
-
-
-
-
-
 #-------------------------------------------------------------------------------
 # EXERCISES
 #-------------------------------------------------------------------------------
 # From Eleanor: Census data with total population, land area, and population
 # density in wide format
 census <- read.csv("popdensity1990_00_10.csv", header=TRUE) %>% tbl_df()
-View(census)
 
 
 # EXERCISE: Add varibles "county_name" and "state_name" to the census data
