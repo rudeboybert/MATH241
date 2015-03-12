@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 library(maptools)
 library(ggmap)
-
+gpclibPermit()
 
 
 
