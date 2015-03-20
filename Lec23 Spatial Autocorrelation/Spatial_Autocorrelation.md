@@ -27,7 +27,7 @@ Spatial Autocorrelation
 
 This succinctly defines the statistical notion of **(positive) spatial autocorrelation**, in which pairs of observations taken nearby are more alike than those taken farther apart.  i.e. they are correlated.
 
-Such data violate the **independence assumption** that many standard statistical methods hinge on and must be accounted for.
+Such data violate the **independence assumption** that many standard statistical methods hinge on and therefore spatial autocorrelation must be accounted for.
 
 
 
@@ -60,7 +60,8 @@ Map of Multnomah County
 There are:
 
 * 882 total links i.e. pairs of regions that share a border
-* Distribution of the number of links.  Ex:  There are 11 regions that have 3 neighbors.
+* Distribution of the number of links.
+  Ex:  There are 11 regions that have 3 neighbors.
 
 
 ```
@@ -85,15 +86,18 @@ A **global index of spatial autocorrelation** provides a summary over the entire
 
 Say we have $n$ regions each with a measurement of some variable of interest $Y_i$ for $i=1, \ldots, n$
 
+Today we'll investigate $Y_i$ = proportion of the $n=171$ census tract's population that are hispanic.
 
 
 Global Indices of Spatial Autocorrelation
 ========================================================
 
+Let
+
 * $w_{ij}$ be a weight describing the proximity of regions $i$ and $j$
 * $\mbox{sim}_{ij}$ be a measure of similarity between $Y_i$ and $Y_j$
 
-Most indices include the form:
+Most global indices are of the form:
 
 $$
 \frac{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij} \mbox{sim}_{ij}}{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij}}
@@ -123,11 +127,11 @@ Properties of Moran's I
 ========================================================
 
 * If neighboring regions tend to
-    + have similar values (pattern is clustered) $I$ will be positive
-    + have different values (pattern is regular) $I$ will be negative
-* Under the null hypothesis of no spatial correlation, the expected value of $I$ is $-\frac{1}{N-1}$
+    + have similar values (pattern is clustered): $I$ will be positive
+    + have different values (pattern is regular): $I$ will be negative
+* Under the null hypothesis of no spatial correlation, the expected value of $I$ is $$-\frac{1}{N-1}$$
 * Unlike a traditional correlation coefficient, $I$ is not restricted to be between $[-1,1]$
-* A $p$-value can be computed
+* A $p$-value is computed.
 
 
 
@@ -139,13 +143,14 @@ You're going to evaluate Moran's $I$ assuming proximity weights
 $$
 w_{ij} = \left\{
 \begin{array}{cl}
-1 & \mbox{if regions $i$ and $j$ share a border (not including corners)}\\
+1 & \mbox{if regions $i$ and $j$ share a border}\\
+& \mbox{(not including corners)}\\
 0 & \mbox{otherwise}
 \end{array}
 \right.
 $$
 
-to see if Hispanic populations in Portland tend to **cluster** i.e. exhibit positive spatial autocorreleation.
+to see if Hispanic populations in Mulnomah County tend to **cluster** i.e. exhibit positive spatial autocorreleation.
 
 
 
@@ -162,7 +167,7 @@ Bicameral legislature:
 House of Representatives
 ========================================================
 
-Seats are distributed proportionally to population size.  After the 2010 Census here are the changes:
+Seats are distributed proportionally to population size.  After the 2010 Census the changes were:
 
 ![alt text](apportionment.png)
 
@@ -170,3 +175,5 @@ Seats are distributed proportionally to population size.  After the 2010 Census 
 
 Senate
 ========================================================
+
+Two seats per state.

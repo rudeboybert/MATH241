@@ -4,9 +4,103 @@ library(stringr)
 library(ggplot2)
 
 
+
 #------------------------------------------------------------------------------
 #
-# US Senate. We're going to analyse the structure of the US Senate
+# Do Hispanics Cluster?
+#
+#------------------------------------------------------------------------------
+# Hopefully this works for you
+library(rgdal)
+
+# Install this package as well.  We need this to run Moran's I.
+library(spdep)
+
+# We use the same shapefiles downloaded from Lecture 20
+# - Import the Portland Shapefile using the readOGR() function from the rgdal
+#   package instead of the other function used in Lecture 20. Please the
+#   function below from now on.
+# - Convert the coordinate system to latitude/longitude using the
+#   spTransform() function
+# - Select only census tracts in Multnomah County
+PDX.shapefile <- readOGR(dsn=".", layer="tract2010", verbose=FALSE) %>%
+  spTransform(CRS("+proj=longlat +ellps=WGS84")) %>%
+  subset(COUNTY=="051")
+
+# Get the data frame of information from the shapefile.  In this case rather
+# weirdly we have to use @ instead of $ to extract the data.
+# Then compute the proportion of the population that is hispanic for each
+# census tract.
+PDX.data <- PDX.shapefile@data %>% tbl_df() %>%
+  mutate(prop.hisp=HISPANIC/POP10)
+
+# We convert the shapefile to a ggplot'able data frame and then plot it
+PDX.map <- fortify(PDX.shapefile, region="FIPS") %>% tbl_df()
+ggplot(PDX.map, aes(x=long, y=lat, group=group)) +
+  geom_polygon(fill="white") +
+  geom_path(col="black", size=0.5) +
+  coord_map() +
+  theme_bw()
+
+# Join the census tract data to the map data
+PDX.map <- inner_join(PDX.map, PDX.data, by=c("id"="FIPS"))
+
+ggplot(PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp)) +
+  geom_polygon() +
+  geom_path(col="black", size=0.5) +
+  coord_map() +
+  scale_fill_continuous(low="white", high="black", name="Prop. Hispanic") +
+  theme_bw()
+
+
+#---------------------------------------------------------------
+# Recreate the Spatial Connectivity map from the slides.
+#---------------------------------------------------------------
+# Get coordinates of each region.  Much of this is code is techincal, so don't
+# worry about understanding it completely.
+PDX.coord <- coordinates(PDX.shapefile)
+
+# Get neighbor information
+PDX.nb <- poly2nb(PDX.shapefile, queen = FALSE)
+summary(PDX.nb)
+
+# Get weights as defined in slides.  "B" indicates basic weights.
+PDX.weights <- nb2listw(PDX.nb, style = "B", zero.policy = TRUE)
+
+# Plot using base R, not ggplot.  Don't try to understand the code to make this
+# kind of plot using base R.
+plot(PDX.shapefile, border = "grey60", main="Spatial Connectivity")
+box()
+plot(PDX.nb, PDX.coord, pch = 19, cex = 0.3, lwd=0.5, add = TRUE)
+
+
+#---------------------------------------------------------------
+# Moran's I.
+#---------------------------------------------------------------
+# We're going to test Moran I's on statistical noise.
+# runif(n, min=a, max=b) returns n Uniform(a,b) random variables. i.e. n values
+# uniformly chosen on the interval [a,b]].
+
+# Run the next bit of code a few times to convince yourselves of this fact.
+n <- nrow(PDX.data)
+noise <- runif(n, min=0, max=1)
+qplot(noise, binwidth=0.1)
+
+# We then compute Moran's I using Y_i = noise.  Look at the statistic and
+# p-value for multiple runs of the following two lines.
+noise <- runif(n, min=0, max=1)
+moran.test(noise, PDX.weights)
+
+# EXERCISE 1: Use Moran's I to see if there is evidence that hispanics cluster.
+# Investigate some other varibles as well
+
+
+
+
+
+#------------------------------------------------------------------------------
+#
+# Mapping the structure of the US Senate
 #
 #------------------------------------------------------------------------------
 # This function takes in numerical values that are coded as strings with commas
@@ -17,8 +111,8 @@ remove.commas <- function(x){
   return(x)
 }
 
-# Let's revisit our old friend rvest and scrape some web data.  Specifically
-# the population of each state in 2010 and other political info
+# Let's revisit our old friend the rvest package and scrape some web data.
+# Specifically the population of each state in 2010 and other political info
 state.pop <-
   html("http://simple.wikipedia.org/wiki/List_of_U.S._states_by_population") %>%
   html_nodes("table") %>% .[[1]] %>% html_table() %>%
@@ -26,7 +120,7 @@ state.pop <-
 
 # We clean the variables. Note for column names that are "weird", we surround
 # them with ` marks (above the TAB button).  We also define a variable
-#
+# Pop.per.senator and lowercase the names of all states.
 state.pop <- state.pop %>%
   rename(
     House.Seats = `House\nSeats`,
@@ -67,9 +161,9 @@ ggplot(data=US.senators, aes(long, lat, group = group)) +
   ggtitle("Population per Senator") +
   xlab("Longitude") + ylab("Latitude")
 
-# EXERCISE 1:
+# EXERCISE 2:  Solutions are at the end of this file.
 # 1.  Ignoring state information, what is the "baseline" ratio of Population per
-#  Senator?
+#     Senator?
 # 2.  Construct a measure of how much a state benefits/is at a disadvantage by
 #     the current arrangement of the Senate where
 #     -low values indicate benefit
@@ -81,7 +175,28 @@ ggplot(data=US.senators, aes(long, lat, group = group)) +
 # 6.  Which states benefit the least?
 
 
-# SOLUTIONS 1:
+
+
+
+#------------------------------------------------------------------------------
+#
+# SOLUTIONS TO EXERCISE 1:
+#
+#------------------------------------------------------------------------------
+# The test statistic is 0.63 > 0, indicating positive correlation.  The p-value
+# is a microscopic 2.2 x 10^{-16}, so we can confidently reject the null
+# hypothesis of no spatial autocorrelation
+moran.test(PDX.data$prop.hisp, PDX.weights)
+
+
+
+
+
+#------------------------------------------------------------------------------
+#
+# SOLUTIONS TO EXERCISE 2:
+#
+#------------------------------------------------------------------------------
 # 1.  It is the sum of the entire population over 50.
 overall.ratio <- sum(state.pop$Population)/50
 
@@ -118,92 +233,3 @@ ggplot(data=US.senators, aes(long, lat, group = group)) +
 
 # 5. and 6.  The maps shows Vermont and Wyoming benefit the most as the have the
 # smallest populations.  California and Texas benefit the least.
-
-
-
-
-#------------------------------------------------------------------------------
-#
-# Do Hispanics Cluster?
-#
-#------------------------------------------------------------------------------
-# Hopefully these work for you
-library(rgdal)
-library(rgeos)
-# Install this package as well.  We need this to run Moran's I.
-library(spdep)
-
-# We use the same shapefiles downloaded from Lecture 20
-# - Import the Portland Shapefile using the readOGR() function from the rgdal
-#   package instead of the other function used in Lecture 20. Please the
-#   function below from now on.
-# - Convert the coordinate system to latitude/longitude using the
-#   spTransform() function
-# - Select only census tracts in Multnomah County
-PDX.shapefile <- readOGR(dsn=".", layer="tract2010", verbose=FALSE) %>%
-  spTransform(CRS("+proj=longlat +ellps=WGS84")) %>%
-  subset(COUNTY=="051")
-
-# Get the data frame of information from the shapefile.  In this case rather
-# weirdly we have to use @ instead of $ to extract the data.
-# Then compute the proportion of the population that is hispanic for each
-# census tract.
-PDX.data <- PDX.shapefile@data %>% tbl_df() %>%
-  mutate(prop.hisp=HISPANIC/POP10)
-
-# We convert the shapefile to a ggplot'able data frame and then plot it
-PDX.map <- fortify(PDX.shapefile, region="FIPS") %>% tbl_df()
-ggplot(PDX.map, aes(x=long, y=lat, group=group)) +
-  geom_polygon(fill="white") +
-  geom_path(col="black", size=0.5) +
-  coord_map() +
-  theme_bw()
-
-# Join the census tract data to the map data
-PDX.map <- inner_join(PDX.map, PDX.data, by=c("id"="FIPS"))
-ggplot(PDX.map, aes(x=long, y=lat, group=group, fill=prop.hisp)) +
-  geom_polygon() +
-  geom_path(col="black", size=0.5) +
-  coord_map() +
-  scale_fill_continuous(low="white", high="black", name="Prop. Hispanic") +
-  theme_bw()
-
-
-#---------------------------------------------------------------
-# Recreate the Spatial Connectivity map from the slides.
-#---------------------------------------------------------------
-# Get coordinates of each region.  Much of this is techincal, so don't worry about
-# understanding it completely
-PDX.coord <- coordinates(PDX.shapefile)
-
-# Get neighbor information
-PDX.nb <- poly2nb(PDX.shapefile, queen = FALSE)
-summary(PDX.nb)
-
-# Get weights as defined in slides.  "B" indicates basic weights.
-PDX.weights <- nb2listw(PDX.nb, style = "B", zero.policy = TRUE)
-
-# Plot using base R, not ggplot
-plot(PDX.shapefile, border = "grey60", main="Spatial Connectivity")
-box()
-plot(PDX.nb, PDX.coord, pch = 19, cex = 0.3, lwd=0.5, add = TRUE)
-
-
-#---------------------------------------------------------------
-# Moran's I.
-#---------------------------------------------------------------
-# We're going to test Moran I's on statistical noise.
-# runif(n, min=a, max=b) returns n Uniform(a,b) random variables. i.e. n values
-# uniformly chosen on the interval [a,b]].
-
-# Run the next bit of code a few times to convince yourselves of this fact.
-n <- nrow(PDX.data)
-noise <- runif(n, min=0, max=1)
-qplot(noise, binwidth=0.1)
-
-# We then compute Moran's I using Y_i = noise.  Look at the statistic and
-# p-value for multiple runs of the following two lines.
-noise <- runif(n, min=0, max=1)
-moran.test(noise, PDX.weights)
-
-# EXERCISE: Use Moran's I to see if there is evidence that hispanics cluster.
