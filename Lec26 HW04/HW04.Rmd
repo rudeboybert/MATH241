@@ -5,7 +5,10 @@ date: "Due Friday 2015/4/17 5:00pm on Moodle"
 output: html_document
 ---
 
-Please indicate approximately how much time you spent on this homework:
+Please indicate
+
+* Approximately how much time you spent on this homework:
+* What, if anything, gave you an exceeding amount of trouble?  By exceeding I mean above and beyond run-of-the-mill difficulties when learning new things.   
 
 ```{r, echo=FALSE}
 
