@@ -88,7 +88,7 @@ In your write-up, you should tell a data science audience about your project, wh
 
 Do not present *all* of the `R` code that you wrote throughout the process of working on this project. In fact
 
-* The amount of R code in the outputted document should be minimal.the less R code the better
+* The amount of R code in the outputted document should be minimal. The less R code the better.
 * Important conclusions should appear in the main text, not in comments in the code.
 * The R markdown file should contain the *necessary* and *sufficient* (i.e. minimal) set of `R` code that is necessary to understand your results and findings. If you make a claim, it *must* be justified by explicit calculation.  A knowledgeable reviewer should be able to reproduce your analysis:
     + Compile your `.Rmd` file without modification
@@ -100,8 +100,7 @@ Be sure to motivate your topic at the beginning of your write-up. You should try
 
 ### Format {.unnumbered}
 
-You don't need to follow a specific format in the write-up, but you should start with an introductory paragraph and finish with a conclusion. These paragraphs needs not follow the formal writing style that you would use in most other classes. Here, a colloquial style that
-is accessible to a lay reader is appropriate. Nevertheless, your write-up should address the following questions:
+You don't need to follow a specific format in the write-up, but you should start with an introductory paragraph and finish with a conclusion. Your write-up should address the following questions:
 
 1.  Why should anyone care about this?
 2.  What is this about? Do *not* assume that your readers have any domain knowledge! The burden of explanation as to what you are talking about is on you! For example, if your project involves phyllogenetic trees, do not assume that your audience has anything other than a basic, lay understanding of genetics.
@@ -124,14 +123,14 @@ Visualizations, particularly interactive ones, will be well-received. That said,
 
 ## Overall
 
-Your term project will be evaluated based on similar critera as the homework grading rubric, as well as:
+Your term project will be evaluated based on similar criteria as the homework grading rubric, as well as:
 
 * **Originality/Interest**: Is the topic original, interesting, and substantial, or is it trite, pedantic, and trivial? How much creativity, initiative, and ambition did you demonstrate? Is the basic question driving the project worth investigating, or is it obviously answerable without a data-based study?
 * **Degree of Difficulty**: How challenging was the project? Were the data particularly large, complex, and/or messy? Did the data come in an obscure format?Was a challenging visualization or applet constructed? Were any elements from outside the coursework necessary to complete the project?
 * **Design**: How well were the graphical elements of the project designed? Were they clunky or elegant? Was a truly original view of the data presented? Were any interactive elements usable?
 * **Meaning/Analysis/Statistical Understanding**: Did we learn anything meaningful from this project? Are the chosen analyses appropriate for the variables/relationships under investigation, and are the assumptions underlying these analyses met? Are the analyses carried out correctly? Did you make appropriate conclusions from the analyses, and are these conclusions justified?
-* **Write-Up**: How effectively does the write-up communicate the goals, procedures, and results of the study? Are the claims adequately supported? Does the writing style enhance what you are trying to communicate? How well is it edited? Are the statistical claims justified? Are text and analyses effectively interwoven? Clear writing, correct spelling, and good grammar are important.
-* **Oral Presentation**: How effectively does the oral presentation communicate the goals, procedures, and results of the study? Do the slides help to illustrate the points being made by the speaker without distracting the audience? Do the presenters seem to be well-rehearsed? Did they properly budget their time? Do they appear to be confident in what she is saying? Are their arguments persuasive?
+* **Write-Up**: How effectively does the write-up communicate the goals, procedures, and results of the study? Are the claims adequately supported? Does the writing style enhance what you are trying to communicate? How well is it edited? Are the statistical claims justified? Are text and analyses effectively interwoven?
+* **Oral Presentation**: How effectively does the oral presentation communicate the goals, procedures, and results of the study? Do the slides help to illustrate the points being made by the speaker without distracting the audience? Does the presenter seem to be well-rehearsed? Did they properly budget their time? Do they appear to be confident in what they are is saying? Are their arguments persuasive?
 
 
 ## Peer Presentation Evaluation
@@ -139,12 +138,12 @@ Your term project will be evaluated based on similar critera as the homework gra
 
 Your assistance is required in evaluating the presentations of your peers. The questions below are an example of what I ask you to answer to evaluate your peers' oral presentations:
 
-* Volume: Are the speakers loud enough? Can you hear them even in the back of the room?
-* Presence: Do the speakers command the room? Do they draw your attention or do they just look like they want this to be over as soon as possible?
-* Emphasis: Do the speakers use intonation to signal what words or concepts are most important? Or do they appear to be reciting a speech flatly?
-* Eye Contact: Are the speakers engaged with the audience? Do they seem connected or do they seem to be going through the motions?
-* Clarity: Did the speakers convey a clear sense of what the project is about? If you had to tell someone what their project was about in three sentences could you do it?
-* Mastery: Do the speakers appear to have full command of the material? Were there obvious gaps in their knowledge of the subject matter? Were they able to answer questions coherently?
+* **Volume**: Are the speakers loud enough? Can you hear them even in the back of the room?
+* **Presence**: Do the speakers command the room? Do they draw your attention or do they just look like they want this to be over as soon as possible?
+* **Emphasis**: Do the speakers use intonation to signal what words or concepts are most important? Or do they appear to be reciting a speech flatly?
+* **Eye Contact**: Are the speakers engaged with the audience? Do they seem connected or do they seem to be going through the motions?
+* **Clarity**: Did the speakers convey a clear sense of what the project is about? If you had to tell someone what their project was about in three sentences could you do it?
+* **Mastery**: Do the speakers appear to have full command of the material? Were there obvious gaps in their knowledge of the subject matter? Were they able to answer questions coherently?
 
 
 
@@ -152,5 +151,5 @@ Your assistance is required in evaluating the presentations of your peers. The q
 
 # Acknowledgements {.unnumbered}
 
-Thanks to Prof. Ben Baumer at Smith College for advice for the project format.  
+Thanks to Prof. Ben Baumer at Smith College for guidance and advice for the project format.  
 

@@ -1,5 +1,5 @@
 ---
-title: "MATH 214: Homework 01"
+title: "MATH 241: Homework 01"
 author: "Write Your Name Here"
 date: "Due Wednesday 2015/2/18 1:00pm on Moodle"
 output: html_document

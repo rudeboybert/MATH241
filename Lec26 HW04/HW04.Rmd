@@ -1,0 +1,16 @@
+---
+title: "MATH 241: Homework 04"
+author: "Write Your Name Here"
+date: "Due Friday 2015/4/17 5:00pm on Moodle"
+output: html_document
+---
+
+Please indicate approximately how much time you spent on this homework:
+
+```{r, echo=FALSE}
+
+```
+
+
+
+## Question 1:

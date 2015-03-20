@@ -92,8 +92,9 @@ cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp))
 cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp), dig.lab=2)
 cut(PDX.data$prop.hisp, quantile(PDX.data$prop.hisp), dig.lab=2, include.lowest=TRUE)
 
-PDX.data <- mutate(PDX.data,
-                   prop.hisp.bracket = cut(prop.hisp, quantile(prop.hisp), dig.lab=2, include.lowest=TRUE)
+PDX.data <-
+  mutate(PDX.data,
+         prop.hisp.bracket = cut(prop.hisp, quantile(prop.hisp), dig.lab=2, include.lowest=TRUE)
                      )
 
 # Fortify PDX data and join with new PDX.data data frame which contains our
