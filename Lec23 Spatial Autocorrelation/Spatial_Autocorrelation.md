@@ -100,7 +100,7 @@ Let
 Most global indices are of the form:
 
 $$
-\frac{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij} \mbox{sim}_{ij}}{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij}}
+\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij} \mbox{sim}_{ij}}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
 $$
 
 i.e. it's a weighted average of the similarity of the variable over all pairs of regions.
@@ -112,7 +112,7 @@ Moran's I
 Moran's $I$ statistic (1950) is among the most used measures
 
 $$
-\frac{1}{s^2}\frac{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij} (Y_i - \overline{Y})(Y_j - \overline{Y})}{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij}}
+\frac{1}{s^2}\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij} (Y_i - \overline{Y})(Y_j - \overline{Y})}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
 $$
 where
 $$

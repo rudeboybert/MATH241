@@ -867,7 +867,7 @@ Ex:  There are 11 regions that have 3 neighbors.</li>
 <p>Most global indices are of the form:</p>
 
 <p>\[ 
-\frac{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij} \mbox{sim}_{ij}}{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij}}
+\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij} \mbox{sim}_{ij}}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
  \]</p>
 
 <p>i.e. it&#39;s a weighted average of the similarity of the variable over all pairs of regions.</p>
@@ -881,7 +881,7 @@ Ex:  There are 11 regions that have 3 neighbors.</li>
 <p>Moran&#39;s \( I \) statistic (1950) is among the most used measures</p>
 
 <p>\[ 
-\frac{1}{s^2}\frac{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij} (Y_i - \overline{Y})(Y_j - \overline{Y})}{\sum_{i=1}^{n}\sum_{i=1}^{n}w_{ij}}
+\frac{1}{s^2}\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij} (Y_i - \overline{Y})(Y_j - \overline{Y})}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
  \]
 where
 \[ 
