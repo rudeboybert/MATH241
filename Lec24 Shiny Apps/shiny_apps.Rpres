@@ -103,10 +103,12 @@ Publishing on the Web
 
 
 
+Exercise: Babynames Shiny App
+========================================================
 
+Add a radio button so that the user has the option can limit consideration to only one `sex`.
 
-
-
+Another tutorial: [http://rmarkdown.rstudio.com/authoring_shiny.html](http://rmarkdown.rstudio.com/authoring_shiny.html)
 
 
 
