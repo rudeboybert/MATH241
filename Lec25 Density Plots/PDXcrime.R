@@ -168,6 +168,9 @@ count(crime2012, Major.Offense.Type) %>% arrange(desc(n)) %>% as.data.frame()
 
 # Investigate the location of specific crimes using similar maps as above.
 # For example, where do car thefts occur?
+
+# Jossef pointed out you can use a facet_wrap in order to all crimes separately.
+# Works very nicely!
 base.plot +
   geom_point(data=crime2012, aes(x=long, y=lat, group=group), alpha=0.2) +
   scale_x_continuous(limits = c(-123.0, -122.3)) +
@@ -175,16 +178,26 @@ base.plot +
   geom_density2d(data=crime2012, aes(x=long, y=lat, group=group), col="red") +
   facet_wrap(~Major.Offense.Type)
 
-# From the package ggmap
+# Eleanor made a good point that just plotting the outlines of the census tracts
+# doesn't tell people much.  So I suggested putting a Google Map as a base as we
+# did in Lec20.  But Rachel reminded me that we didn't manage to super impose a
+# shapefile over a Google Maps map b/c we didn't have the right libraries
+# installed yet.  Here we go:  From the package ggmap
 library(ggmap)
-google.map <- get_map(location = "Portland, OR", maptype = "roadmap", zoom = 10, color = "color")
 
-# Plot it
+# The map is centered whereever Google Maps centers the map when you search
+# "Portland, OR".  Higher the zoom, the closer in you get.
+google.map <-
+  get_map(location = "Portland, OR", maptype = "roadmap", zoom = 10, color = "color")
+
+# Plot it!
+# The census tract outlines aren't as important if you have the actual map, so I
+# commented out the geom_path() part.  The google.map is itself a ggplot object,
+# so we no longer need to use geom_polygon() as our base.  Furthermore, we can
+# remove the theme_bw()
 ggmap(google.map) +
-  # The census tract outlines aren't as important if you have the actual map!
   # geom_path(data=PDX.map, aes(x=long, y=lat, group=group), col="black", size=0.5) +
   coord_map() +
-  theme_bw() +
   xlab("longitude") + ylab("latitude") +
   geom_point(data=crime2012, aes(x=long, y=lat, group=group), alpha=0.05) +
   scale_x_continuous(limits = c(-123.0, -122.3)) +
