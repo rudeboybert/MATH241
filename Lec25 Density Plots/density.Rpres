@@ -1,0 +1,169 @@
+Density Plots
+========================================================
+author: Albert Y. Kim
+date: Wednesday 2015/04/01
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 40)
+```
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(mvtnorm))
+```
+
+Density
+========================================================
+In probability theory, a probability density function (PDF), or density of a continuous random variable, is a function that describes the relative likelihood for this random variable to take on a given value.
+
+The area under the curve of a density is 1 i.e. 100%.
+
+
+
+Density
+========================================================
+![alt text](http://upload.wikimedia.org/wikipedia/commons/8/89/Boxplot_vs_PDF.png)
+
+
+
+One-Dimensional Case
+========================================================
+Say you have observations $(x_1, \ldots, x_n)$ of some continuous random variable.  Example the Old Faithful geyser in Yellowstone National Park eruption times
+
+```{r, echo=FALSE}
+faithful$eruptions
+```
+
+
+
+One-Dimensional Case
+========================================================
+The simplest approximation to $(x_1, \ldots, x_n)$'s density is a histogram where on the y-axis we are not representing **counts**, but rather **proportions**.  i.e. the sum of the area of the boxes is 1.
+
+Density is the more general term for proportion.
+
+
+
+One-Dimensional Case
+========================================================
+```{r, echo=FALSE}
+ggplot(faithful, aes(x=eruptions, y=..density..)) +
+  geom_histogram(alpha=0) +
+  geom_point(data=faithful, aes(x=eruptions, y=0), col="red", size=4)
+```
+
+
+
+
+
+
+One-Dimensional Case
+========================================================
+```{r, echo=FALSE}
+ggplot(faithful, aes(x=eruptions, y=..density..)) +
+  geom_histogram() +
+  geom_point(data=faithful, aes(x=eruptions, y=0), col="red", size=4)
+```
+
+
+
+
+Density Curve in Red
+========================================================
+```{r, echo=FALSE}
+ggplot(faithful, aes(x=eruptions, y=..density..)) +
+  geom_histogram() +
+  geom_point(data=faithful, aes(x=eruptions, y=0), col="red", size=4) +
+  geom_density(col="red", size=2)
+```
+
+
+
+
+Two Dimensions
+========================================================
+
+For two dimensions, each observation is a pair of points $(x_i, y_i)$ for $i=1, \ldots, n$. Now
+
+* Our bins are actually boxes, not intervals
+* A histogram for these would require a third dimension sticking out of the page to show the height
+  corresponding to each box
+
+
+
+Two Dimensions
+========================================================
+
+So rather we have **concentric circles** indicate density.  We use the `geom_density2d()` command on the front of your cheatsheet under two variables.
+
+
+
+Example
+========================================================
+```{r, echo=FALSE}
+n.sim <- 10000
+mu <- c(1,2)
+sigma <- matrix(c(4,2,2,3), ncol=2)
+X <- rmvnorm(n=n.sim, mean=mu, sigma=sigma)
+X <- data.frame(X1=X[,1], X2=X[,2])
+ggplot(X, aes(X1,X2)) + geom_point()
+```
+
+
+Setting alpha Parameter in geom_point()
+========================================================
+```{r, echo=FALSE}
+ggplot(X, aes(X1,X2)) + geom_point(alpha=0.2)
+```
+
+
+Concentric Circles Representing Densities
+========================================================
+```{r, echo=FALSE}
+ggplot(X, aes(X1,X2)) + geom_point() + geom_density2d(col="red", size=1.5)
+```
+
+
+Today's Example
+========================================================
+
+
+```{r, eval=FALSE, echo=FALSE}
+Prostitution <- filter(crime2012, Major.Offense.Type == "Prostitution")
+ggplot(data=Prostitution, aes(x=long, y=lat, group=group)) +
+  geom_point(size=4) +
+  coord_map() +
+  theme_bw() +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  xlab("") + ylab("")
+ggsave("plot1.pdf")
+
+ggplot(data=Prostitution, aes(x=long, y=lat, group=group)) +
+  geom_point(size=4) +
+  coord_map() +
+  theme_bw() +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  geom_density2d(data=Prostitution, aes(x=long, y=lat, group=group), col="red") +
+  xlab("") + ylab("")
+ggsave("plot2.pdf")
+
+base.plot +
+  geom_point(data=Prostitution, aes(x=long, y=lat, group=group), size=4) +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  geom_density2d(data=Prostitution, aes(x=long, y=lat, group=group), col="red")
+ggsave("plot3.pdf")
+
+base.plot +
+  geom_point(data=Prostitution, aes(x=long, y=lat, group=group), size=4) +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  geom_density2d(data=Prostitution, aes(x=long, y=lat, group=group), col="red") +
+  ggtitle("Prostitution Arrests in 2012")
+ggsave("plot4.pdf")
+```
+
+
+
