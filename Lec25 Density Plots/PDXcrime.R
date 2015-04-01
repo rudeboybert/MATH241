@@ -168,3 +168,28 @@ count(crime2012, Major.Offense.Type) %>% arrange(desc(n)) %>% as.data.frame()
 
 # Investigate the location of specific crimes using similar maps as above.
 # For example, where do car thefts occur?
+base.plot +
+  geom_point(data=crime2012, aes(x=long, y=lat, group=group), alpha=0.2) +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  geom_density2d(data=crime2012, aes(x=long, y=lat, group=group), col="red") +
+  facet_wrap(~Major.Offense.Type)
+
+# From the package ggmap
+library(ggmap)
+google.map <- get_map(location = "Portland, OR", maptype = "roadmap", zoom = 10, color = "color")
+
+# Plot it
+ggmap(google.map) +
+  # The census tract outlines aren't as important if you have the actual map!
+  # geom_path(data=PDX.map, aes(x=long, y=lat, group=group), col="black", size=0.5) +
+  coord_map() +
+  theme_bw() +
+  xlab("longitude") + ylab("latitude") +
+  geom_point(data=crime2012, aes(x=long, y=lat, group=group), alpha=0.05) +
+  scale_x_continuous(limits = c(-123.0, -122.3)) +
+  scale_y_continuous(limits = c(45.43, 45.73)) +
+  geom_density2d(data=crime2012, aes(x=long, y=lat, group=group), col="red")
+
+
+

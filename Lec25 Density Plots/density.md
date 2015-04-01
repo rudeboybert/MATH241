@@ -7,6 +7,9 @@ date: Wednesday 2015/04/01
 
 
 
+
+
+
 Density
 ========================================================
 In probability theory, a probability density function (PDF), or density of a continuous random variable, is a function that describes the relative likelihood for this random variable to take on a given value.
