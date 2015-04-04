@@ -82,7 +82,7 @@ img {
 <li><span class="math">\(N_i\)</span> is the total number of people</li>
 </ul></li>
 <li>A map of the median income <strong>quintiles</strong>. i.e. your map should be a <a href="http://2.bp.blogspot.com/_Vod56KuZXlk/S9IdL4yW14I/AAAAAAAAAFc/jHIE6fPuQvM/s1600/standardized+c+map.PNG">chrolopleth map</a> involving only 5 colors.</li>
-<li>A map of that gives a sense of census tracts with high and low breast cancer incidence rates <em>while taking income into account</em>. The approach I’m thinking of is rather simple operationally, but requires some thought to come up with.</li>
+<li>A map of that gives a sense of census tracts with high and low breast cancer incidence rates <em>while taking income into account</em>. The approach I’m thinking of is rather simple mathematically, but requires some thought to come up with.</li>
 </ul>
 <p>Notes:</p>
 <ul>
@@ -95,17 +95,17 @@ img {
 <p>Download the results of the 2000 election from the <a href="http://www.american.edu/spa/ccps/Data-Sets.cfm">School of Public Affairs at American University in DC</a> and create two maps involving only the lower 48 states that show:</p>
 <ul>
 <li>The proportion of people who voted for Bush at a <strong>state</strong> level</li>
-<li>The proportion of people who voted for Bush at a <strong>census tract</strong> level</li>
+<li>The proportion of people who voted for Bush at a <strong>county</strong> level</li>
 </ul>
 <p>where</p>
 <ul>
-<li>Census tracts are filled with red when they tend to favor Bush</li>
-<li>Census tracts are filled with blue when they tend to not favor Bush</li>
-<li>Census tracts are filled with blue when they tend to be split</li>
+<li>Counties are filled with red when they tend to favor Bush</li>
+<li>Counties tracts are filled with blue when they tend to not favor Bush</li>
+<li>Counties tracts are filled with purple when they tend to be split</li>
 </ul>
 <p>Then answer the following questions:</p>
 <ol style="list-style-type: decimal">
-<li>Comment on the biggest differences when changing from “census tract” resolution to “state” resolution.</li>
+<li>Comment on the biggest differences when changing from “county” resolution to “state” resolution.</li>
 <li>Comment on how the maps align with the idea of the <a href="http://en.wikipedia.org/wiki/The_Nine_Nations_of_North_America">Nine Nations of North America</a></li>
 <li>Which states exhibit the greatest <strong>within state heterogeneity</strong> in voting? Come up with a mathematical justification.</li>
 </ol>
@@ -126,7 +126,7 @@ clean.text &lt;- function(text){
 }
 clean.text(&quot;HeLLO wOrLd.&quot;)</code></pre>
 <pre><code>## [1] &quot;helloworld&quot;</code></pre>
-<pre class="r"><code># County map of US in 2010
+<pre class="r"><code># State and county map of US in 2010
 US.state &lt;- map_data(&quot;state&quot;) %&gt;% tbl_df()
 US.county &lt;- map_data(&quot;county&quot;) %&gt;% tbl_df()
 ggplot(US.county, aes(x=long, y=lat, group=group)) +

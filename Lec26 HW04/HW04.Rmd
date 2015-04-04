@@ -36,7 +36,7 @@ Consider the breast cancer from HW02.  Plot, using the `ww` shapefiles provided 
 Notes: 
 
 * You should use the solutions from HW02.
-* Do not import the shapefiles using the code from Lecture 20, but rather the `readOGR()` function from Lectures 23 and 25.  
+* Do not import the shapefiles using the code from Lecture 20, but rather the `readOGR()` func`tion from Lectures 23 and 25.  
 
 
 
@@ -47,17 +47,17 @@ Notes:
 Download the results of the 2000 election from the [School of Public Affairs at American University in DC](http://www.american.edu/spa/ccps/Data-Sets.cfm) and create two maps involving only the lower 48 states that show:
 
 * The proportion of people who voted for Bush at a **state** level
-* The proportion of people who voted for Bush at a **census tract** level
+* The proportion of people who voted for Bush at a **county** level
 
 where
 
-* Census tracts are filled with red when they tend to favor Bush
-* Census tracts are filled with blue when they tend to not favor Bush
-* Census tracts are filled with blue when they tend to be split
+* Counties are filled with red when they tend to favor Bush
+* Counties are filled with blue when they tend to not favor Bush
+* Counties are filled with purple when they tend to be split
 
 Then answer the following questions:
 
-1. Comment on the biggest differences when changing from "census tract" resolution to "state" resolution.
+1. Comment on the biggest differences when changing from "county" resolution to "state" resolution.
 2. Comment on how the maps align with the idea of the [Nine Nations of North America](http://en.wikipedia.org/wiki/The_Nine_Nations_of_North_America)
 3. Which states exhibit the greatest **within state heterogeneity** in voting?  Come up with a mathematical justification.
 

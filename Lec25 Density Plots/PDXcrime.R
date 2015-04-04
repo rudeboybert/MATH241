@@ -196,7 +196,7 @@ google.map <-
 # so we no longer need to use geom_polygon() as our base.  Furthermore, we can
 # remove the theme_bw()
 ggmap(google.map) +
-  #geom_path(data=PDX.map, aes(x=long, y=lat, group=group), col="black", size=0.5) +
+  geom_path(data=PDX.map, aes(x=long, y=lat, group=group), col="black", size=0.5) +
   coord_map() +
   xlab("longitude") + ylab("latitude") +
   geom_point(data=crime2012, aes(x=long, y=lat, group=group), alpha=0.05) +
