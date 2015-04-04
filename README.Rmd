@@ -24,7 +24,7 @@ suppressPackageStartupMessages(library(ggthemes))
 
 Credit to Rennie Meyers
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, fig.height=6}
 flights <- read.csv("./Lec06 R Markdown + HW01/flights.csv", stringsAsFactors = FALSE) %>%
   tbl_df() %>%
   mutate(date=as.Date(date))
