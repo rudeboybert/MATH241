@@ -1,0 +1,19 @@
+---
+title: "Project"
+author: "Albert Y. Kim"
+date: "April 3, 2015"
+output: html_document
+---
+
+* Awesome ideas!
+* For those of you making Shiny apps, be sure to fit in your name and contact info.
+* Unfortunately Rich is moving to Colby College.  Keep this date in mind.
+* If Rich or Kristin Bott were helpful to you this semester, please put in a good word.  Staff live in a very different world than faculty, and their promotion mechanism is very different.  A kind quick message to Marty Ringle [Reed Chief Information Officer](http://www.reed.edu/cis/about/staff/ringle.html) goes a long way.  Describe how Rich/Kristin helped you.  
+* Ask for all files from you.
+* 
+
+
+Marty Ringle
+
+
+
