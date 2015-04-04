@@ -1,10 +1,66 @@
 ---
-title: "Case Studies in Statistical Analysis"
+title: "Case Studies in Statistical Analysis AKA Data Science"
 output:
   html_document:
     keep_md: yes
 ---
 
-This is the GitHub repository for Reed College's Spring 2015 MATH 241 Case Studies in Statistical Analysis i.e. Data Science.  
+This is the GitHub repository for Reed College's Spring 2015 MATH 241 Case Studies in Statistical Analysis AKA Data Science.  
 
 For all slide presentations from this class, go to [RPubs](http://rpubs.com/rudeboybert/) and view all published material tagged: MATH 241.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(ggthemes))
+```
+                               
+
+
+## Examples
+
+### Flight data from Houston Airport (IAH)
+
+Credit to Rennie Meyers
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+flights <- read.csv("./Lec06 R Markdown + HW01/flights.csv", stringsAsFactors = FALSE) %>%
+  tbl_df() %>%
+  mutate(date=as.Date(date))
+weather <- read.csv("./Lec06 R Markdown + HW01/weather.csv", stringsAsFactors = FALSE) %>%
+  tbl_df() %>%
+  mutate(date=as.Date(date))
+planes <- read.csv("./Lec06 R Markdown + HW01/planes.csv", stringsAsFactors = FALSE) %>% 
+  tbl_df()
+airports <- read.csv("./Lec06 R Markdown + HW01/airports.csv", stringsAsFactors = FALSE) %>% 
+  tbl_df()
+states <- read.csv("./Lec06 R Markdown + HW01/states.csv", stringsAsFactors = FALSE) %>%
+  tbl_df()
+flight_delays <- flights %>% 
+  select(date, dep_delay) %>%
+  group_by(date)
+flight_delays30 <- filter(flight_delays, dep_delay > 30) %>%
+  count(date)
+
+ggplot(data=flight_delays30, aes(x=date, y=n)) + 
+  geom_line(stat="identity") +
+  xlab("Date") + 
+  ylab("Number of Flights Delayed longer than 30 minutes") +
+  ggtitle("Departure Delays from Houston over a Year") +
+  theme_economist() +
+  geom_smooth(col="blue")
+```
+
+### Sex breakdown for different jobs on San Francisco OkCupid
+
+Credit to Miguel Connor
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE, fig.width=10}
+profiles <- read.csv("./Lec09 OkCupid Data/profiles.csv", header=TRUE) %>% tbl_df()
+ggplot(profiles, aes(job, fill = sex)) + 
+  geom_bar(position = "dodge") + 
+  xlab("Job") +
+  ylab("Counts") +
+  theme(axis.text.x=element_text(angle=45, hjust=1)) 
+```
