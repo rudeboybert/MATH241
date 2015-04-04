@@ -24,7 +24,7 @@ suppressPackageStartupMessages(library(ggthemes))
 
 Credit to Rennie Meyers
 
-```{r, echo=FALSE, message=FALSE, cache=TRUE}
+```{r, echo=FALSE, message=FALSE}
 flights <- read.csv("./Lec06 R Markdown + HW01/flights.csv", stringsAsFactors = FALSE) %>%
   tbl_df() %>%
   mutate(date=as.Date(date))
@@ -56,7 +56,7 @@ ggplot(data=flight_delays30, aes(x=date, y=n)) +
 
 Credit to Miguel Connor
 
-```{r, echo=FALSE, message=FALSE, cache=TRUE, fig.width=10}
+```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=6}
 profiles <- read.csv("./Lec09 OkCupid Data/profiles.csv", header=TRUE) %>% tbl_df()
 ggplot(profiles, aes(job, fill = sex)) + 
   geom_bar(position = "dodge") + 
