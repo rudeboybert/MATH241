@@ -1,35 +1,38 @@
 library(twitteR)
 library(stringr)
 
-setup_twitter_oauth("Z81sQ1bW8LC4g3u0G4VbdHgAr", "ZPf9UKzEDmMQxXP9MZPdsd5oEQBNavQEfSmx63YqIhPinp9iWQ", "55667378-QPqom3aXZZ2PIMpEX6Hr8yEwslrUmVE2lxG0UdK8y", "DA6B1ut6lrd6UCsn1QP75fvc5vQcQ1W5H87gD7waJpaSB")
+# Copy over your info from the Twitter developer page and run this command.
+# Select 2 at the prompt.
+setup_twitter_oauth("API key", "API secret", "Access token", "Access token secret")
 
-# Select yes.
+# The tragedy in Kenya has been in the news of late.
+some_tweets <- searchTwitter("kenya", n=100, lang="en")
 
+# The function returns a "list", not a vector, with 100 tweets.  You access them
+# individually using [[]] and not [] like with vectors
+some_tweets
+some_tweets[[1]]
 
+# As well as Indiana has been in the news of late.
 some_tweets <- searchTwitter("indiana", n=100, lang="en")
 some_tweets
 
 # Check out help file:
 ?searchTwitter
 
-some_tweets <- searchTwitter("indiana", n=100, lang="en", geocode='37.781157,-122.39720,1mi')
-
+# We can pull out geo-coded tweets within a certain distance of a long/lat point
+some_tweets <- searchTwitter("indiana", n=100, lang="en", geocode='37.781157,-122.39720,100mi')
 some_tweets
 
-# Press tab after the dollar sign, and scroll to the bottom.
+# Press tab after the dollar sign to what info is stored for each list element.
 some_tweets[[1]]$
 
-# Example: Now a vector of text elements
-sapply(some_tweets,
-       function(x){
-         x$text
-       })
-sapply(some_tweets,
-       function(x){
-         x$screenName
-       })
+# For example, the following lines extract the text and the author
+some_tweets[[1]]$text
+some_tweets[[1]]$screenName
 
-
-# stringr vignette doesn't officially exist, only in development mode as
-# of 2015/04/03
-browseVignettes()
+# If we want to extract the text for each tweet, i.e. each list element, we use
+# the sapply() command.  i.e. it applies the function we define to each element
+# of the list.
+tweets.vector <- sapply(some_tweets, function(x){x$text})
+tweets.vector[1]
