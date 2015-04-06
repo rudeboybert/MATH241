@@ -2,7 +2,7 @@ library(twitteR)
 library(stringr)
 
 # Copy over your info from the Twitter developer page and run this command.
-# Select 2 at the prompt.
+# Select 1 at the prompt.
 setup_twitter_oauth("API key", "API secret", "Access token", "Access token secret")
 
 # The tragedy in Kenya has been in the news of late.
