@@ -8,7 +8,7 @@ date: Monday 2015/04/06
 Deviant Cartography
 ========================================================
 
-* Exhibit in Portland called [deviant cartography](http://deviantcartography.com/)
+* Exhibit in Portland called [Deviant Cartography](http://deviantcartography.com/)
 * Artist's [webpage](http://dougmccune.com/blog/)
 
 h/t to [@armalarm42](https://twitter.com/armalarm42)
