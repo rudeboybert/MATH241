@@ -139,37 +139,6 @@ aapl <- Quandl("GOOG/NASDAQ_AAPL") %>% tbl_df()
 aapl <- select(aapl,Date,Close)
 aapl$Date <- ymd(aapl$Date)
 
-ggplot(data=aapl, aes(x=Date,y=Close)) + geom_point() + geom_smooth(size=2) +
+ggplot(data=aapl, aes(x=Date,y=Close)) + geom_line() + geom_smooth(size=1.5, col="red") +
   xlab("Time") + ylab("Closing Price (USD)") + ggtitle("aapl")
-```
-
-
-
-
-### Apple Stock
-
-By Rennie Meyers
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-date.range2 <- interval(ymd("1980-01-31"), ymd("2010-02-28"))
-shrimpy <- Quandl("ODA/PSHRI_USD") 
-shrimpy1 <- shrimpy %>%
-  filter(Date %within% date.range2) %>%
-  mutate(year = year(Date))
-
-oceantemp <- Quandl("EPI/74") %>%
-  group_by(Year) %>%
-  filter(Year %within% date.range2) %>%
-  rename(Date = Year, Temperature.C = `Temperature (Degrees Celsius)`) %>%
-  mutate(year = year(Date))
-  
-oceanshrimp <- left_join(shrimpy1, oceantemp, by = "year")
-
-ggplot(data=oceanshrimp, aes(x=Date.x, y=Value, color=Temperature.C)) +
-      geom_point(stat="identity", na.rm=TRUE) +
-      theme_igray() +
-      ylab("USD per kG") +
-      xlab("Date") +
-      ggtitle("Shrimp Landing Value 1980-2010, given Ocean Temperature") +
-      geom_smooth(col="blue")
 ```
