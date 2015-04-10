@@ -5,22 +5,26 @@ date: April 10, 2015
 output: html_document
 ---
 
+
+### Basic Example
+
 If you create an account, you can obtain an authorization token to make more than 50 calls in one day at [https://www.quandl.com/account](https://www.quandl.com/account)
 
 ```{r, message=FALSE, warning=FALSE}
 library(Quandl)
 # Quandl.auth("ENTER_AUTH_CODE_HERE")
-Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 ```
 
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install the following packages:
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))
 suppressPackageStartupMessages(library(ggthemes))
 suppressPackageStartupMessages(library(scales))
 ```
+
+
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -33,15 +37,13 @@ plot(as.Date(US.fertility$Date), US.fertility$Value, type='l', xlab="Date",
 
 
 
-
-
 ### Comparing the Price of Gold to the Price of Bitcoin
 
 ```{r, message=FALSE, warning=FALSE}
 bitcoin <- Quandl("BAVERAGE/USD", start_date="2013-01-01")
-bitcoin %>% tbl_df()
+head(bitcoin)
 gold <- Quandl("BUNDESBANK/BBK01_WT5511", start_date="2013-01-01")
-gold %>% tbl_df()
+head(gold)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
