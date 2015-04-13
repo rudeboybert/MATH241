@@ -5,6 +5,9 @@ This is the GitHub repository for Reed College's Spring 2015 MATH 241 Case Studi
 For all slide presentations from this class, go to [RPubs](http://rpubs.com/rudeboybert/) and view all published material tagged: MATH 241.
 
 
+<iframe src="https://docs.google.com/spreadsheets/d/1HQPtHvPLQl_meSeJK372oXmkY7BVD4rCOamMSwTfaBI/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
 
                                
 
