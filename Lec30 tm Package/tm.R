@@ -16,14 +16,8 @@ library(wordcloud)
 #-------------------------------------------------------------------------------
 # Character Encodings
 #-------------------------------------------------------------------------------
-# Working with text data can be a real PITA, as there are many different
-# "character encodings", i.e. how characters are represented on a computer:
-# http://www.iana.org/assignments/character-sets/character-sets.xhtml
-# Converting between them can be a real nuissance as some characters don't
-# translate well, like accented letters, spaces, punctuation.
-
-# Let try to avoid some of these issues the best we can for now and revisit "The
-# Old Man and the Sea" from Project Gutenberg:
+# Let try to avoid some character encoding issues the best we can for now and
+# revisit "The Old Man and the Sea" from Project Gutenberg:
 # -Go to: http://www.gutenberg.ca/ebooks/hemingwaye-oldmanandthesea/hemingwaye-oldmanandthesea-00-t.txt
 # -Copy all:  COMMAND-A and then COMMAND-C on Macs (CTRL on windows)
 # -In RStudio -> Menu Bar -> File -> New File -> Text File, and paste the contents
@@ -120,30 +114,6 @@ wordcloud(old.man, scale=c(5,0.5), max.words=25, random.order=FALSE,
 # Check out the help file for the wordcloud() function to see what all these
 # parameters do
 ?wordcloud
-
-
-
-#-------------------------------------------------------------------------------
-# Note on colors
-#-------------------------------------------------------------------------------
-# To see all the possible color palette options in R, run the following code
-# after installing the RColorBrewer package:
-library(RColorBrewer)
-par(mar = c(0, 4, 0, 0))
-display.brewer.all()
-par(mar = c(0, 0, 0, 0))
-
-# The first cluster are "sequential" palettes i.e. indicate highs and lows
-# The next are qualitative i.e. they don't convey any real order
-# The last are diverging i.e. they diverge from some middle point
-
-# In this case, sequential is appropriate since we want to convey highs and
-# lows, but there is no divergence point
-
-# The following commands generate the HEX codes representing colors on the
-# color wheel:  http://simple.wikipedia.org/wiki/Color_wheel
-brewer.pal(8, "Purples")
-brewer.pal(8, "Set3")
 
 
 
