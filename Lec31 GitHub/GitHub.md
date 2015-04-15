@@ -24,10 +24,10 @@ If so, you can create private repositories as well.  The default is public (i.e.
 
 
 
-What is Version Control?
+How do you keep a history of file changes?
 ========================================================
 
-How do you keep a historical log of file changes?
+The **old** model
 
 ![alt text](filename.jpg)
 
@@ -35,22 +35,22 @@ This is easy when you have only one file.  What about 10? 100? 1000?
 
 
 
-What is Version Control?
+How do you keep a history of file changes?
 ========================================================
 
 The **version control** model
 
 ![alt text](version-control-edit-commit.png)
 
-You can rewind copies of an entire directory to past versions you know work.
+You can rewind copies of an **entire directory** to past versions you know work.
 
 
 
 Other Benefits
 ========================================================
 
-* Easy to set up **reproducible research** practices: repository should contain **all** files necessary to reproduce/replicate whatever task and set up for easy sharing.
-* Allows for multiple people to edit the same files (we won't focus on such collaboration)
+* Easy to set up **reproducible research** practices: repository should contain **all** files necessary to reproduce/replicate the task in an easy to share fashion.
+* Allows for multiple people to edit the same files (we won't focus on such collaboration, for you to learn on your own)
 * Syncs seamlessly with RStudio.
 
 
@@ -70,7 +70,7 @@ For Example: Myself
 
 * I use(d) it to sync files between my home and work computers so that I wouldn't have to carry a computer around.
 * I use it to promo work.  For example, earlier in April I got contacted by a prof at McAllester who said he liked my work and asked me to submit a proposal to receive a NSF summer grant.
-* [This class](https://github.com/rudeboybert/MATH241).  I don't post files on Moodle, but rather links to GitHub files, so if something changes, I don't need to use Moodle's awful interface to reupload files.
+* [This class](https://github.com/rudeboybert/MATH241).  I don't post files on Moodle, but rather links to GitHub files, so if something changes, I don't need to use Moodle's awful interface to update files.
 
 
 
@@ -78,10 +78,10 @@ For Example: You
 ========================================================
 
 * I am **requiring** that you submit your projects on your own public GitHub repository (unless your data is private).
-* All under organization [ReedCollegeMATH241](https://github.com/ReedCollegeMATH241)
-* A chance to promo your work!  Sell yourselves!
+* All in the organization [ReedCollegeMATH241](https://github.com/ReedCollegeMATH241)
+* A chance to promo your work!
 * Note there is a 50MB file size limit, so you might need to `.zip` certain files.
-* I want a crisp (nice, new, fresh, concise, not overly verbose, the tip of an iceberg) README page to your work.
+* I want a crisp README page to give a summary of your work.
 
 
 
@@ -163,7 +163,7 @@ Say you have the same repository set up on two machines and you want to sync the
 
 In the "Git" panel, click "Pull".
 
-**Note**:  If you are working between two machines and don't want to deal with overlapping changes to the same file, you have to make sure you resync at the end of every work session.  (I need to learn how to do that.)
+**Note**:  If you are working between two machines and don't want to deal with overlapping changes to the same file, you have to make sure you resync at the end of every work session.  Otherwise you'll have to **merge** the conflict. (I need to learn how to do that.)
 
 
 
@@ -181,10 +181,12 @@ Say you want to make your own copy of someone else's repository for your own use
 Directory Structure
 ========================================================
 
-* Go to the [README.Rmd](https://github.com/rudeboybert/MATH241/blob/master/README.Rmd) R Markdown file that created the homepage for this class.
-* Look in the code block under Rennie's name
+* Go to the [README.Rmd](https://github.com/rudeboybert/MATH241/blob/master/README.Rmd) R Markdown file that created the homepage for this class and look under Rennie's name
 * See how I load the `flights`, `weather`, etc CSV files.
-    + `read.csv("./Lec06 R Markdown + HW01/flights.csv", ...)`
-    + `read.csv("./Lec06 R Markdown + HW01/weather.csv", ...)`
-* We can specify the directory the CSV file is in (i.e. we don't have to manually change the working directory).  The `./` means "this directory" and is assumed to be the home directory of your project.  That way this code will run no matter where a user saves the project directory.
+
+```r
+read.csv("./Lec06 R Markdown + HW01/flights.csv", ...)
+```
+* We can specify the directory the CSV file is in (i.e. we don't have to manually change the working directory).  The `./` means "this directory" and is assumed to be the home directory of your project.
+* That way this code will run no matter where a user saves the project directory.
 
