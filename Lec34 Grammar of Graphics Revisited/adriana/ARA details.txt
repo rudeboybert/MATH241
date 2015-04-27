@@ -1,26 +1,65 @@
 Acetylene Reduction Assay:
-- Used to test and organism’s ability to fix nitrogen [create ammonia (NH3) from nitrogen gas (N2)]
-- A quantitative measure of ethylene gas (C2H4) using gas chromatography after an initial addition of acetylene gas (C2H2)
+- Used to test and organism’s ability to fix nitrogen [create ammonia (NH3)
+  from nitrogen gas (N2)]
+- A quantitative measure of ethylene gas (C2H4) using gas chromatography after
+  an initial addition of acetylene gas (C2H2)
 - Experiments are done in glass vials, sealed with rubber stoppers
 
 My experiments:
-Set: I had 4 different types of sample “sets” that I used (“M”,”NS”,”OS”,”NN”). These refer to the individual cultures (e.g. NN was transferred on 2/10 into liquid from a plate and grew for two week and then I measured it, while OS was transferred on 10/22 and grew for a few months and then I measured it)
+Set: I had 4 different types of sample “sets” that I used (“M”,”NS”,”OS”,”NN”).
+These refer to the individual cultures (e.g. NN was transferred on 2/10 into
+liquid from a plate and grew for two week and then I measured it, while OS was
+transferred on 10/22 and grew for a few months and then I measured it)
 
-Sample: Throughout the year I had 10 different samples (“A1”,”A2”…”E2”).  A1 from set NN, is the same type of sample and from the same initial plate (not the same exact bacterial growth) as A1 from NS, or OS. Set M had different samples (V1, V2…) and
+Sample: Throughout the year I had 10 different samples (“A1”,”A2”…”E2”).  A1
+from set NN, is the same type of sample and from the same initial plate (not the
+same exact bacterial growth) as A1 from NS, or OS. Set M had different samples
+(V1, V2…) and
 
-Reps: These all came from the same vial. The reps were 3 different syringes of gas that were drawn from the vial and measured.
+Reps: These all came from the same vial. The reps were 3 different syringes of
+gas that were drawn from the vial and measured.
 
-Time: Once acetylene was added cultures were left under light for x hrs. This number varied from 4-316 hrs. A different time period for a the same sample in the same set is actually the same vial, just measured at a later time.
+Time: Once acetylene was added cultures were left under light for x hrs. This
+number varied from 4-316 hrs. A different time period for a the same sample in
+the same set is actually the same vial, just measured at a later time.
 
-Date: The day I stood at the GC and measured gas samples. Sometimes the GC acted up, didn’t have a very consistent baseline. I would like to account for this, but I don’t want to minimize the deviation that may have naturally come up between the days of the experiment because different sets that were measured on different days.
+Date: The day I stood at the GC and measured gas samples. Sometimes the GC
+acted up, didn’t have a very consistent baseline. I would like to account for
+this, but I don’t want to minimize the deviation that may have naturally come up
+between the days of the experiment because different sets that were measured on
+different days.
 
-Controls: ETH=Ethylene standard, AV=A free-living bacteria that readily fixes nitrogen (positive control), EC= A free-living bacteria that definitely does not fix nitrogen. NEG=samples that only had liquid, no bacteria.
+Controls: ETH=Ethylene standard, AV=A free-living bacteria that readily fixes
+nitrogen (positive control), EC= A free-living bacteria that definitely does not
+fix nitrogen. NEG=samples that only had liquid, no bacteria.
 
-Potential error: Everything should have been prepared with sterile techniques, but I could have been clumsy at some point. EC has some ethylene hits in a set or two that it shouldn’t have. Alternatively, some syringes retain small bits of gas from previous samples, and so maybe an older syringe wasn’t sterilized well.
+Potential error: Everything should have been prepared with sterile techniques,
+but I could have been clumsy at some point. EC has some ethylene hits in a set
+or two that it shouldn’t have. Alternatively, some syringes retain small bits of
+gas from previous samples, and so maybe an older syringe wasn’t sterilized well.
 
-What I want to say: From my casual observations during the experiment I didn’t think there was any fixation in samples A1-E2. I expected fixation to occur in at least some of the samples from the M set (V1 and V2). After seeing my data I saw that D1 appeared to have some hits (as did EC though) and I’m just trying to confirm whether or not I should say it fixed any ethylene, or if I should just consider it noise from error. I want to have some numbers for this. I’m not dying to see a significant p-value for D1 being different from other samples, I just want to find good way to quantitatively compare D1 to other samples. The best model, in my mind, would show that the moles of ethylene from EC and neg was not significantly from 0 and the same time that the moles of D1 either was or wasn’t significantly different from 0 moles.
+What I want to say: From my casual observations during the experiment I didn’t
+think there was any fixation in samples A1-E2. I expected fixation to occur in
+at least some of the samples from the M set (V1 and V2). After seeing my data I
+saw that D1 appeared to have some hits (as did EC though) and I’m just trying to
+confirm whether or not I should say it fixed any ethylene, or if I should just
+consider it noise from error. I want to have some numbers for this. I’m not
+dying to see a significant p-value for D1 being different from other samples, I
+just want to find good way to quantitatively compare D1 to other samples. The
+best model, in my mind, would show that the moles of ethylene from EC and neg
+was not significantly from 0 and the same time that the moles of D1 either was
+or wasn’t significantly different from 0 moles.
 
-What I’ve done: I’m looking at all the data by Set, because in the end these were all different experiments (different environments, different cultures). I’ve been relying on the phia pkg to use a mixed-effects model. I came to this conclusion just by seeing example experiments, that seemed similar to mine. Though I’m not very confident in my understanding of the statistical theory behind any of these models to confirm that I am, or am not using the right one. I’ve run an anova on this model, but in the end I don’t think that’s exactly what I want, because I don’t want to identify one mean that differs from another mean, I really want to consider the sample level, one by one if the mean differs from 0, relative to the values for AV and ETH, which do differ from 0.
+What I’ve done: I’m looking at all the data by Set, because in the end these
+were all different experiments (different environments, different cultures).
+I’ve been relying on the phia pkg to use a mixed-effects model. I came to this
+conclusion just by seeing example experiments, that seemed similar to mine.
+Though I’m not very confident in my understanding of the statistical theory
+behind any of these models to confirm that I am, or am not using the right one.
+I’ve run an anova on this model, but in the end I don’t think that’s exactly
+what I want, because I don’t want to identify one mean that differs from another
+mean, I really want to consider the sample level, one by one if the mean differs
+from 0, relative to the values for AV and ETH, which do differ from 0.
 
 
 
