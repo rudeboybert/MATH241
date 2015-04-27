@@ -101,11 +101,13 @@ Go to my Twitter account and check-out my retweet of [@rhobott](https://twitter.
 
 
 
-Adriana Escobedo-Land
+Example
 ========================================================
 
-Let's consider her dataset.
+Adriana Escobedo-Land's thesis:
 
+* Let's consider her [problem](https://github.com/rudeboybert/MATH241/blob/master/Lec34%20Grammar%20of%20Graphics%20Revisited/adriana/ARA%20details.txt):
+* Analysis
 
 
 Some Nice Morals

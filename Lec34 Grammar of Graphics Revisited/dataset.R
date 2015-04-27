@@ -27,6 +27,11 @@ ggplot(dataset, aes(x=x, y=y)) +
 
 
 
+
+
+
+
+
 adriana <- read.csv("./adriana/adriana_data.csv", header=TRUE) %>% tbl_df()
 
 ggplot(adriana, aes(x=Sample, y=nmoles.mL)) +
