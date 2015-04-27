@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Misc</title>
+  <title>Grammar of Graphics Revisited</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -749,9 +749,20 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>Misc</h1><p>Albert Y. Kim<br/>Monday 2015&#x2F;04&#x2F;27</p>
+<h1>Grammar of Graphics Revisited</h1><p>Albert Y. Kim<br/>Monday 2015&#x2F;04&#x2F;27</p>
 
 <div class="slideContent" >
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Administrative Notes</h3>
+<div class="slideContent" >
+<ul>
+<li>Juniors and younger:  new course next year <a href="http://academic.reed.edu/math/courses.html">MATH 243</a> Statistical Learning.  This will be about machine learning on <a href="http://cdn.meme.am/instances/500x/47510205.jpg">big data</a>.</li>
+<li>Andrew Bray giving a <a href="http://academic.reed.edu/math/seminars/index.html">talk</a> this Thursday at 4:10 in Physics 123.</li>
+</ul>
 
 </div>
 
@@ -795,12 +806,20 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>(x,y) Position and Line</h3>
 <div class="slideContent" >
-<p>The (x,y) positions on the map are distortions of the <a href="http://www.creativedataprojects.com/wp-content/uploads/2011/06/real-tube-map-1.gif">actual locations</a>.  The Beck map:</p>
+<p>The (x,y) positions on the map are distortions of the actual locations.  Check out the geographically faithful <a href="http://www.creativedataprojects.com/wp-content/uploads/2011/06/real-tube-map-1.gif">map</a>.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>(x,y) Position and Line</h3>
+<div class="slideContent" >
+<p>The Beck map:</p>
 
 <ul>
 <li>Compresses geographically spread out suburban stations</li>
 <li>Expands out geographically compressed urban stations</li>
-<li><strong>Most importantly</strong>:  it only uses straight lines at 45 and 90 degree lines.</li>
+<li><strong>Most importantly</strong>:  it only uses straight lines at 45 and 90 degree angles.</li>
 </ul>
 
 </div>
@@ -818,6 +837,54 @@ hljs.initHighlightingOnLoad();
 </ul>
 
 <p>Brain Candy:  Cameron Booth&#39;s <a href="http://cdn.visualnews.com/wp-content/uploads/2012/02/USInterstatesasaSubwayMap_4f32a6dc9a6f0.jpg">Interstate subway map</a></p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Exercise</h3>
+<div class="slideContent" >
+<p>Open <code>dataset.csv</code> on Moodle or <a href="https://raw.githubusercontent.com/rudeboybert/MATH241/master/Lec34%20Grammar%20of%20Graphics%20Revisited/dataset.csv">GitHub</a>, load in R, and for each of the 4 levels of <code>group</code>:</p>
+
+<ul>
+<li>Compute the means and sd&#39;s for both x and y</li>
+<li>Compute the correlation coefficient between x and y using the cor() function</li>
+<li>Get the coefficients of the linear regression y~x.</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Anscombe&#x27;s Quartet</h3>
+<div class="slideContent" >
+<p>This dataset is known as <a href="http://en.wikipedia.org/wiki/Anscombe&#x27;s_quartet">Anscombe&#39;s Quartet</a> which has near identical summary statistics (means, standard deviations, correlation coefficients, and regression coefficient).</p>
+
+<p>They were developped to demonstrate both the importance of graphing data before analyzing it and the effect of outliers on statistical properties.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>PLOS Biology Paper</h3>
+<div class="slideContent" >
+<p>Go to my Twitter account and check-out my retweet of <a href="https://twitter.com/RhoBott">@rhobott</a> of a <a href="https://twitter.com/RhoBott/status/591283297365327872">PLOS Biology paper</a>.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Some Nice Morals</h3>
+<div class="slideContent" >
+<ul>
+<li><a href="https://twitter.com/kevin_c_chen/status/462254750109802496">Don&#39;t fear simplicity</a></li>
+<li>It&#39;s a question of tools
+
+<ul>
+<li>You can&#39;t use a water bottle to extinguish a forest fire.</li>
+<li>You don&#39;t need a fire hydrant to extinguish a candle.</li>
+</ul></li>
+</ul>
 
 </div>
 

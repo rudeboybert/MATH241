@@ -5,6 +5,14 @@ date: Monday 2015/04/27
 
 
 
+Administrative Notes
+========================================================
+
+* Juniors and younger:  new course next year [MATH 243](http://academic.reed.edu/math/courses.html) Statistical Learning.  This will be about machine learning on [big data](http://cdn.meme.am/instances/500x/47510205.jpg).
+* Andrew Bray giving a [talk](http://academic.reed.edu/math/seminars/index.html) this Thursday at 4:10 in Physics 123.
+
+
+
 London Underground Map
 ========================================================
 
@@ -37,11 +45,19 @@ Think in terms of **aesthetics**, as defined by [The Grammar of Graphics](http:/
 (x,y) Position and Line
 ========================================================
 
-The (x,y) positions on the map are distortions of the [actual locations](http://www.creativedataprojects.com/wp-content/uploads/2011/06/real-tube-map-1.gif).  The Beck map:
+The (x,y) positions on the map are distortions of the actual locations.  Check out the geographically faithful [map](http://www.creativedataprojects.com/wp-content/uploads/2011/06/real-tube-map-1.gif).
+
+
+
+
+(x,y) Position and Line
+========================================================
+
+The Beck map:
 
 * Compresses geographically spread out suburban stations
 * Expands out geographically compressed urban stations
-* **Most importantly**:  it only uses straight lines at 45 and 90 degree lines.
+* **Most importantly**:  it only uses straight lines at 45 and 90 degree angles.
 
 
 
@@ -55,5 +71,49 @@ Almost every subway map in the world follows this format.
 * [Moscow](http://thecityfix.com/files/2014/03/Moscow-metro-map.gif)
 
 Brain Candy:  Cameron Booth's [Interstate subway map](http://cdn.visualnews.com/wp-content/uploads/2012/02/USInterstatesasaSubwayMap_4f32a6dc9a6f0.jpg)
+
+
+
+Exercise
+========================================================
+
+Open `dataset.csv` on Moodle or [GitHub](https://raw.githubusercontent.com/rudeboybert/MATH241/master/Lec34%20Grammar%20of%20Graphics%20Revisited/dataset.csv), load in R, and for each of the 4 levels of `group`:
+
+* Compute the means and sd's for both x and y
+* Compute the correlation coefficient between x and y using the cor() function
+* Get the coefficients of the linear regression y~x.
+
+
+
+Anscombe's Quartet
+========================================================
+
+This dataset is known as [Anscombe's Quartet](http://en.wikipedia.org/wiki/Anscombe's_quartet) which has near identical summary statistics (means, standard deviations, correlation coefficients, and regression coefficient).
+
+They were developped to demonstrate both the importance of graphing data before analyzing it and the effect of outliers on statistical properties.
+
+
+
+PLOS Biology Paper
+========================================================
+
+Go to my Twitter account and check-out my retweet of [@rhobott](https://twitter.com/RhoBott) of a [PLOS Biology paper](https://twitter.com/RhoBott/status/591283297365327872).
+
+
+
+Adriana Escobedo-Land
+========================================================
+
+Let's consider her dataset.
+
+
+
+Some Nice Morals
+========================================================
+
+* [Don't fear simplicity](https://twitter.com/kevin_c_chen/status/462254750109802496)
+* It's a question of tools
+    + You can't use a water bottle to extinguish a forest fire.
+    + You don't need a fire hydrant to extinguish a candle.
 
 
