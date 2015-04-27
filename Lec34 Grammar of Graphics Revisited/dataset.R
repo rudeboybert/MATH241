@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2)
 
-anscombe <- read.csv("anscombe.csv", header = TRUE) %>% tbl_df()
+dataset <- read.csv("dataset.csv", header = TRUE) %>% tbl_df()
 
 # For each group, do the following:
 # -Compute the means and sd's for both x and y
