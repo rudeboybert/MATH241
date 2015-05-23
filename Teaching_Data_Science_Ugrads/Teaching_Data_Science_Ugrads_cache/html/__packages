@@ -1,0 +1,9 @@
+base
+ggplot2
+ggthemes
+dplyr
+knitr
+stringr
+lubridate
+maps
+mapproj
