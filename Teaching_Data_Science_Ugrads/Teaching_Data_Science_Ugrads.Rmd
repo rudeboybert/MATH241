@@ -7,6 +7,7 @@ output:
     incremental: false
     smaller: false
 ---
+
 <style>
 h2 { 
  color: #3399ff;		
@@ -26,30 +27,35 @@ This is my *note*.
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(ggthemes))
 suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(lubridate))
 suppressPackageStartupMessages(library(Quandl))
+suppressPackageStartupMessages(library(scales))
+suppressPackageStartupMessages(library(rgdal))
 Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 ```
 
 
+
 # Background
 
+<!--
 ## Myself
 
-<!--
 > - Undergrad in math & CS at McGill University
 > - PhD in statistics at the University of Washington
 > - Ads Metrics from June 2011 to March 2013
 > - Visiting position at Reed College from August 2013 until now
 > - Starting at Middlebury College this fall
--->
+
 > - <img src="figure/mcgill.png" height="75px"/>
 > - <img src="figure/uw.jpg" height="75px"/>
 > - <img src="figure/google.png" height="75px"/>
 > - <img src="figure/reed.png" height="75px"/>
 > - <img src="figure/middlebury.svg" height="75px"/>
+-->
 
 
 
@@ -92,25 +98,18 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 
 ## Statistics at Reed
 
-> - Statistics is within the math department.
+> - Statistics within the math department.
 > - Classes:
-    + Introductory statistics
-    + Year-long junior level probability & mathematical statistics sequence
-    + A few methods classes in other departments
-> - Until this semester, no applied stats class taught by statistician
-
-
-
-## New Class in Spring 2015
-
-> - MATH241: Case Studies in Statistical Analysis
-> - Should have called it "Introduction to Data Science" <center><img src="figure/data_science.png" height="300px"/></center>
+    + Intro stats
+    + Year-long junior level prob & math stats sequence
+    + Applied/methods classes in other departments
+> - New class: **MATH241 Case Studies in Statistical Analysis** <center><img src="figure/data_science.png" height="250px"/></center>
 
 
 
 ## The Bigger Picture
 
-Concern from the statistics community
+Concern from the stats community
 
 * Former ASA president Marie Davidson ["Aren't we data science?"](http://magazine.amstat.org/blog/2013/07/01/datascience/)
 * Former IMS president Bin Yu ["Let us own data science"](http://bulletin.imstat.org/2014/10/ims-presidential-address-let-us-own-data-science/)
@@ -140,17 +139,15 @@ Former Googler Rachel Schutt taught a similar Data Science class course at Colum
 
 ### Prereqs
 
-Only intro stats (know what a standard error and regression are) and some exposure to R
+Only intro stats and some exposure to R
 
 ### Syllabus
 
-> - 6-7 biweekly mini-reports
-    + varying degree of open-endedness
-    + submitted in R Markdown to encourage **reproducible research**
-    + Large amount of feedback from me
-> - Term project: both report and 20 min oral presentation
-> - In-class participation
-
+* 5 biweekly mini-reports
+    + submitted in R Markdown: **reproducible research**
+    + large amount of feedback from me
+* Term project: both report and 20 min oral
+* In-class participation
 
 
 
@@ -233,17 +230,18 @@ ASA's [GAISE Reports](http://www.amstat.org/education/gaise/)
 > - Key: Forget Base R
 > - How? The Hadleyverse. <center><img src="figure/hadley.png" height="300px"/></center>
 > - In particular
-    + `dplyr` package for data wrangling
+    + `dplyr` package for data wrangling/manipulation
     + `ggplot2` package for data visualization
 
 
 
+<!--
 ## Data Frame
 
 We set the restriction that all our data exists in a matrix called a **data frame**, which we say has the "tidy" property:
 
 ![alt text](figure/tidy.png)
-
+-->
 
 
 
@@ -251,16 +249,18 @@ We set the restriction that all our data exists in a matrix called a **data fram
 
 Most data manipulations can be achieved by the following **verbs** on a "tidy" data:
 
-> 1. **`filter`**: keep rows matching criteria
-> 2. **`summarise`**: reduce variables to values
-> 3. **`mutate`**: add new variables
-> 4. **`arrange`**: reorder rows
-> 5. **`select`**: pick columns by name
-> 6. **`join`**: join two data frames
-> 7. **`group_by`**: group subsets of observations together
+1. **`filter`**: keep observations matching criteria
+2. **`summarise`**: reduce variables to values
+3. **`mutate`**: add new variables
+4. **`arrange`**: reorder rows
+5. **`select`**: pick columns by name
+6. **`join`**: join two data sets
+7. **`group_by`**: group subsets of observations together
+
+> - Moral: No matrix indexing or for loops
 
 
-
+<!--
 ## dplyr Piping
 
 The pipe `%>%` command, pronounced "_then_". 
@@ -273,19 +273,23 @@ For example: say you want to apply functions `h()` and `g()` and then `f()` on d
 
 
 ## Example
-
-
-
-
-## ggplot2: the Grammar of Graphics
-
-<center><img src="figure/graphics.jpg" height="400px"/></center>
+-->
 
 
 
 ## ggplot2: the Grammar of Graphics
 
-A statistical graphic consists of a mapping of variables in **data** to **aesthetic** attributes of **geometric objects** that we can observe.
+<center>
+<img src="figure/graphics.jpg" height="400px"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="figure/ggplot2.jpg" height="400px"/>
+</center>
+
+
+
+## ggplot2: the Grammar of Graphics
+
+A statistical graphic consists of a mapping of **data** variables to **aesthetic** attributes of **geometric objects** that we can observe.
 
 `ggplot2` allows us to construct graphics in a modular fashion by specifying these components.
 
@@ -319,7 +323,7 @@ temperature | (x,y) position | lines
 
 # Results
 
-## HW 1: Houston Flight Data
+## Dataset: Houston Flights
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 flights <- 
@@ -341,18 +345,16 @@ states <-
   tbl_df()
 ```
 
-Dataset consisting of all `r formatC(nrow(flights), format="d", big.mark=',')` flights domestic flights leaving Houston airport (IAH) in 2011.  Four data frames:
+Domestic flights leaving Houston airport (IAH) in 2011.  Four data sets:
 
-* `flights`:  flight info
+* `flights`:  info on all `r formatC(nrow(flights), format="d", big.mark=',')` flights
 * `weather`:  hourly weather info
 * `planes`:  information on all `r nrow(planes)` airplanes
-* `airports`:  destination airport information
+* `airports`:  information on all `r nrow(airports)` destination airports
 
 
 
-## HW 1: Delayed Flights
-
-Rennie Meyers
+## Delayed Flights
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 flight_delays <- flights %>% 
@@ -372,9 +374,7 @@ ggplot(data=flight_delays30, aes(x=date, y=n)) +
 
 
 
-## HW 1: Age of Airplanes
-
-Will Jones
+## Age of Airplanes
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 airline_plane_ages <-
@@ -394,7 +394,8 @@ ggplot(airline_plane_ages, aes(x = reorder(carrier, age, FUN=median), y = age)) 
 
 
 
-## HW 1: Destination Cities
+<!--
+## HW 1: Destination States
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 SW.flights <- filter(flights, carrier=="WN") %>% 
@@ -415,10 +416,11 @@ ggplot(data=SW.flights, aes(long, lat, group = group)) +
   ggtitle("SW Flights") +
   coord_map()
 ```
+-->
 
 
 
-## HW 2: OkCupid Data
+## Dataset: OkCupid Data
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 profiles <- 
@@ -436,28 +438,44 @@ profiles <- profiles %>%
     )
 ```
 
-Sample of 10% of [San Francisco OkCupid users](https://github.com/rudeboybert/JSE_OkCupid)
-in June 2012 ($n=`r nrow(profiles)`$).  `r round(100*mean(profiles$is.female), 1)`% of the population was female.  
+> - Sample of 10% of [San Francisco OkCupid users](https://github.com/rudeboybert/JSE_OkCupid)
+in June 2012 ($n=`r nrow(profiles)`$)
+> - `r round(100*mean(profiles$is.female), 1)`% of the sample was female  
+> - Use logistic regression to predict gender
+> - Overfitting, out-of-sample prediction, cross-validation
 
-Goal was to use logistic regression to predict gender.
 
 
-
-## HW 2: Listed Job
-
-Miguel Connor
+## Height
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-ggplot(profiles, aes(job, fill = sex)) + 
-  geom_bar(position = "dodge") + 
-  xlab("Job") +
-  ylab("Counts") +
-  theme(axis.text.x=element_text(angle=45, hjust=1)) 
+profiles <- mutate(profiles, is.female = ifelse(sex=="f", 1, 0))
+base.plot <- ggplot(data=profiles, aes(x=height, y=is.female)) +
+  scale_y_continuous(breaks=0:1) +
+  theme(panel.grid.minor.y = element_blank()) +
+  xlab("Height in inches") +
+  ylab("Is female?")
+#
+linear.model <- lm(is.female ~ height, data=profiles)
+b1 <- coef(linear.model)
+#
+logistic.model <- glm(is.female ~ height, family=binomial, data=profiles)
+b2 <- coefficients(logistic.model)
+#
+inverse.logit <- function(x, b){
+  linear.equation <- b[1] + b[2]*x
+  1/(1+exp(-linear.equation))
+}
+base.plot + geom_jitter(position = position_jitter(width = .2, height=.2)) +
+  geom_abline(intercept=b1[1], slope=b1[2], col="red", size=2) +
+  stat_function(fun = inverse.logit, args=list(b=b2), color="blue", size=2)
 ```
 
 
 
-## HW 2: Self-Referenced Body Type
+## Self-Referenced Body Type
+
+*Best predictors have distinct differences (in gender) in large segments of the population.*
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 ggplot(profiles, aes(body_type, fill = sex)) + 
@@ -469,71 +487,326 @@ ggplot(profiles, aes(body_type, fill = sex)) +
 
 
 
+## Dataset: Reed Jukebox
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+jukebox <- read.csv("../Lec18 HW03/jukebox.csv", header=TRUE) %>% tbl_df()
+```
+
+All `r formatC(nrow(jukebox), format="d", big.mark=',')` songs played on the Reed poolhall room jukebox from 2003-2009. 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+slice(jukebox, 1110:1112) %>% kable()
+```
+
+
+
+## Importance of EDA
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+jukebox <- jukebox %>%
+  mutate(
+    date_time = parse_date_time(date_time, "%b %d %H%M%S %Y")
+    )
+
+jukebox %>% 
+  mutate(hour=hour(date_time)) %>%
+  group_by(hour) %>%
+  summarise(count=n()) %>%
+  ggplot(data=., aes(x=hour, y=count)) + geom_bar(stat="identity") +
+  xlab("Hour of day") + ylab("Number of songs played")
+```
+
+
+
+## Importance of EDA
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+jukebox <- jukebox %>% 
+  mutate(
+    date_time = with_tz(date_time, tz = "America/Los_Angeles"),
+    week = ceiling_date(date_time, "week"),
+    month = ceiling_date(date_time, "month")
+  )
+
+jukebox %>%
+  mutate(hour=hour(date_time)) %>%
+  group_by(hour) %>%
+  summarise(count=n()) %>%
+  ggplot(data=., aes(x=hour, y=count)) + geom_bar(stat="identity") +
+  xlab("Hour of day") + ylab("Number of songs played")
+```
+
+
+
+## Artist Popularity
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+artists <- c("Eminem", "Talking Heads", "Girl Talk")
+# We use the %in% command
+pop.comparison <- filter(jukebox, artist %in% artists) %>%
+  group_by(month, artist) %>%
+  summarise(count=n())
+# We make the actual time series a little fainter
+ggplot(data=pop.comparison, aes(x=month, y=count, col=artist)) + 
+  geom_line(alpha=0.5) + 
+  xlab("") + ylab("Number of Times Played per Month") +
+  geom_smooth(se=FALSE, size=1.25)
+```
+
+
+
+## Time Series
+
+[quandl.com](https://www.quandl.com/) has a great R interface
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Get bitcoin differences
+bitcoin <- Quandl("BAVERAGE/USD", start_date="2013-01-01") %>% 
+  tbl_df() %>% 
+  mutate(Date=ymd(Date)) %>%
+  rename(price = `24h Average`) %>% 
+  select(Date, price) %>%
+  arrange(Date) %>% 
+  mutate(
+    lag.price = lag(price),
+    rel.diff = (price-lag.price)/lag.price,
+    type = "Bitcoin"
+    ) %>%
+  select(Date, rel.diff, type)
+
+# Get gold differences
+gold <- Quandl("BUNDESBANK/BBK01_WT5511", start_date="2013-01-01") %>% 
+  tbl_df() %>% 
+  mutate(Date=ymd(Date)) %>%
+  rename(price=Value) %>% 
+  arrange(Date) %>% 
+  mutate(
+    lag.price = lag(price),
+    rel.diff = (price-lag.price)/lag.price,
+    type = "Gold"
+    ) %>%
+  select(Date, rel.diff, type)
+
+# Combine the two since they have the same columns and plot
+combined <- bind_rows(bitcoin, gold)
+ggplot(data=combined, aes(x=Date, y=rel.diff, col=type)) + 
+  geom_line() + 
+  scale_y_continuous(labels = percent) + 
+  ylab("Day-Over-Day Relative % Change") + 
+  ggtitle("Volatility of Bitcoin and Gold Prices")
+```
+
+
+<!--
 ## HW 3: Time Series
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+bitcoin <- Quandl("BAVERAGE/USD", start_date="2013-01-01") %>% 
+  tbl_df() %>% 
+  mutate(Date=ymd(Date)) %>%
+  rename(price = `24h Average`) %>% 
+  select(Date, price) %>%
+  arrange(Date) %>%
+  mutate(
+    lag1 = lag(price, 1), lag2 = lag(price, 2), lag3 = lag(price, 3), 
+    lag4 = lag(price, 4), lag5 = lag(price, 5), lag6 = lag(price, 6),
+    lag7 = lag(price, 7),
+    sum.x = lag1 + lag2 + lag3 + lag4 + lag5 + lag6 + lag7,
+    sum.x2 = lag1^2 + lag2^2 + lag3^2 + lag4^2 + lag5^2 + lag6^2 + lag7^2,
+    s2 = (1/(7-1)) * (sum.x2- ((sum.x)^2)/7),
+    s = sqrt(s2),
+    type = "Bitcoin"
+    )
+gold <- Quandl("BUNDESBANK/BBK01_WT5511", start_date="2013-01-01") %>% 
+  tbl_df() %>% 
+  mutate(Date=ymd(Date)) %>%
+  rename(price=Value) %>% 
+  arrange(Date) %>%
+  mutate(
+    lag1 = lag(price, 1), lag2 = lag(price, 2), lag3 = lag(price, 3), 
+    lag4 = lag(price, 4), lag5 = lag(price, 5), lag6 = lag(price, 6),
+    lag7 = lag(price, 7),
+    sum.x = lag1 + lag2 + lag3 + lag4 + lag5 + lag6 + lag7,
+    sum.x2 = lag1^2 + lag2^2 + lag3^2 + lag4^2 + lag5^2 + lag6^2 + lag7^2,
+    s2 = (1/(7-1)) * (sum.x2- ((sum.x)^2)/7),
+    s = sqrt(s2),
+    type = "Gold"
+    )
+# Combine the two since they have the same column names
+combined <- bind_rows(bitcoin, gold)
+
+ggplot(data=combined, aes(x=Date, y=s)) + 
+  geom_line() +
+  facet_grid(.~type) + 
+  xlab("Date") + 
+  ylab("Rolling Standard Deviation") + 
+  ggtitle("Volatility as a Rolling Standard Deviation") + 
+  geom_smooth()
+```
+-->
 
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-ggplot(profiles, aes(body_type, fill = sex)) + 
-  geom_bar(position = "dodge") + 
-  theme(axis.text.x=element_text(angle=45, hjust=1)) +
-  xlab("Body Type") +
-  ylab("Count") 
+## Time Series
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+cheese <- Quandl("USDANASS/NASS_CHEESEPRODUCTIONMEASUREDINLB")
+milk <-  Quandl("USDANASS/NASS_MILKPRODUCTIONMEASUREDINLB")
+
+cheese.date <- interval(ymd(19241231), ymd(20131231))
+
+cheese <- filter(cheese, Date %within% cheese.date)%>%
+          mutate(type = "cheese")
+milk <- filter(milk, Date %within% cheese.date) %>%
+        mutate(type = "milk")
+
+milk.cheese <- bind_rows(milk, cheese)
+
+ggplot(data=milk.cheese, aes(x=Date, y=Value, color=type)) +
+  geom_line() +
+  theme_economist()+
+  theme(plot.title=element_text(size=10))+
+  scale_y_log10()+
+  xlab("Date") + ylab("Pounds (lbs) of Cheese and Milk Produced (log-scale)") +
+  ggtitle("Production of Cheese and Milk in the US from 1924 to 2013")
 ```
 
 
 
+## Maps
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
+breast <- 
+  read.csv("data/Space Time Surveillance Counts 11_05_09.txt", header=TRUE) %>% 
+  rename(FIPS = StateCoTractComb) %>% tbl_df() %>%
+  filter(SiteRecodeTxt == "Breast " & SexGrp == "Female") %>%
+  group_by(FIPS) %>%
+  summarize(cases=sum(CountOfintPatientIDNumber))
 
+# Import census data
+census <- read.csv("data/Kim_R10911893_SL140.csv", header=TRUE) %>% tbl_df() %>%
+  transmute(
+    FIPS = Geo_FIPS,
+    pop.female = SE_T005_003,
+    median.income = SE_T093_001/10000
+    )
 
+total <-
+  left_join(census, breast, by="FIPS") %>%
+  mutate(
+    incidence = cases/pop.female,
+    income.quintile = cut(median.income, 
+                          quantile(median.income, probs=seq(0, 1, 0.2)), 
+                          dig.lab=2, include.lowest=TRUE),
+    incidence = ifelse(!is.na(incidence), incidence, 0),
+    incidence.quintile = cut(incidence, 
+                             quantile(incidence, probs=seq(0, 1, 0.2)), 
+                             dig.lab=2, include.lowest=TRUE),
+    FIPS = as.character(FIPS)
+    )
 
+# Import Western Washington shapefile, convert to data frame, and merge 
+# with cancer/census data.  
+ww <- readOGR(dsn="./data/ww/", layer="ww", verbose=FALSE) %>%
+  fortify(region="FIPS") %>% 
+  tbl_df() %>%
+  inner_join(total, by = c("id"="FIPS"))
 
-
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-
+ggplot(data=ww, aes(x=long, y=lat, group = id, fill = incidence)) +
+  geom_polygon() +
+  geom_path(color="black", size=0.1) +
+  coord_map() +
+  theme_bw() + 
+  xlab("longitude") + ylab("latitude") +
+  scale_fill_continuous(low="white", high="deeppink3", name="Incidence") + 
+  ggtitle("Breast Cancer Incidence")
 ```
 
 
 
+## Maps
 
-## Final Project
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+clean.text <- function(text){
+  text <- gsub("[^[:alnum:]]", "", text)
+  text <- gsub(" ", "", text)
+  text <- tolower(text)
+  return(text)
+}
 
-
-[Shiny App](https://rachelgfox.shinyapps.io/Insect_Abundances/Insect_Abundances.Rmd)
-
-
-* Houston Flights data
-* OkCupid data
-* Reed jukebox data:  Talking Heads
-* Elections data
-* Quandl
-* Babynames datasets
-* Census data (I love FIPS codes!) joined with health data joined with shapefile data
-
-## Topics
-
-* Regressions, time series, spatial autocorrelation (show image), density plots (prostitution in Portland), text mining, sampling bias, First law of geography
-* Webscraping using the rvest package
-* GitHub and R Markdown for reproducibility
-* Good programming practice (Google style guide)
-* GitHub for promoting/sharing work
-* Dates with lubridate
-* String manipulation and basic regular expressions with stringr
+# State and county map of US in 2010
+US.state <- map_data("state") %>% tbl_df()
+US.county <- map_data("county") %>% tbl_df()
 
 
-## Examples:
+US.state <- US.state %>%
+  mutate(region=clean.text(region))
+US.county <- US.county %>%
+  mutate(
+    region=clean.text(region),
+    subregion=clean.text(subregion)
+  ) %>%
+  unite("county", c(region, subregion), sep="-", remove=FALSE)
 
-* Importance of exploratory data analysis
-    + Time zones of Reed Jukebox
-    + Erroneous join of counties in US
-* Miguel's quandl analysis
+# Load elections data, get county summaries, then state summaries
+elections.county <-
+  read.csv("../Lec26 HW04/COUNTY.csv", header=TRUE, stringsAsFactors=FALSE) %>%
+  tbl_df() %>%
+  mutate(
+    STATE=clean.text(STATE),
+    COUNTY=clean.text(COUNTY)
+    ) %>%
+  unite("county", c(STATE, COUNTY), sep="-", remove=FALSE) %>%
+  select(county, STATE, COUNTY, BUSH, GORE) %>%
+  mutate(
+    N = BUSH + GORE,
+    PBUSH = BUSH/N,
+    PGORE = GORE/N
+    )
+elections.state <- elections.county %>%
+  group_by(STATE) %>%
+  summarise(BUSH=sum(BUSH), GORE=sum(GORE), N=sum(N)) %>%
+    mutate(
+    PBUSH = BUSH/N,
+    PGORE = GORE/N
+    )
+
+# Join the maps with the election counts.
+US.county <- inner_join(US.county, elections.county, by="county")
+US.state <- inner_join(US.state, elections.state, by=c("region" = "STATE"))
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
+ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
+  geom_polygon() +
+  geom_path(col="black", size=0.05) +
+  geom_path(data=US.state, aes(x=long, y=lat, group=group), col="black", size=0.1) +
+  coord_map() +
+  scale_fill_gradient2(name="", low="blue", high="red", mid="white") +
+  ggtitle("2000 US Elections: Bush vs Gore")
+
+# ggplot(US.state, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
+#   geom_polygon() +
+#   geom_path(col="black", size=0.05) +
+#   coord_map() +
+#   scale_fill_gradient2(name="", low="blue", high="red", mid="white")
+```
+
+
+
+## Interactive Shiny Apps
+
+* [Portland Crime](https://rudeboybert.shinyapps.io/PDXCrime)
+* [Insect Abundance](https://rachelgfox.shinyapps.io/Insect_Abundances/Insect_Abundances.Rmd)
+
+
 
 ## Student Comments
 
-* One econ student who used to be STATA, is now building a Shiny app for his senior thesis.
-* One biology major, most useful class he's taken at Reed.
-* One biology major said if she took this class earlier in her career, it would have convinced her to be a Math major.
+* Econ junior: used to love STATA, now building a Shiny app for his senior thesis
+* Biology major: most useful class he's taken at Reed
+* Biology major: if she took this class earlier, it would have convinced her to be a Math major
+* Seniors: incorporated such tools in their thesis
 
 
 
@@ -550,7 +823,7 @@ ggplot(profiles, aes(body_type, fill = sex)) +
 
 > - Statistical topics:  More on dependent data, missing data, causal inference, and some machine learning
 > - Databases/SQL
-> - Ask better questions of the students
+> - Ask better questions
 > - Flipped-classroom
     + Lab exercises at home
     + Problem solving/debugging and discussion in class

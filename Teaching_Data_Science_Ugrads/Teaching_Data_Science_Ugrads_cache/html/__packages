@@ -7,3 +7,11 @@ stringr
 lubridate
 maps
 mapproj
+zoo
+xts
+Quandl
+scales
+sp
+rgdal
+maptools
+tidyr
