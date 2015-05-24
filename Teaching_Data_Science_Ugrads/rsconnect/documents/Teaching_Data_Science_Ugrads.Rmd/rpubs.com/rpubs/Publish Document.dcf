@@ -3,6 +3,5 @@ account: rpubs
 server: rpubs.com
 bundleId:
         https://api.rpubs.com/api/v1/document/82099/a290781d7ff043c2b09b81d32bd8477a
-url:
-        http://rpubs.com/publish/claim/82099/00ef43943e884eeabc0fa61c5666e1c9
-when: 1432438124.50861
+url: http://rpubs.com/rudeboybert/82099
+when: 1432438902.34897
