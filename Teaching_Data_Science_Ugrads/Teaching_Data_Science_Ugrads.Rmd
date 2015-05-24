@@ -67,7 +67,6 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 
 ## Reed College
 
-> - *Baby hipsters going to baby graduate school*
 > - Small (1400 students) undergraduate only liberal arts college
     + Smaller class sizes
     + Very motivated and quirky student body
@@ -845,7 +844,7 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 > - **Data visualization is a backdoor way to get students interested in statistics.**
 > - Prez from Season 4 of "The Wire":
-<center><img src="figure/prez.jpg" height="200px"/></center> *Trick them into thinking they're not learning and they do.*
+<center><img src="figure/Prez.png" height="300px"/></center>
 > - Students loved ggplot, maps, and Shiny apps
 
 
