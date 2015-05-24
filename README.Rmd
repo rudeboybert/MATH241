@@ -9,7 +9,7 @@ This is the GitHub repository for Reed College's Spring 2015 MATH 241 Case Studi
 
 * All slide presentations from this class can be found at [RPubs](http://rpubs.com/rudeboybert/) and is tagged: MATH 241.
 * The syllabus can be found at [here](https://docs.google.com/spreadsheets/d/1HQPtHvPLQl_meSeJK372oXmkY7BVD4rCOamMSwTfaBI/pubhtml?gid=0&single=true).
-
+* The summary presentation titled "Teaching Data Science to Undergrads: an ex-Googler’s Tales from the Trenches" can be found at [RPubs](http://rpubs.com/rudeboybert/Teaching_Data_Science_Ugrads).  The code to generate the slides can be found in the directory `Teaching_Data_Science_Ugrads`.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -66,3 +66,7 @@ ggplot(profiles, aes(job, fill = sex)) +
   ylab("Counts") +
   theme(axis.text.x=element_text(angle=45, hjust=1)) 
 ```
+
+### Sex breakdown for different jobs on San Francisco OkCupid
+
+

@@ -83,7 +83,7 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 ## Curriculum
 
 > - Not a vocational school 
-> - Among the schools with the highest proportion of students who do a PhD
+> - High proportion of students who continue to do a PhD
 > - All students must:
     + take a junior qualifying exam
     + write a senior thesis
@@ -98,12 +98,12 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 
 ## Statistics at Reed
 
-> - Statistics within the math department.
+> - Statistics within the math department
 > - Classes:
     + Intro stats
     + Year-long junior level prob & math stats sequence
     + Applied/methods classes in other departments
-> - New class: **MATH241 Case Studies in Statistical Analysis** <center><img src="figure/data_science.png" height="250px"/></center>
+> - New class: **MATH241 Case Studies in Statistical Analysis** <center><img src="figure/data_science.png" height="200px"/></center>
 
 
 
@@ -247,11 +247,11 @@ We set the restriction that all our data exists in a matrix called a **data fram
 
 ## dplyr Verbs
 
-Most data manipulations can be achieved by the following **verbs** on a "tidy" data:
+Data manipulation via the following **verbs** on tidy data:
 
 1. **`filter`**: keep observations matching criteria
-2. **`summarise`**: reduce variables to values
-3. **`mutate`**: add new variables
+2. **`summarise`**: reduce many values to one
+3. **`mutate`**: create new variables from existing ones
 4. **`arrange`**: reorder rows
 5. **`select`**: pick columns by name
 6. **`join`**: join two data sets
@@ -466,7 +466,7 @@ inverse.logit <- function(x, b){
   linear.equation <- b[1] + b[2]*x
   1/(1+exp(-linear.equation))
 }
-base.plot + geom_jitter(position = position_jitter(width = .2, height=.2)) +
+base.plot + geom_jitter(position = position_jitter(width = .2, height=.1)) +
   geom_abline(intercept=b1[1], slope=b1[2], col="red", size=2) +
   stat_function(fun = inverse.logit, args=list(b=b2), color="blue", size=2)
 ```
@@ -832,27 +832,21 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 ## Statistics' Image Problem
 
-> - Typical conversation
-    + Me (statistician): "Hi, my name is Albert. I'm a statistician."
+> - You hear this a lot:
+    + Statistician: "Hi, my name is X. I'm a statistician."
     + Other party:  "Statistics?  I hated that class."
-> - Atypical conversation
-    + Me (statistician): "Hi, my name is Albert. My work involves a lot of data visualization."
+> - You'll never hear this:
+    + Statistician: "Hi, my name is X. My work involves a lot of data visualization."
     + Other party:  "Data visualization?  I hate that stuff."
-
 
 
 
 ## Solution: Data Visualization
 
-**Data visualization is a backdoor way to get students interested in statistics.**
-
-
-
-## "Prez" from Season 4 of "The Wire"
-
-*Trick them into thinking they're not learning and they do.*
-
-<center><img src="figure/prez.jpg" height="400px"/></center>
+> - **Data visualization is a backdoor way to get students interested in statistics.**
+> - Prez from Season 4 of "The Wire":
+<center><img src="figure/prez.jpg" height="300px"/></center> *Trick them into thinking they're not learning and they do.*
+> - Students loved ggplot, maps, and Shiny app
 
 
 
@@ -860,11 +854,9 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 This is the only stats class many will take.
 
-> - Get them looking, manipulating, and visualizing data quick
+> - Get them looking at, manipulating, and visualizing data quick
 > - Better integration of lectures and labs
-> - Intro stats:  
-    + Boost data visualization
-    + Randomization based methods.  Tim Hesterberg's paper [What Teachers Should Know about the Bootstrap: Resampling in the Undergraduate Statistics Curriculum](http://arxiv.org/abs/1411.5279)
+> - Randomization based methods.  Tim Hesterberg's paper [What Teachers Should Know about the Bootstrap: Resampling in the Undergraduate Statistics Curriculum](http://arxiv.org/abs/1411.5279)
 
 
 
@@ -880,7 +872,7 @@ This is the only stats class many will take.
 > - Point-and-click vs command line.  
 > - Thinking algorithmically
 > - Debugging: help files and [Google](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)
-> - Like learning a language
+> - Not easy: like learning a language
 
 
 
@@ -895,10 +887,10 @@ This is the only stats class many will take.
 
 ## Take Home Messages
 
-> - A statistics class focused on the data
+> - A statistics class focused on the data first, methods second
 > - Rich Majerus wrote ["Why should students at a small liberal arts college learn R?"](http://blogs.reed.edu/ed-tech/2015/04/why-should-students-at-a-small-liberal-arts-college-learn-r/)
-    + He learned R using dplyr and ggplot, not base R.
-    + New tools like [Datacamp](https://www.datacamp.com/swirl-r-tutorial) are increasing: $$\frac{\mbox{Payoff from learning R}}{\mbox{Startup costs}}$$
+    + Learned R using dplyr and ggplot, not base R.
+    + New tools like [Datacamp](https://www.datacamp.com/swirl-r-tutorial) are increasing the ratio: $$\frac{\mbox{Payoff from learning R}}{\mbox{Startup costs}}$$
 > - Data visualization as a "backdoor entrance" for statistics
 > - Developing skills and intuition takes time.  At Reed classes are small: attention and feedback
 > - Interactivity boosts student interest  
@@ -912,9 +904,9 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 > - Look at your data ASAP.
 > - Don't thrash
     + Do your due diligence, but don't overdo.
-    + Seek expert advice!  
-> - "You actually don’t know what you are doing until after you have done it!"
-> - Do the most braindead thing first, take it end to end, then iterate and improve.
+    + Seek expert advice.
+> - "You actually don’t know what you are doing until after you have done it."
+> - Do the most braindead thing first, take it end to end, then iterate/improve.
 > - Fight perfectionistism: think of the marginal return of your efforts.
 
 
@@ -923,10 +915,8 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 
 ### Ressources
 
-In the repositories section of [github.com/rudeboybert](https://github.com/rudeboybert/repositories)
-
-* Slides for this talk: [Teaching Data Science Ugrads](https://github.com/rudeboybert/Teaching_Data_Science_Ugrads)
-* All the materials for the class: [MATH241](https://github.com/rudeboybert/MATH241)
+* Slides: 
+* Code for slides along with all material for this class [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
 
 <!--
 ### Thanks
