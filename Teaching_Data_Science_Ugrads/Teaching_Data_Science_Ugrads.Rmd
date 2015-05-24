@@ -833,11 +833,11 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 ## Statistics' Image Problem
 
 > - You hear this a lot:
-    + Statistician: "Hi, my name is X. I'm a statistician."
-    + Other party:  "Statistics?  I hated that class."
+    + Statistician: Hi, my name is X. I'm a statistician.
+    + Non-statistician:  Statistics?  I hated that class.
 > - You'll never hear this:
-    + Statistician: "Hi, my name is X. My work involves a lot of data visualization."
-    + Other party:  "Data visualization?  I hate that stuff."
+    + Statistician: Hi, my name is X. My work involves a lot of data visualization.
+    + Non-statistician:  Data visualization?  I hate that stuff.
 
 
 
@@ -845,8 +845,8 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 > - **Data visualization is a backdoor way to get students interested in statistics.**
 > - Prez from Season 4 of "The Wire":
-<center><img src="figure/prez.jpg" height="300px"/></center> *Trick them into thinking they're not learning and they do.*
-> - Students loved ggplot, maps, and Shiny app
+<center><img src="figure/prez.jpg" height="200px"/></center> *Trick them into thinking they're not learning and they do.*
+> - Students loved ggplot, maps, and Shiny apps
 
 
 
@@ -915,8 +915,8 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 
 ### Ressources
 
-* Slides: 
-* Code for slides along with all material for this class [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
+* Slides: [RPubs.com/rudeboybert](http://rpubs.com/rudeboybert/Teaching_Data_Science_Ugrads)
+* Code for slides and all material for this class [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
 
 <!--
 ### Thanks
