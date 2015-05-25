@@ -102,7 +102,8 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
     + Intro stats
     + Year-long junior level prob & math stats sequence
     + Applied/methods classes in other departments
-> - New class: **MATH241 Case Studies in Statistical Analysis** <center><img src="figure/data_science.png" height="200px"/></center>
+> - New class: **MATH241 Case Studies in Statistical Analysis**
+> - <center><img src="figure/data_science.png" height="200px"/></center>
 
 
 
