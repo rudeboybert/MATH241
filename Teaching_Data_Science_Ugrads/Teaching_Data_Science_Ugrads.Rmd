@@ -913,6 +913,7 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 
 ### Ressources
 
+* [@rudeboybert](https://twitter.com/rudeboybert)
 * Slides: [RPubs.com/rudeboybert](http://rpubs.com/rudeboybert/Teaching_Data_Science_Ugrads)
 * Code for slides and all material for this class [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
 
