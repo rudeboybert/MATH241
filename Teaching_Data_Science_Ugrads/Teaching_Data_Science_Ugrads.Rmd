@@ -74,7 +74,7 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 > - Established in 1908 because founder
     + Didn't care for sports
     + Despised social clubs
-> - Huge de-emphasis on grades
+<!-- > - Huge de-emphasis on grades-->
 > - High degree of interaction between departments
 
 
@@ -269,8 +269,6 @@ For example: say you want to apply functions `h()` and `g()` and then `f()` on d
 
 * `f(g(h(x)))` OR
 * `h(x) %>% g() %>% f()`
-
-
 
 ## Example
 -->
@@ -803,10 +801,10 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 ## Student Comments
 
-* Econ junior: used to love STATA, now building a Shiny app for his senior thesis
-* Biology major: most useful class he's taken at Reed
-* Biology major: if she took this class earlier, it would have convinced her to be a Math major
+<!--* Biology major: most useful class he's taken at Reed-->
+* Econ junior: STATA user, now building a Shiny app for his senior thesis
 * Seniors: incorporated such tools in their thesis
+* Biology major: if she took this class earlier, it would have convinced her to be a Math major
 
 
 
@@ -833,10 +831,11 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 ## Statistics' Image Problem
 
 > - You hear this a lot:
-    + Statistician: Hi, my name is X. I'm a statistician.
+    + Statistician: Hi, I'm a statistician.
     + Non-statistician:  Statistics?  I hated that class.
+    
 > - You'll never hear this:
-    + Statistician: Hi, my name is X. My work involves a lot of data visualization.
+    + Statistician: Hi, my work involves a lot of data visualization.
     + Non-statistician:  Data visualization?  I hate that stuff.
 
 
@@ -845,7 +844,7 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 > - **Data visualization is a backdoor way to get students interested in statistics.**
 > - Prez from Season 4 of "The Wire":
-<center><img src="figure/Prez.png" height="300px"/></center>
+> - <center><img src="figure/Prez.png" height="300px"/></center>
 > - Students loved ggplot, maps, and Shiny apps
 
 
@@ -891,7 +890,7 @@ This is the only stats class many will take.
 > - Rich Majerus wrote ["Why should students at a small liberal arts college learn R?"](http://blogs.reed.edu/ed-tech/2015/04/why-should-students-at-a-small-liberal-arts-college-learn-r/)
     + Learned R using dplyr and ggplot, not base R.
     + New tools like [Datacamp](https://www.datacamp.com/swirl-r-tutorial) are increasing the ratio: $$\frac{\mbox{Payoff from learning R}}{\mbox{Startup costs}}$$
-> - Data visualization as a "backdoor entrance" for statistics
+> - Data visualization as a "gateway drug" for statistics
 > - Developing skills and intuition takes time.  At Reed classes are small: attention and feedback
 > - Interactivity boosts student interest  
 
@@ -905,10 +904,9 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 > - Don't thrash
     + Do your due diligence, but don't overdo.
     + Seek expert advice.
-> - "You actually don’t know what you are doing until after you have done it."
 > - Do the most braindead thing first, take it end to end, then iterate/improve.
-> - Fight perfectionistism: think of the marginal return of your efforts.
-
+> - "You actually don’t know what you are doing until after you have done it."
+> - Think of the marginal return of your efforts.
 
 
 ## Conclusion
