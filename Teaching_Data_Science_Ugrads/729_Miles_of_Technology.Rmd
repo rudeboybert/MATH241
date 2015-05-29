@@ -39,24 +39,17 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 
 
 
-# Background
+## Correction
+
+Teaching data science to undergrads: an ex-~~Googler’s~~ **Reed professor's** tales from the trenches.
+
+
 
 ## HUM 110
 
 All Reed freshman are required to take Humanities 110.
 
 <center><img src="figure/HUM110.jpg" height="400px"/></center>
-
-
-
-## Statistics at Reed
-
-> - Statistics within the math department
-> - Classes:
-    + Intro stats
-    + Year-long junior level prob & math stats sequence
-    + Applied/methods classes in other departments
-> - New class: **MATH241 Case Studies in Statistical Analysis**
 
 
 
@@ -79,7 +72,7 @@ All Reed freshman are required to take Humanities 110.
 
 ### Prereqs
 
-Only intro stats and some exposure to R
+Only intro stats and some exposure to the statistical software language R. No programming experience necessary.
 
 ### Syllabus
 
@@ -89,13 +82,13 @@ Only intro stats and some exposure to R
 
 
 
-## Classroom
+## Classroom:  ETC 208
 
 <center><img src="figure/ETC208_3.jpg" height="450px"/></center>
 
 
 
-## Classroom
+## Classroom:  ETC 208
 
 <center><img src="figure/ETC208_2.jpg" height="450px"/></center>
 
@@ -133,7 +126,6 @@ counts %>% kable()
 > - Real data i.e. messy & needing cleaning, from potentially disparate sources
 > - Bottom-up:  Let questions/data motivate the statistical methodology, rather than vice-versa
 > - Discussions in class
-> - Focus on the entire analysis pipeline: article in [Nature](http://www.nature.com/news/statistics-p-values-are-just-the-tip-of-the-iceberg-1.17412)
 > - Lean on R heavily
 
 
@@ -163,36 +155,17 @@ counts %>% kable()
 
 
 
-<!--
-## dplyr Verbs
-
-Data manipulation via the following **verbs** on tidy data:
-
-1. **`filter`**: keep observations matching criteria
-2. **`summarise`**: reduce many values to one
-3. **`mutate`**: create new variables from existing ones
-4. **`arrange`**: reorder rows
-5. **`select`**: pick columns by name
-6. **`join`**: join two data sets
-7. **`group_by`**: group subsets of observations together
-
-> - Moral: No matrix indexing or for loops
--->
-
-
 
 ## dplyr Package
 
 Features
 
 > - Data manipulation is performed using **verbs**
-> - The pipe `%>%` command. For example: say you want to apply functions `h()` then `g()` then `f()` on data `x`.  You can do
-    + `f(g(h(x)))` OR
-    + `h(x) %>% g() %>% f()`
+> - The pipe `%>%` command, pronounced "THEN"
 
 
 
-## Example: Houston Flights
+## Example: Houston Flights Dataset
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 # Load flights data
@@ -217,8 +190,8 @@ states <-
 
 Info on all domestic flights leaving Houston (IAH) in 2011:
 
-* `flights`:  info on all `r formatC(nrow(flights), format="d", big.mark=',')` flights
-* `planes`:  information on all `r nrow(planes)` airplanes
+* `flights`:  info on `r formatC(nrow(flights), format="d", big.mark=',')` flights
+* `planes`:  info on `r nrow(planes)` airplanes
 
 What are the top 5 carriers using the oldest planes (averaged over all flights)?
 
@@ -298,13 +271,14 @@ kable(airline_plane_ages)
 
 ## ggplot2: the Grammar of Graphics
 
-A statistical graphic consists of a mapping of **data** variables to **aesthetic** attributes of **geometric objects** that we can observe.
-
-`ggplot2` allows us to construct graphics in a modular fashion by specifying these components.
+> -A statistical graphic consists of a mapping of **data** variables to **aesthetic** attributes of **geometric objects** that we can observe.
+>- `ggplot2` allows us to construct graphics in a modular fashion by specifying the elements of the grammar.
 
 
 
 ## ggplot2: the Grammar of Graphics
+
+Minard's map of Napoleon's Russian campaign of 1812:
 
 <center><img src="figure/Minard.png" width="700px"/></center>
 
@@ -312,14 +286,14 @@ A statistical graphic consists of a mapping of **data** variables to **aesthetic
 
 ## ggplot2: the Grammar of Graphics
 
-Data (Variable)  | Aesthetic | Geometric Object
+Data (Variable)  | Geometric Object | Aesthetic Attribute of Geo Obj
 ------------- | ------------- | -------------
-longitude | x position | points
-latitude | y position | points
-army size | size = width | bars
-army direction | color = brown or black | bars
-date | (x,y) position | text
-temperature | (x,y) position | lines
+longitude | points | x position 
+latitude | points | y position 
+army size | bars | width
+army direction | bars | color
+date | text | (x,y) position 
+temperature | lines | (x,y) position 
 
 
 
@@ -413,7 +387,7 @@ ggplot(profiles, aes(job, fill = sex)) +
 
 ## Self-Referenced Body Type
 
-*Best predictors have distinct differences (in gender) in large segments of the population.*
+<!--*Best predictors have distinct differences (in gender) in large segments of the population.*-->
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 ggplot(profiles, aes(body_type, fill = sex)) + 
@@ -638,6 +612,8 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 ## Interactive Shiny Apps
 
+"A web application framework for R. Turn your analyses into interactive web applications. No HTML, CSS, or JavaScript knowledge required."
+
 * [Baby Name Popularity in US](https://rudeboybert.shinyapps.io/BabyNames/babynames.Rmd)
 * [Portland Crime](https://rudeboybert.shinyapps.io/PDXCrime)
 * [Insect Abundance](https://rachelgfox.shinyapps.io/Insect_Abundances/Insect_Abundances.Rmd)
@@ -678,8 +654,8 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 This is the only stats class many will take.
 
 > - Get them looking at, manipulating, and visualizing data QUICK
-> - Better integration of lectures and labs
-> - Flipped-classroom
+> - Better integration of lectures and labs: technology
+> - [Flipped-classroom model](http://web.grinnell.edu/individuals/kuipers/stat2labs/flipped.html)
     + Lab exercises at home
     + Problem solving/debugging and discussion in class
 
@@ -711,16 +687,16 @@ This is the only stats class many will take.
 ## Take Home Messages
 
 > - A class focused on the data first, methods second, using only open-source tools.
+> - Interactivity boosts student interest
 > - Rich Majerus wrote ["Why should students at a small liberal arts college learn R?"](http://blogs.reed.edu/ed-tech/2015/04/why-should-students-at-a-small-liberal-arts-college-learn-r/)
 > - New tools like [Datacamp](https://www.datacamp.com/swirl-r-tutorial) are increasing the ratio: $$\frac{\mbox{Payoff from learning R}}{\mbox{Startup costs}}$$
 > - Data visualization is a **gateway drug** for statistics
 > - Developing skills and intuition takes time.  Instructor attention and feedback are crucial.
-> - Interactivity boosts student interest  
 
 
 
 ## Resources
 
-* Presentation slides: [RPubs.com/rudeboybert](http://rpubs.com/rudeboybert/SevenTwentyNine_Miles)
+* Presentation slides: [rpubs.com/rudeboybert/SevenTwentyNine_Miles](http://rpubs.com/rudeboybert/SevenTwentyNine_Miles)
 * Code and (non-private) data for class: [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
-* 17 out of 18 final projects [data & code](https://github.com/ReedCollegeMATH241)
+* 17 out of 18 final projects data & code [https://github.com/ReedCollegeMATH241](https://github.com/ReedCollegeMATH241)
