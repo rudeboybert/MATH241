@@ -1,6 +1,6 @@
 ---
 title: "Teaching Data Science to Undergrads"
-author: "Albert Y. Kim"
+author: "Albert Y. Kim @rudeboybert"
 date: "May 29, 2015"
 output: 
   ioslides_presentation: 
@@ -16,12 +16,6 @@ h3 {
  color: #3399ff;		
 }
 </style>
-
-<div class="notes">
-This is my *note*.
-- It can contain markdown
-- like this list
-</div>
 
 ```{r, echo=FALSE}
 suppressPackageStartupMessages(library(ggplot2))
@@ -39,11 +33,7 @@ Quandl.auth("izVwTt9m5VoEe7TsEzdr")
 
 
 
-## Correction
-
-Teaching data science to undergrads: an ex-~~Googler’s~~ **Reed professor's** tales from the trenches.
-
-
+# Class Description
 
 ## HUM 110
 
@@ -53,32 +43,11 @@ All Reed freshman are required to take Humanities 110.
 
 
 
-## Data Science
+## MATH241: Data Science
 
-<center><img src="figure/data_science.png" height="450px"/></center>
+<center><img src="figure/data_science.png" height="350px"/></center>
 
-
-
-
-
-
-
-
-
-
-# Class Description
-
-## Class Structure
-
-### Prereqs
-
-Only intro stats and some exposure to the statistical software language R. No programming experience necessary.
-
-### Syllabus
-
-* 5 biweekly mini-reports submitted in R Markdown: **reproducible research**
-* Term project: both report and 20 min oral
-* In-class participation
+Only prereq was intro stats. No serious programming experience necessary.
 
 
 
@@ -126,7 +95,7 @@ counts %>% kable()
 > - Real data i.e. messy & needing cleaning, from potentially disparate sources
 > - Bottom-up:  Let questions/data motivate the statistical methodology, rather than vice-versa
 > - Discussions in class
-> - Lean on R heavily
+> - Lean on the statistical software language R heavily
 
 
 
@@ -153,20 +122,6 @@ counts %>% kable()
     + `dplyr` package for data wrangling/manipulation
     + `ggplot2` package for data visualization
 
-
-
-
-## dplyr Package
-
-Features
-
-> - Data manipulation is performed using **verbs**
-> - The pipe `%>%` command, pronounced "THEN"
-
-
-
-## Example: Houston Flights Dataset
-
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 # Load flights data
 flights <- 
@@ -183,83 +138,11 @@ planes <-
 airports <- 
   read.csv("../Lec06 R Markdown + HW01/airports.csv", stringsAsFactors = FALSE) %>% 
   tbl_df()
-states <- 
-  read.csv("../Lec06 R Markdown + HW01/states.csv", stringsAsFactors = FALSE) %>% 
-  tbl_df()
-```
-
-Info on all domestic flights leaving Houston (IAH) in 2011:
-
-* `flights`:  info on `r formatC(nrow(flights), format="d", big.mark=',')` flights
-* `planes`:  info on `r nrow(planes)` airplanes
-
-What are the top 5 carriers using the oldest planes (averaged over all flights)?
-
-
-
-## Flights
-
-The `flights` dataset:
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-select(flights, date, dep, arr, carrier, flight, dest, plane) %>%
-  slice(1:5) %>% 
-  kable()
 ```
 
 
 
-## Planes
-
-The `planes` dataset:
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-select(planes, plane, year, model, mfr, no.seats) %>% 
-  slice(1:5) %>% 
-  kable()
-```
-
-
-
-## Example: Age of Planes 
-
-The following *sequence of verbs* wrangle/manipulate the data:
-
-```{r, eval=FALSE}
-left_join(flights, planes, by='plane') %>%
-  select(carrier, plane, year) %>%
-  mutate(age = 2011 - year) %>%
-  group_by(carrier) %>%
-  summarise(avg_age = mean(age)) %>%
-  arrange(desc(avg_age)) %>%
-  top_n(5)
-```
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-airline_plane_ages <-
-  flights %>%
-  left_join(planes, by='plane') %>%
-  select(carrier, plane, year) %>%
-  mutate(age = 2011 - year) %>%
-  group_by(carrier) %>%
-  filter(!(is.na(year)) & plane != '') %>%
-  summarise(avg_age = round(mean(age),3)) %>%
-  arrange(desc(avg_age)) %>%
-  top_n(5)
-```
-
-
-
-## Example: Age of Planes 
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
-kable(airline_plane_ages)
-```
-
-
-
-
-## ggplot2: the Grammar of Graphics
+## The Grammar of Graphics
 
 <center>
 <img src="figure/graphics.jpg" height="400px"/>
@@ -269,14 +152,13 @@ kable(airline_plane_ages)
 
 
 
-## ggplot2: the Grammar of Graphics
+## The Grammar of Graphics
 
-> -A statistical graphic consists of a mapping of **data** variables to **aesthetic** attributes of **geometric objects** that we can observe.
->- `ggplot2` allows us to construct graphics in a modular fashion by specifying the elements of the grammar.
-
+A statistical graphic consists of a mapping of **data** variables to **aesthetic** attributes of **geometric objects** that we can observe.
 
 
-## ggplot2: the Grammar of Graphics
+
+## The Grammar of Graphics
 
 Minard's map of Napoleon's Russian campaign of 1812:
 
@@ -284,7 +166,7 @@ Minard's map of Napoleon's Russian campaign of 1812:
 
 
 
-## ggplot2: the Grammar of Graphics
+## The Grammar of Graphics
 
 Data (Variable)  | Geometric Object | Aesthetic Attribute of Geo Obj
 ------------- | ------------- | -------------
@@ -305,8 +187,6 @@ temperature | lines | (x,y) position
 
 
 # Results
-
-
 
 ## Delayed Flights
 
@@ -373,7 +253,7 @@ in June 2012 ($n=`r nrow(profiles)`$)
 
 
 
-## Job
+## Listed Job
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 ggplot(profiles, aes(job, fill = sex)) + 
@@ -386,8 +266,6 @@ ggplot(profiles, aes(job, fill = sex)) +
 
 
 ## Self-Referenced Body Type
-
-<!--*Best predictors have distinct differences (in gender) in large segments of the population.*-->
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
 ggplot(profiles, aes(body_type, fill = sex)) + 
@@ -487,59 +365,6 @@ ggplot(data=combined, aes(x=Date, y=rel.diff, col=type)) +
 
 
 
-<!--
-## Maps
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
-breast <- 
-  read.csv("data/Space Time Surveillance Counts 11_05_09.txt", header=TRUE) %>% 
-  rename(FIPS = StateCoTractComb) %>% tbl_df() %>%
-  filter(SiteRecodeTxt == "Breast " & SexGrp == "Female") %>%
-  group_by(FIPS) %>%
-  summarize(cases=sum(CountOfintPatientIDNumber))
-
-# Import census data
-census <- read.csv("data/Kim_R10911893_SL140.csv", header=TRUE) %>% tbl_df() %>%
-  transmute(
-    FIPS = Geo_FIPS,
-    pop.female = SE_T005_003,
-    median.income = SE_T093_001/10000
-    )
-
-total <-
-  left_join(census, breast, by="FIPS") %>%
-  mutate(
-    incidence = cases/pop.female,
-    income.quintile = cut(median.income, 
-                          quantile(median.income, probs=seq(0, 1, 0.2)), 
-                          dig.lab=2, include.lowest=TRUE),
-    incidence = ifelse(!is.na(incidence), incidence, 0),
-    incidence.quintile = cut(incidence, 
-                             quantile(incidence, probs=seq(0, 1, 0.2)), 
-                             dig.lab=2, include.lowest=TRUE),
-    FIPS = as.character(FIPS)
-    )
-
-# Import Western Washington shapefile, convert to data frame, and merge 
-# with cancer/census data.  
-ww <- readOGR(dsn="./data/ww/", layer="ww", verbose=FALSE) %>%
-  fortify(region="FIPS") %>% 
-  tbl_df() %>%
-  inner_join(total, by = c("id"="FIPS"))
-
-ggplot(data=ww, aes(x=long, y=lat, group = id, fill = incidence)) +
-  geom_polygon() +
-  geom_path(color="black", size=0.1) +
-  coord_map() +
-  theme_bw() + 
-  xlab("longitude") + ylab("latitude") +
-  scale_fill_continuous(low="white", high="deeppink3", name="Incidence") + 
-  ggtitle("Breast Cancer Incidence")
-```
--->
-
-
-
 ## Maps
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
@@ -631,13 +456,9 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 ## Statistics' Image Problem
 
-> - You hear this a lot:
-    + Statistician: Hi, I'm a statistician.
-    + Non-statistician:  Statistics?  I hated that class!
-    
-> - You'll never hear this:
-    + Statistician: Hi, my work involves a lot of data visualization.
-    + Non-statistician:  Data visualization?  I hate that stuff!
+> - I hear this a lot:
+    + Me: Hi, I'm Albert. I'm a statistician.
+    + Them:  Statistics?  I hated that class!
 
 
 
@@ -649,6 +470,7 @@ ggplot(US.county, aes(x=long, y=lat, group=group, fill=100*(PBUSH-0.50))) +
 
 
 
+<!--
 ## Impact on my Intro Stats Classes
 
 This is the only stats class many will take.
@@ -658,21 +480,8 @@ This is the only stats class many will take.
 > - [Flipped-classroom model](http://web.grinnell.edu/individuals/kuipers/stat2labs/flipped.html)
     + Lab exercises at home
     + Problem solving/debugging and discussion in class
-
-
-
-<!--
-## Issue: Programming
-
-<center><img src="figure/tweet.png" height="500px"/></center>
-
-## Issue: Programming
-
-> - Point-and-click vs command line.  
-> - Thinking algorithmically
-> - Debugging: help files and [Google](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)
-> - Not easy: like learning a language
 -->
+
 
 
 
@@ -686,12 +495,10 @@ This is the only stats class many will take.
 
 ## Take Home Messages
 
-> - A class focused on the data first, methods second, using only open-source tools.
-> - Interactivity boosts student interest
-> - Rich Majerus wrote ["Why should students at a small liberal arts college learn R?"](http://blogs.reed.edu/ed-tech/2015/04/why-should-students-at-a-small-liberal-arts-college-learn-r/)
-> - New tools like [Datacamp](https://www.datacamp.com/swirl-r-tutorial) are increasing the ratio: $$\frac{\mbox{Payoff from learning R}}{\mbox{Startup costs}}$$
+> - A class focused on the data first, methods second, using only open-source tools
+> - Interactivity fostered by choice of classroom
 > - Data visualization is a **gateway drug** for statistics
-> - Developing skills and intuition takes time.  Instructor attention and feedback are crucial.
+> - Rich Majerus wrote ["Why should students at a small liberal arts college learn R?"](http://blogs.reed.edu/ed-tech/2015/04/why-should-students-at-a-small-liberal-arts-college-learn-r/)
 
 
 
@@ -699,4 +506,94 @@ This is the only stats class many will take.
 
 * Presentation slides: [rpubs.com/rudeboybert/SevenTwentyNine_Miles](http://rpubs.com/rudeboybert/SevenTwentyNine_Miles)
 * Code and (non-private) data for class: [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
-* 17 out of 18 final projects data & code [https://github.com/ReedCollegeMATH241](https://github.com/ReedCollegeMATH241)
+* 17 out of 18 final projects data & code [github.com/ReedCollegeMATH241](https://github.com/ReedCollegeMATH241)
+
+
+
+
+
+
+
+
+
+
+# Extras
+
+## dplyr Package
+
+Features
+
+> - Data manipulation is performed using **verbs**
+> - The pipe `%>%` command, pronounced "THEN"
+
+
+
+## Example: Houston Flights Dataset
+
+Info on all domestic flights leaving Houston (IAH) in 2011:
+
+* `flights`:  info on `r formatC(nrow(flights), format="d", big.mark=',')` flights
+* `planes`:  info on `r nrow(planes)` airplanes
+
+What are the top 5 carriers using the oldest planes (averaged over all flights)?
+
+
+
+## Flights
+
+The `flights` dataset:
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+select(flights, date, dep, arr, carrier, flight, dest, plane) %>%
+  slice(1:5) %>% 
+  kable()
+```
+
+
+
+## Planes
+
+The `planes` dataset:
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+select(planes, plane, year, model, mfr, no.seats) %>% 
+  slice(1:5) %>% 
+  kable()
+```
+
+
+
+## Example: Age of Planes 
+
+The following *sequence of verbs* wrangle/manipulate the data:
+
+```{r, eval=FALSE}
+left_join(flights, planes, by='plane') %>%
+  select(carrier, plane, year) %>%
+  mutate(age = 2011 - year) %>%
+  group_by(carrier) %>%
+  summarise(avg_age = mean(age)) %>%
+  arrange(desc(avg_age)) %>%
+  top_n(5)
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+airline_plane_ages <-
+  flights %>%
+  left_join(planes, by='plane') %>%
+  select(carrier, plane, year) %>%
+  mutate(age = 2011 - year) %>%
+  group_by(carrier) %>%
+  filter(!(is.na(year)) & plane != '') %>%
+  summarise(avg_age = round(mean(age),3)) %>%
+  arrange(desc(avg_age)) %>%
+  top_n(5)
+```
+
+
+
+## Example: Age of Planes 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, cache=TRUE}
+kable(airline_plane_ages)
+```
