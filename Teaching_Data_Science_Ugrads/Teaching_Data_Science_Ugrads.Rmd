@@ -491,7 +491,7 @@ ggplot(profiles, aes(body_type, fill = sex)) +
 jukebox <- read.csv("../Lec18 HW03/jukebox.csv", header=TRUE) %>% tbl_df()
 ```
 
-All `r formatC(nrow(jukebox), format="d", big.mark=',')` songs played on the Reed poolhall room jukebox from 2003-2009. 
+All `r formatC(nrow(jukebox), format="d", big.mark=',')` songs played on the Reed pool hall room jukebox from 2003-2009. 
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 slice(jukebox, 1110:1112) %>% kable()
@@ -896,9 +896,10 @@ This is the only stats class many will take.
 
 
 
+
 ## Google Wisdom Imparted to Students
 
-Presentation on 2011/06/27 given by Dierdre and Amir:
+Presentation on 2011/06/27 given by Deirdre and Amir:
 
 > - Look at your data ASAP.
 > - Don't thrash
@@ -909,11 +910,13 @@ Presentation on 2011/06/27 given by Dierdre and Amir:
 > - Think of the marginal return of your efforts.
 
 
+
+
 ## Conclusion
 
-### Ressources
+### Resources
 
-* [@rudeboybert](https://twitter.com/rudeboybert)
+* Twitter: [rudeboybert](https://twitter.com/rudeboybert)
 * Slides: [RPubs.com/rudeboybert](http://rpubs.com/rudeboybert/Teaching_Data_Science_Ugrads)
 * Code for slides and all material for this class [github.com/rudeboybert/MATH241](https://github.com/rudeboybert/MATH241)
 
