@@ -1,0 +1,155 @@
+---
+title: "MATH241 Term Project"
+output:
+  html_document:
+    theme: cerulean
+    highlight: pygments
+    number_sections: true
+---
+
+
+
+# Overall Goal
+
+You will undertake a data science project on a topic of your choice. The project is an opportunity to show off what you've learned about data science.  Your task is to use data to tell us something interesting. This project is deliberately open-ended to allow you to fully explore your creativity. Here are the main rules that must be followed:
+
+  #. **Use the materials learned in this class.**  Both the computational and statistical tools learned.  
+  #. **Your project must be centered around real data.** You will work with large, complex, and/or messy data. While this is not an explicit requirement of the project, the more challenging your data set is, the more you will have to use the tools learned in this class.  . For example, one thing that will make your data science project more ambitious is combining two or more data sets that are not directly related. For example, combining cancer data with census data like in Homework 03.  
+  #. **Your project must tell us something.** There is a range of data science projects that can satisfy this. We've seen a range of examples over the course of the semester.  On one extreme would be a strict visualization based project that involves little statistical analysis. On the other extreme are *data mining/machine learning* projects, which involve no visualization. Your project can be anywhere on this spectrum, but expectations may be different depending on where you are on the scale. An example of a project that doesn't tell us anything, would be something that downloads a single data source and summarizes it, with some perfunctory visualization. Make sure that your project is thought-provoking and has some underlying meaning!
+  #. **Cleverness and creativity will be rewarded.**  Going above and beyond what we did in class will be rewarded.
+  #. You may discuss your project with other students, but each of you will have a different topic, so there is a limit to how much you can help each other. You may consult other sources, but you should credit these sources in your report. Feel free to consult with me.
+
+
+
+# Components
+
+## Proposal
+
+Your proposal is due in class on Friday, April 3rd on Moodle.  Once you decide on a topic that interests you, think about what you would like to end up with as a final result without worrying about how to get there. Try to visualize what your end product will look like. Will it be an interactive map? A predictive model? Don't think about coding, or a particular data set, or what you know how to do now. If you come up with something ambitious and original, you'll be more motivated to learn new things as you go in order to accomplish your goal.  The topic is completely open to your choice, but keep in mind the rules listed above.
+
+### Content {#content .unnumbered}
+
+Your initial and revised proposals should contain the following content:
+
+  #.  Title: The title of your project
+  #.  Purpose: Describe the general topic/phenomenon you want to explore, as well some carefully considered questions that you hope to address. You should make an argument *motivating* your work. Why should someone be interested in what you are doing? What do you hope people will learn from your project?
+  #.  Data: As best you can, describe where you will find your data, and what *kind* of data it is. Will you be working with spatial data in shapefiles? Where will you be accessing you data? Will you need help from Data at Reed?  Be as specific as you can, listing URLs and file formats if possible.
+  #.  Variables: List, and briefly describe, each variable that you plan to incorporate. If you can, be specific about units, scale, etc.
+  #.  End Product: Describe what you hope to deliver as a final product.
+    - Will it be an interactive application that will be posted on the Internet?
+    - Will it be a paper that draws some statistical conclusions?
+    - Will it be a predictive model that forecasts future values?
+  #. If you are planning on using your thesis data, please have your thesis advisors email me agreeing to this before Friday April 3rd.  
+
+
+
+## Presentation
+
+An effective oral presentation is an integral part of this project. One of the objectives of this class is to give you experience conveying the results of a technical investigation to a non-technical audience in a way that they can understand. Whether you choose to stay in academia or pursue a career in industry, the ability to communicate clearly is of paramount importance. As a data scientist, the burden of proof is on you to convince your audience that what you are saying is true. If your audience (who may very well be less knowledgeable about statistics than you are) cannot understand your results or their interpretations, then the technical merit of your project is irrelevant.
+
+During exam week you will give a 20 minute presentation of your work. There will be 4 sessions where in groups of 5 you will present to each other and me. Your goal should be to convey to your audience a clear understanding of your research topic, along with a basic understanding of your project, and how well it addresses the research question you posed. You should **not** tell us everything that you did, or show a bunch of things that you tried that didn't work well. After hearing your talk, each student in the class should be able to answer:
+
+1.  What was your project about?
+2.  What was your data like, and what techniques did you apply to it?
+3.  What were your findings?
+
+You should prepare electronic slides for your talk. PowerPoint is fine, but you might also want to consider 
+
+  * RStudio tools:
+      + Markdown slides [ioslides](http://rmarkdown.rstudio.com/ioslides_presentation_format.html)
+      + [Slidy](http://rmarkdown.rstudio.com/slidy_presentation_format.html)
+      + [reveal.js](http://rmarkdown.rstudio.com/revealjs_presentation_format.html)
+      + Beamer (LaTeX)
+  * Google Presentations
+  * Non-linear presentation software like [Prezi](http://prezi.com/). 
+  
+Use your creativity! One thing you should *not* do is walk us through your calculations in RStudio. If your project has any interactive elements, please demonstrate them for us!  You will need to **submit your slides via email the before your presentation**. You will not be able to hook up your laptop to the computer.  
+
+### Advice {.unnumbered}
+
+There are many sources of advice for how to make a good presentation, but an excellent place to start is: <http://techspeaking.denison.edu/>.  Watch the videos on this site to identify some common mistakes. Here is some general advice:
+
+* Budget your time. You only have 20 minutes and we will be running a very tight schedule. Plan for 17 minutes to talk, and 3 minutes to answer questions. Rehearse your talk ahead of time several times in order to get a better feel for your timing. Note also that you may have a tendency to talk faster during your actual talk than you will during your rehearsal.
+* As a rule of thumb I use the one minute per slide rule.  
+* Don't write too much on each slide. You don't want people to have to read your slides, because if the audience is reading your slides, then they aren't listening to you. You want your slides to provide visual cues to the points that you are making, not substitute for your spoken words. Concentrate on graphical displays and bullet-pointed lists of ideas.
+* Put your problem in context. Remember that most of your audience will have little or no knowledge of your subject matter. The easiest way to lose people is to dive right into technical details that require prior domain knowledge. Spend a few minutes at the beginning of your talk introducing your audience to the most basic aspects of your topic and present some motivation for what you are studying.
+* Speak loudly and clearly. Remember that you know more about your topic that anyone else in the room, so speak and act with confidence!
+* Tell a story It is unrealistic to expect that you can tell your audience everything that you know about your topic in 20 minutes. You should strive to convey the big ideas in a clear fashion, but not dwell on the details. Your talk will be successful if your audience is able to walk away with an understanding of what your research question was, how you addressed it, and what the implications of your findings are.
+
+
+
+## Write-Up
+
+Your write-up has to be a reproducible R Markdown HTML document that when printed is of length no more than 20 pages.  i.e. I should be able to recreate your entire analysis with one click of the mouse. All relevant files will be due on Moodle on Monday May 15th at 9am.  
+
+In your write-up, you should tell a data science audience about your project, why they should care about it, and what you have discovered. Your audience will be people like you:  current or aspiring data scientists. Keep in mind that this audience is extraordinarily diverse in terms of skills and abilities, so you should assume very little about what they might know. However, your audience is reasonably tech-savvy, so you need not "dumb-down" your analysis.  Your write-up should make it clear to me and any other student in the class what methods and techniques you have used to produce your finished product.
+
+### Content {.unnumbered}
+
+Do not present *all* of the `R` code that you wrote throughout the process of working on this project. In fact
+
+* The amount of R code in the outputted document should be minimal. The less R code the better.
+* Important conclusions should appear in the main text, not in comments in the code.
+* The R markdown file should contain the *necessary* and *sufficient* (i.e. minimal) set of `R` code that is necessary to understand your results and findings. If you make a claim, it *must* be justified by explicit calculation.  A knowledgeable reviewer should be able to reproduce your analysis:
+    + Compile your `.Rmd` file without modification
+    + Verify every statement that you have made.
+
+### Motivation {.unnumbered}
+
+Be sure to motivate your topic at the beginning of your write-up. You should try to hook the reader early on. Assume that your audience is a skeptical data scientist who has stumbled across your report but has very little time to read it. Can you give them a reason to continue reading? A cool visualization or result can help.
+
+### Format {.unnumbered}
+
+You don't need to follow a specific format in the write-up, but you should start with an introductory paragraph and finish with a conclusion. Your write-up should address the following questions:
+
+1.  Why should anyone care about this?
+2.  What is this about? Do *not* assume that your readers have any domain knowledge! The burden of explanation as to what you are talking about is on you! For example, if your project involves phyllogenetic trees, do not assume that your audience has anything other than a basic, lay understanding of genetics.
+3.  Where did your data come from? What kind of data was it? Is there a link to the data or some other way for the reader to follow up on your work?
+4.  What are your findings?  What kind of statistical computations (if any) have you done to support those conclusions? Again, while the `R` code will show you performing the calculation, it is up to you to interpret, in English sentences, the results of these calculations. Do not forget about units, axis labels, etc.
+5.  What are the limitations of your work? Be clear so that others do not misinterpret your findings. To what population do your results apply? Do they generalize?  How could your study be improved? Suggesting plausible extensions don't weaken your work, they strengthen it by connecting it to future work.
+
+
+### Style {.unnumbered}
+
+The write-up can have interactive components. Take advantage of this by including hyperlinks, figures, videos, etc. to
+provide context for the reader. You can even include a [bibiliography](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html), and your references should be embedded via links. Use Markdown elements like links, lists, LaTeX, and images as needed.
+
+Visualizations, particularly interactive ones, will be well-received. That said, do not overuse visualizations. You may be better off with one complicated but well-crafted visualization as opposed to many quick-and-dirty plots. Any plots should be well-thought out, properly labelled, informative, and visually appealing!
+
+
+
+
+# Evalution
+
+## Overall
+
+Your term project will be evaluated based on similar criteria as the homework grading rubric, as well as:
+
+* **Originality/Interest**: Is the topic original, interesting, and substantial, or is it trite, pedantic, and trivial? How much creativity, initiative, and ambition did you demonstrate? Is the basic question driving the project worth investigating, or is it obviously answerable without a data-based study?
+* **Degree of Difficulty**: How challenging was the project? Were the data particularly large, complex, and/or messy? Did the data come in an obscure format?Was a challenging visualization or applet constructed? Were any elements from outside the coursework necessary to complete the project?
+* **Design**: How well were the graphical elements of the project designed? Were they clunky or elegant? Was a truly original view of the data presented? Were any interactive elements usable?
+* **Meaning/Analysis/Statistical Understanding**: Did we learn anything meaningful from this project? Are the chosen analyses appropriate for the variables/relationships under investigation, and are the assumptions underlying these analyses met? Are the analyses carried out correctly? Did you make appropriate conclusions from the analyses, and are these conclusions justified?
+* **Write-Up**: How effectively does the write-up communicate the goals, procedures, and results of the study? Are the claims adequately supported? Does the writing style enhance what you are trying to communicate? How well is it edited? Are the statistical claims justified? Are text and analyses effectively interwoven?
+* **Oral Presentation**: How effectively does the oral presentation communicate the goals, procedures, and results of the study? Do the slides help to illustrate the points being made by the speaker without distracting the audience? Does the presenter seem to be well-rehearsed? Did they properly budget their time? Do they appear to be confident in what they are is saying? Are their arguments persuasive?
+
+
+## Peer Presentation Evaluation
+
+
+Your assistance is required in evaluating the presentations of your peers. The questions below are an example of what I ask you to answer to evaluate your peers' oral presentations:
+
+* **Volume**: Are the speakers loud enough? Can you hear them even in the back of the room?
+* **Presence**: Do the speakers command the room? Do they draw your attention or do they just look like they want this to be over as soon as possible?
+* **Emphasis**: Do the speakers use intonation to signal what words or concepts are most important? Or do they appear to be reciting a speech flatly?
+* **Eye Contact**: Are the speakers engaged with the audience? Do they seem connected or do they seem to be going through the motions?
+* **Clarity**: Did the speakers convey a clear sense of what the project is about? If you had to tell someone what their project was about in three sentences could you do it?
+* **Mastery**: Do the speakers appear to have full command of the material? Were there obvious gaps in their knowledge of the subject matter? Were they able to answer questions coherently?
+
+
+
+
+
+# Acknowledgements {.unnumbered}
+
+Thanks to Prof. Ben Baumer at Smith College for guidance and advice for the project format.  
+

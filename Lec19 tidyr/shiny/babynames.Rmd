@@ -1,0 +1,56 @@
+---
+title: "US Name Popularity"
+author: "Albert Y. Kim"
+output: html_document
+runtime: shiny
+---
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(babynames))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(scales))
+```
+
+Enter in names separated by spaces and with first letter capitalized.  Note: only names used at least 5 times in a year are considered as described [here](https://github.com/hadley/babynames).  In our MATH241 class, I present the 6 names that have the biggest difference in highest and lowest use between 1880 and 2013.
+
+
+```{r, echo=FALSE, fig.width=30}
+inputPanel(
+# c("Albert", "Liam", "Claire", "Sofia", "Miguel", "Rachel", "Julian", "Emmeline",
+#   "Will", "Maxwell", "Makoto", "Joewie", "Julie", "Rennie", "Benjamin",
+#   "Jossef", "Eleanor", "Eli", "Dean")
+  textInput("queries", "Name:", "Albert Julie Liam Rachel Eleanor Benjamin"),
+  numericInput("start.year", "Start Year:", 1880),
+  numericInput("end.year", "End Year:", 2013)
+  )
+
+renderPlot({
+  queries <- unlist(str_split(input$queries, " "))
+  start.year <- input$start.year
+  end.year <- input$end.year
+  
+  counts <- 
+    babynames %>% 
+    filter(name %in% queries) %>%
+    filter(year >= start.year, year <= end.year) %>%
+    group_by(year, name) %>%
+    summarise(count=sum(n)) 
+  
+  total <-
+    babynames %>% 
+    filter(year >= input$start.year, year <= input$end.year) %>%
+    group_by(year) %>% 
+    summarise(n=sum(n))
+  
+  counts <- inner_join(counts, total) %>%
+    mutate(prop=count/n)
+  
+  ggplot(counts, aes(x=year, y=prop, col=name)) + 
+    geom_line(size=1) +
+    xlab("Year") +
+    ylab("Percent of all births with name") + 
+    scale_y_continuous(labels = percent)
+  })
+```

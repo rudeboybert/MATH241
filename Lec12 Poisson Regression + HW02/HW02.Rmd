@@ -1,0 +1,43 @@
+---
+title: "MATH 241: Homework 02"
+author: "Write Your Name Here"
+date: "Due Friday 2015/3/6 5:00pm on Moodle"
+output: html_document
+---
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(foreign))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(ggplot2))
+```
+
+
+
+## Question 1:
+
+```{r, echo=FALSE}
+url <- "http://www.stat.columbia.edu/~gelman/arm/examples/pollution/pollution.dta"
+pollution <- read.dta(url) %>% tbl_df()
+```
+
+
+
+## Question 2:
+
+```{r}
+```
+
+
+
+## Question 3:
+
+```{r}
+SEER <- read.csv("Space Time Surveillance Counts 11_05_09.txt", header=TRUE) %>% tbl_df()
+glimpse(SEER)
+```
+
+
+
+
+
+

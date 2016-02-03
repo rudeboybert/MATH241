@@ -1,0 +1,69 @@
+---
+title: "US Name Popularity"
+author: "Albert Y. Kim"
+output: html_document
+runtime: shiny
+---
+
+```{r, echo=FALSE}
+# Note we load all necessary packages in a separate R code block
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(babynames))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(scales))
+```
+
+Enter in names separated by spaces and with first letter capitalized.  Note: only names used at least 5 times in a year are considered as described [here](https://github.com/hadley/babynames).  In our MATH241 class, I present the 6 names that have the biggest difference in highest and lowest use between 1880 and 2013.
+
+
+```{r, echo=FALSE, fig.width=30}
+inputPanel(
+  textInput(inputId = "names", label = "Name:", value = "Albert Julie Liam Rachel Eleanor Benjamin"),
+  numericInput(inputId = "start.year", label = "Start Year:", value = 1880),
+  numericInput(inputId = "end.year", label = "End Year:", value = 2013)
+  )
+
+renderPlot({
+  # Assign all inputs to their own variables so that we don't need to type 
+  # "input$..." constantly
+  names <- input$names
+  start.year <- input$start.year
+  end.year <- input$end.year
+  
+  # Note the line below takes the inputed string of names, "splits" them by 
+  # spaces into a "list", and unlists them to form a vector.
+  names <- str_split(names, " ") %>% unlist()
+  
+  # You can test the code below using:
+  # names <- "Albert Julie Liam Rachel Eleanor Benjamin"
+  # start.year <- 1880
+  # end.year <- 2013
+  
+  # Get counts of names for each year in range
+  counts <- 
+    babynames %>% 
+    filter(name %in% names) %>%
+    filter(year >= start.year, year <= end.year) %>%
+    group_by(year, name) %>%
+    summarise(count=sum(n)) 
+  
+  # Get total number of births for each year in range
+  totals <-
+    babynames %>% 
+    filter(year >= start.year, year <= end.year) %>%
+    group_by(year) %>% 
+    summarise(n=sum(n))
+  
+  # Join the data frames and get proportions
+  counts <- inner_join(counts, totals, by="year") %>%
+    mutate(prop=count/n)
+  
+  ggplot(counts, aes(x=year, y=prop, col=name)) + 
+    geom_line(size=1) +
+    xlab("Year") +
+    ylab("Percent of all births with name") + 
+    scale_y_continuous(labels = percent)
+  
+  })
+```

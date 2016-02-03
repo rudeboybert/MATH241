@@ -1,0 +1,17 @@
+base
+ggplot2
+ggthemes
+dplyr
+tidyr
+knitr
+stringr
+lubridate
+zoo
+xts
+Quandl
+scales
+sp
+rgdal
+maptools
+maps
+mapproj

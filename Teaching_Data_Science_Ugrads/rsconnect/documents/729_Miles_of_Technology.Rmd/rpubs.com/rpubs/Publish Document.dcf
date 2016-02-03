@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/83881/4252b0e6ea1f4c77b582f48724ece64e
+url: http://rpubs.com/rudeboybert/83881
+when: 1432919723.72472

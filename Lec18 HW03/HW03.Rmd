@@ -1,0 +1,96 @@
+---
+title: "MATH 241: Homework 02"
+author: "Write Your Name Here"
+date: "Due Friday 2015/3/20 5:00pm on Moodle"
+output: html_document
+---
+
+Note:  For all R code chucks (grey blocks below where insert R code) I've set `echo=FALSE` so that R commands won't be echoed.  I'll look at the R code separately from the report
+
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(dplyr))
+jukebox <- read.csv("jukebox.csv", header=TRUE)
+```
+
+
+
+## Question 1:
+
+For each academic year between 2003-2004 thru 2008-2009, who were the top 10 artists played?  Define
+
+* the start of academic year as the first Tuesday in September
+* the end of the academic year as the last Monday in January plus 15 weeks plus 4 days (i.e. the Friday of that week)
+
+You can find these dates manually, or with the help of lubridate functions, or entirely using lubrdiate functions.  Display the results in easily digestible format.  
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 2:
+
+Plot a time series of the number of songs played each week.  What patterns do you observe?  
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 3:
+
+Compare Eminem, Talking Heads, and Girl Talk's month by month popularity over this time period.
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 4:
+
+Did jukebox using Reedies' taste in songs change much during the period of the Sunday night blues?  Define this period to be between 4pm and 11pm on Sundays.  
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 5:
+
+We want to study the volatility of bitcoin prices.  Let our measure of volatility be the relative change from day-to-day in price.  For which periods since 2013/01/01 did we see the most volatility?
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 5:
+
+Compare the volatility of bitcoin prices with the volatility of the price of gold for the same time period.  What do you observe?  
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 7:
+
+Answer another question of interest to you about the jukebox data.  
+
+```{r, echo=FALSE}
+```
+
+
+
+## Question 8:
+
+CHANGED:  Answer another question of interest to you using data on Quandl **or** using the `library(babynames)` dataset.  Preferably on a topic you are interested in.  
+
+```{r, echo=FALSE}
+```
+
+
+
+
+
