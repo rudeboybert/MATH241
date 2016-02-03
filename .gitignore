@@ -1,7 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-MATH241.Rproj
+*.Rproj
 test.R
 README.html
 profiles.20120630.csv
